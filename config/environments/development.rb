@@ -13,7 +13,7 @@ Rails.application.configure do
 
   # Show full error reports.
   config.consider_all_requests_local = true
-  config.hosts << "693a-2401-4900-4bc1-c06c-8874-6cfb-f529-2e11.ngrok-free.app"
+  config.hosts << "telephone.nitk.ac.in"
 
   # Enable server timing
   config.server_timing = true
