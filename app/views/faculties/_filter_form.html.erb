@@ -1,0 +1,27 @@
+<style>
+  .filterrific-form select {
+    text-decoration: none;
+  }
+</style>
+<%= form_for_filterrific @filterrific, { class: 'filterrific-form' } do |f| %>
+  <div class="row g-3">
+    <div class="col-md-4">
+      <%= f.label :search_query, "Faculty Name contains", class: "form-label" %>
+      <%= f.text_field :search_query, class: "form-control" %>
+    </div>
+
+    <div class="col-md-4">
+      <%= f.label :with_department_id, "Department", class: "form-label" %>
+      <%= f.select :with_department_id, [['All Branches', nil]] + @filterrific.select_options[:with_department_id], { style: 'text-decoration: none;' }, class: "form-select" %>
+    </div>
+
+    <div class="col-md-4">
+      <%= f.label :with_interest_ids, "Areas of Interests", class: "form-label" %>
+      <%= f.select :with_interest_ids, [['All Interests', nil]] + @filterrific.select_options[:with_interest_ids], { multiple: true }, class: "form-select" %>
+    </div>
+
+    <div class="col-12 mt-3">
+      <%= f.submit "Apply Filters", class: "btn btn-secondary" %>
+    </div>
+  </div>
+<% end %>

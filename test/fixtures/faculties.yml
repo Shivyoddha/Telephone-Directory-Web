@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  phoneno: MyString
+  email: MyString
+  telephone: MyString
+  site_name: MyString
+  joining_date: 2023-12-05
+
+two:
+  name: MyString
+  phoneno: MyString
+  email: MyString
+  telephone: MyString
+  site_name: MyString
+  joining_date: 2023-12-05

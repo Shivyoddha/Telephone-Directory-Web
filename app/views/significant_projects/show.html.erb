@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @significant_project %>
+
+<div>
+  <%= link_to "Edit this significant project", edit_significant_project_path(@significant_project) %> |
+  <%= link_to "Back to significant projects", significant_projects_path %>
+
+  <%= button_to "Destroy this significant project", @significant_project, method: :delete %>
+</div>

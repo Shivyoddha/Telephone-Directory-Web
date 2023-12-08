@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Significant projects</h1>
+
+<div id="significant_projects">
+  <% @significant_projects.each do |significant_project| %>
+    <%= render significant_project %>
+    <p>
+      <%= link_to "Show this significant project", significant_project %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New significant project", new_significant_project_path %>

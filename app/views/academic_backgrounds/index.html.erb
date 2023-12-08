@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Academic backgrounds</h1>
+
+<div id="academic_backgrounds">
+  <% @academic_backgrounds.each do |academic_background| %>
+    <%= render academic_background %>
+    <p>
+      <%= link_to "Show this academic background", academic_background %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New academic background", new_academic_background_path %>

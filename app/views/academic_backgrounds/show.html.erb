@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @academic_background %>
+
+<div>
+  <%= link_to "Edit this academic background", edit_academic_background_path(@academic_background) %> |
+  <%= link_to "Back to academic backgrounds", academic_backgrounds_path %>
+
+  <%= button_to "Destroy this academic background", @academic_background, method: :delete %>
+</div>

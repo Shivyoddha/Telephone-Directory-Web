@@ -1,0 +1,22 @@
+<%= form_with(model: significant_project) do |form| %>
+  <% if significant_project.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(significant_project.errors.count, "error") %> prohibited this significant_project from being saved:</h2>
+
+      <ul>
+        <% significant_project.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
