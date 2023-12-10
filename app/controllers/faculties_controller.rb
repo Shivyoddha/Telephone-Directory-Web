@@ -76,8 +76,8 @@ class FacultiesController < ApplicationController
       @faculty = Faculty.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def faculty_params
-      params.require(:faculty).permit(:name, :phoneno, :email, :telephone, :site_name, :joining_date, :profile, :department_id)
+      params.require(:faculty).permit(:name, :phoneno, :email, :telephone, :site_name, :joining_date, :profile, :department_id, :search_designation)
     end
+
 end
