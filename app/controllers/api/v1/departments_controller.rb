@@ -4,3 +4,6 @@ class Api::V1::DepartmentsController < ApplicationController
     render json: @departments
   end
 end
+
+
+
