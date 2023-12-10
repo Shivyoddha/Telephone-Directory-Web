@@ -1,0 +1,38 @@
+.main-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.nitk-header{
+  display: flex;
+  flex-direction: column;
+}
+
+.telephone_header{
+  display: flex;
+}
+
+.content{
+  display: flex;
+  flex-direction: column;
+}
+
+.content_list{
+  display: flex;
+  overflow-y: auto;
+}
+
+.search-area{
+  display: flex;
+  flex-direction: row;
+}
+
+.search_header{
+  display: flex;
+}
+
+.search_data{
+  display: flex;
+  flex-direction: row;
+  overflow-y: auto;
+}

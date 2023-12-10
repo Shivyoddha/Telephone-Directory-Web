@@ -8,8 +8,6 @@ class FacultiesController < ApplicationController
           params[:filterrific],
           select_options: {
             with_department_id: Department.pluck(:name, :id),
-            with_interest_ids: Interest.pluck(:title, :id)
-            # Add other select options as needed
           }
         ) or return
 

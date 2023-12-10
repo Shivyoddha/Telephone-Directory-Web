@@ -10,35 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_05_050236) do
-  create_table "academic_backgrounds", force: :cascade do |t|
-    t.string "degree"
-    t.string "college"
-    t.integer "year"
+ActiveRecord::Schema[7.0].define(version: 2023_12_10_015950) do
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "faculty_id"
-    t.index ["faculty_id"], name: "index_academic_backgrounds_on_faculty_id"
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "achievements", force: :cascade do |t|
-    t.text "description"
-    t.integer "year"
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "faculty_id"
-    t.index ["faculty_id"], name: "index_achievements_on_faculty_id"
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
   create_table "departments", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "unit_id"
+    t.index ["unit_id"], name: "index_departments_on_unit_id"
   end
 
   create_table "faculties", force: :cascade do |t|
     t.string "name"
-    t.string "phoneno"
     t.string "email"
     t.string "telephone"
     t.string "site_name"
@@ -46,38 +56,41 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_05_050236) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "department_id"
+    t.string "position1"
+    t.string "position2"
+    t.integer "mobile1"
+    t.integer "mobile2"
+    t.integer "landline_office"
+    t.integer "landline_residential"
+    t.string "designation"
     t.index ["department_id"], name: "index_faculties_on_department_id"
   end
 
-  create_table "interests", force: :cascade do |t|
-    t.string "title"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "faculty_id"
-    t.index ["faculty_id"], name: "index_interests_on_faculty_id"
-  end
-
-  create_table "publications", force: :cascade do |t|
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "faculty_id"
-    t.index ["faculty_id"], name: "index_publications_on_faculty_id"
-  end
-
-  create_table "significant_projects", force: :cascade do |t|
+  create_table "units", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "faculty_id"
-    t.index ["faculty_id"], name: "index_significant_projects_on_faculty_id"
   end
 
-  add_foreign_key "academic_backgrounds", "faculties"
-  add_foreign_key "achievements", "faculties"
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "admin"
+    t.boolean "super_admin"
+    t.integer "department_id"
+    t.index ["department_id"], name: "index_users_on_department_id"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "departments", "units"
   add_foreign_key "faculties", "departments"
-  add_foreign_key "interests", "faculties"
-  add_foreign_key "publications", "faculties"
-  add_foreign_key "significant_projects", "faculties"
+  add_foreign_key "users", "departments"
 end

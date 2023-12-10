@@ -1,11 +1,8 @@
 Rails.application.routes.draw do
-  resources :achievements
+  devise_for :users
+  resources :units
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  resources :significant_projects
-  resources :publications
-  resources :academic_backgrounds
   resources :departments
-  resources :interests
   resources :faculties
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

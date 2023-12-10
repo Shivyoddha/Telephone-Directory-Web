@@ -19,6 +19,8 @@ gem 'rails_admin', '~> 3.0'
 
 gem 'jquery-rails'
 
+gem 'cancancan'
+
 gem 'filterrific'
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
@@ -80,3 +82,5 @@ group :test do
 
 end
 gem "sassc-rails"
+
+gem "devise", "~> 4.9"
