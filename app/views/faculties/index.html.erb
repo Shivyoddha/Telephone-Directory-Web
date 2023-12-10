@@ -1,32 +1,51 @@
 <%= stylesheet_link_tag 'index' %>
-<main class="container">
-  <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
-    <div class="col-lg-6 px-0">
-      <h1 class="display-4 fst-italic">Faculties of NITK</h1>
-      <p class="lead my-3">A one-stop place to get in touch with top facullties of NITK</p>
-      <p class="lead mb-0"><a href="#" class="text-body-emphasis fw-bold"><%= render 'filter_form' %></a></p>
-    </div>
-  </div>
-<%= render 'faculty_list', faculties: @faculties %>
-</main>
-
 <div class="main-container">
   <div class="nitk-header">
-
+    <div class="container">
+    <header class="d-flex justify-content-center py-3"
+        <li class="nav-item"><a href="#" class="nav-link active" aria-current="page"><%= image_tag 'header.png' %></a></li>
+    </header>
   </div>
-  <div class="telephone-header">
-
   </div>
-  <div class="content">
-    <div class="content-list">
+  <header class="d-flex justify-content-center py-3">
+   <div class="telephone-header">
+      TELEPHONE DIRECTORY WEBSITE NITK
+   </div>
+  </header>
 
+  <div class="contents">
+    <div class="contents-list" style="background-color:red;">
+      <div class="accordion" id="accordionPanelsStayOpenExample" style="width:100%;">
+        <% Unit.all.each do |unit| %>
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+          <%= unit.title %>
+        </button>
+      </h2>
+      <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+        <div class="accordion-body">
+        <% unit.departments.all.each do |department| %>
+        <div class="">
+          <%= link_to department.name %>
+        </div>
+        <% end %>
+        </div>
+      </div>
     </div>
-    <div class="search-area">
+   <% end %>
+  </div>
+    </div>
+    <div class="search-area"  style="background-color:yellow;">
       <div class="search-header">
-
+          <div class="p-4 mb-4 rounded text-body-emphasis" style="width:100%;background-color:#192f59;">
+              <h1 class="display-4 fst-italic" style="color:white;">Faculties of NITK</h1>
+              <p class="lead my-3" style="color:white;">A one-stop place to get in touch with top facullties of NITK</p>
+              <p class="lead mb-0" style="color:white;"><a href="#" class="text-body-emphasis fw-bold" ><%= render 'filter_form' %></a></p>
+          </div>
       </div>
       <div class="search-data">
-
+        <%= render 'faculty_list', faculties: @faculties %>
       </div>
     </div>
   </div>
