@@ -31,7 +31,6 @@ RailsAdmin.config do |config|
 
   config.actions do
     dashboard
-    import
     index
     new
     export
