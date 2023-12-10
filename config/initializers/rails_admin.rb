@@ -30,8 +30,9 @@ RailsAdmin.config do |config|
   # config.show_gravatar = true
 
   config.actions do
-    dashboard                     # mandatory
-    index                         # mandatory
+    dashboard
+    import
+    index
     new
     export
     bulk_delete

@@ -1,21 +1,99 @@
-<div class="row mb-2">
-  <main>
-  <table>
-  <tr>
-    <th> Sr.No </th>
-    <th> Name </th>
-    <th> Landline ( Office ) </th>
-    <th> Mobile </th>
-    <th> Details </th>
-  </tr>
-  <% faculties.each do |faculty| %>
-  <tr>
-    <td> <%= faculty.id %> </td>
-    <td> <%= faculty.name %> </td>
-    <td> <%= faculty.landline_office %> </td>
-    <td> <%= faculty.mobile1 %> </td>
-    <td> <%= faculty.mobile2 %></td>
-  </tr>
-  <% end %>
+<!-- Include Bootstrap 5.3 CSS and JS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 
+<div class="container-fluid">
+  <table class="table">
+    <thead>
+      <tr>
+        <th> Sr.No </th>
+        <th> Name </th>
+        <th> Landline (Office) </th>
+        <th> Mobile </th>
+        <th> Details </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% faculties.each do |faculty| %>
+        <tr>
+          <td> <%= faculty.id %> </td>
+          <td> <%= faculty.name %> </td>
+          <td> <%= faculty.landline_office %> </td>
+          <td> <%= faculty.mobile1 %> </td>
+          <td>
+            <!-- Button to trigger Bootstrap modal -->
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#facultyModal<%= faculty.id %>">
+              Click here
+            </button>
+
+            <div class="modal fade" id="facultyModal<%= faculty.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Faculty Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <!-- Left column with image -->
+                          <%= image_tag faculty.profile, class: "img-fluid" %>
+                        </div>
+                        <div class="col-md-6">
+                          <!-- Right column with details -->
+                          <dl class="row">
+                            <dt class="col-sm-4">Name</dt>
+                            <dd class="col-sm-8"><%= faculty.name %></dd>
+
+                            <dt class="col-sm-4">Designation</dt>
+                            <dd class="col-sm-8"><%= faculty.designation %></dd>
+
+                            <dt class="col-sm-4">Unit</dt>
+                            <dd class="col-sm-8"><%= faculty.department.name %></dd>
+
+                            <dt class="col-sm-4">Position-1</dt>
+                            <dd class="col-sm-8"><%= faculty.position1 %></dd>
+
+                            <dt class="col-sm-4">Position-2</dt>
+                            <dd class="col-sm-8"><%= faculty.position2 %></dd>
+
+                            <dt class="col-sm-4">Landline (Off.)</dt>
+                            <dd class="col-sm-8"><%= faculty.landline_office %></dd>
+
+                            <dt class="col-sm-4">Landline (Res.)</dt>
+                            <dd class="col-sm-8"><%= faculty.landline_residential %></dd>
+
+                            <dt class="col-sm-4">Mobile-1</dt>
+                            <dd class="col-sm-8"><%= faculty.mobile1 %></dd>
+
+                            <dt class="col-sm-4">Mobile-2</dt>
+                            <dd class="col-sm-8"><%= faculty.mobile2 %></dd>
+
+                            <dt class="col-sm-4">Email</dt>
+                            <dd class="col-sm-8"><%= faculty.email %></dd>
+
+                            <dt class="col-sm-4">Personal Webpage</dt>
+                            <dd class="col-sm-8"><a href="<%= faculty.site_name %>" target="_blank"><%= faculty.site_name %></a></dd>
+
+                            <dt class="col-sm-4">Last Updated</dt>
+                            <dd class="col-sm-8"><%= faculty.updated_at.strftime('%B %d, %Y %I:%M %p') %></dd>
+                          </dl>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <!-- Close button for the modal -->
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>

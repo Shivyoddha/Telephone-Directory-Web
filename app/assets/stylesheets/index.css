@@ -57,10 +57,9 @@ img{
   overflow-y: auto;
 }
 
-
-main {
-  display: flex;
-  justify-content: center;
+.container-fluid{
+  margin: 0;
+  padding: 0;
 }
 
 table {

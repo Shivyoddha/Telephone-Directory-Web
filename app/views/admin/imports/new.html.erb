@@ -1,0 +1,7 @@
+<h1>Data Import</h1>
+
+<%= form_tag admin_imports_path, multipart: true do %>
+  <label for="file">Select a file to import:</label>
+  <%= file_field_tag 'file' %>
+  <%= submit_tag 'Import', class: 'btn btn-primary' %>
+<% end %>

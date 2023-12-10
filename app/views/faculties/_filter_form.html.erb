@@ -1,6 +1,10 @@
 <style>
   .filterrific-form select {
-    text-decoration: none;
+    text-decoration: none !important;
+  }
+
+  .filterrific-form select::-ms-expand {
+    display: none;
   }
 </style>
 <%= form_for_filterrific @filterrific, { class: 'filterrific-form' } do |f| %>
@@ -8,6 +12,11 @@
     <div class="col-md-4">
       <%= f.label :search_query, "Faculty Name contains", class: "form-label" ,style:"color:white;" %>
       <%= f.text_field :search_query, class: "form-control" %>
+    </div>
+
+    <div class="col-md-4">
+      <%= f.label :search_designation, "Designation contains", class: "form-label", style: "color:white;" %>
+      <%= f.text_field :search_designation, class: "form-control" %>
     </div>
 
     <div class="col-md-4">

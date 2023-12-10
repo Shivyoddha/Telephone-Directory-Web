@@ -14,7 +14,7 @@
   </header>
 
   <div class="contents">
-    <div class="contents-list" style="background-color:red;">
+    <div class="contents-list">
       <div class="accordion" id="accordionPanelsStayOpenExample" style="width:100%;">
         <% Unit.all.each do |unit| %>
     <div class="accordion-item">
@@ -36,9 +36,9 @@
    <% end %>
   </div>
     </div>
-    <div class="search-area"  style="background-color:yellow;">
+    <div class="search-area">
       <div class="search-header">
-          <div class="p-4 mb-4 rounded text-body-emphasis" style="width:100%;background-color:#192f59;">
+          <div class="p-4 rounded text-body-emphasis" style="width:100%;background-color:#192f59;">
               <h1 class="display-4 fst-italic" style="color:white;">Faculties of NITK</h1>
               <p class="lead my-3" style="color:white;">A one-stop place to get in touch with top facullties of NITK</p>
               <p class="lead mb-0" style="color:white;"><a href="#" class="text-body-emphasis fw-bold" ><%= render 'filter_form' %></a></p>

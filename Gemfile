@@ -21,6 +21,8 @@ gem 'jquery-rails'
 
 gem 'cancancan'
 
+gem 'roo'
+
 gem 'filterrific'
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
