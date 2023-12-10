@@ -14,10 +14,12 @@ Rails.application.routes.draw do
   root "faculties#index"
 
   namespace :api do
-  namespace :v1 do
-    resources :departments
-    resources :faculties
-    resources :units
+    namespace :v1 do
+      resources :departments
+      resources :faculties
+      resources :units
+      resources :faculty_desig
+      resources :faculty_by_name
   end
 end
 
