@@ -7,7 +7,7 @@
     display: none;
   }
 </style>
-<%= form_for_filterrific @filterrific, { class: 'filterrific-form' } do |f| %>
+<%= form_for_filterrific @filterrific, { class: 'filterrific-form', id: 'submission' } do |f| %>
   <div class="row g-3">
     <div class="col-md-4">
       <%= f.label :search_query, "Faculty Name contains", class: "form-label" ,style:"color:white;" %>

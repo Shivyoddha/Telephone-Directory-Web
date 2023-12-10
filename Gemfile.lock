@@ -106,6 +106,8 @@ GEM
     filterrific (5.2.5)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    haml (4.0.7)
+      tilt
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     io-console (0.6.0)
@@ -197,6 +199,12 @@ GEM
       nested_form (~> 0.3)
       rails (>= 6.0, < 8)
       turbo-rails (~> 1.0)
+    rails_admin_import (1.4.0)
+      haml (~> 4.0)
+      rails (>= 3.2)
+      rails_admin (>= 0.6.6)
+      rchardet (~> 1.6)
+      simple_xlsx_reader (~> 1.0)
     railties (7.0.8)
       actionpack (= 7.0.8)
       activesupport (= 7.0.8)
@@ -205,6 +213,7 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.1.0)
+    rchardet (1.8.0)
     rdoc (6.6.0)
       psych (>= 4.0.0)
     regexp_parser (2.8.3)
@@ -230,6 +239,9 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    simple_xlsx_reader (1.0.5)
+      nokogiri
+      rubyzip
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -284,6 +296,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rails (~> 7.0.8)
   rails_admin (~> 3.0)
+  rails_admin_import (~> 1.2)
   roo
   sassc-rails
   selenium-webdriver

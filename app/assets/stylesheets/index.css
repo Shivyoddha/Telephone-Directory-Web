@@ -35,7 +35,22 @@ img{
 .contents-list{
   display: flex;
   flex: 1;
+  flex-direction: column;
   width:100%;
+}
+
+.department-filter {
+  cursor: pointer;
+}
+
+/* Hover effect */
+.department-filter:hover {
+  background-color: #f0f0f0;
+}
+
+/* Click effect */
+.department-filter:active {
+  background-color: #d4d4d4;
 }
 
 .search-area{
@@ -79,4 +94,60 @@ th,
 td {
   text-align: left;
   padding: 0.5em 1em;
+}
+
+/* Add this to your existing index.css file or create a new one */
+
+.accordion {
+  width: 100%;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.accordion-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: #3498db;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  border-bottom: 1px solid #2980b9;
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.accordion-content p {
+  margin: 0;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.accordion.open .accordion-content {
+  max-height: 1000px;
+}
+
+/* Hover effect for label */
+.accordion-label:hover {
+  background-color: #2980b9;
+}
+
+/* Arrow icon for label */
+.accordion-label::after {
+  content: "\25B8";
+  font-size: 20px;
+  transform: rotate(90deg);
+  transition: transform 0.3s ease-out;
+}
+
+.accordion.open .accordion-label::after {
+  transform: rotate(-90deg);
 }
