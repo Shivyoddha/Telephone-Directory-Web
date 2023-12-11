@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       resources :units
       resources :faculty_desig
       resources :faculty_by_name
+      resources :faculty_by_all
   end
 end
 
