@@ -7,7 +7,6 @@ class Ability
     user ||= User.new # guest user (not logged in)
 
     Rails.logger.debug("User: #{user.inspect}")
-    
     if user.super_admin?
       can :manage, :all
     elsif user.admin?
