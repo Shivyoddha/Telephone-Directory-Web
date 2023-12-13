@@ -39,10 +39,6 @@
                       <div class="row">
                         <div class="col-md-6">
                           <!-- Left column with image -->
-                          <%= image_tag faculty.profile, class: "img-fluid" %>
-                        </div>
-                        <div class="col-md-6">
-                          <!-- Right column with details -->
                           <dl class="row">
                             <dt class="col-sm-4">Name</dt>
                             <dd class="col-sm-8"><%= faculty.name %></dd>
@@ -80,6 +76,10 @@
                             <dt class="col-sm-4">Last Updated</dt>
                             <dd class="col-sm-8"><%= faculty.updated_at.strftime('%B %d, %Y %I:%M %p') %></dd>
                           </dl>
+                        </div>
+                        <div class="col-md-6">
+                          <!-- Right column with details -->
+                           <%= image_tag faculty.profile, class: "img-fluid" %>
                         </div>
                       </div>
                     </div>

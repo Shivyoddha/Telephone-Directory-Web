@@ -10,7 +10,7 @@
 <%= form_for_filterrific @filterrific, { class: 'filterrific-form', id: 'submission' } do |f| %>
   <div class="row g-3">
     <div class="col-md-4">
-      <%= f.label :search_query, "Faculty Name contains", class: "form-label" ,style:"color:white;" %>
+      <%= f.label :search_query, "Name", class: "form-label" ,style:"color:white;" %>
       <%= f.text_field :search_query, class: "form-control" %>
     </div>
 
@@ -25,7 +25,7 @@
     </div>
 
     <div class="col-12 mt-3">
-      <%= f.submit "Apply Filters", class: "btn btn-success" %>
+      <%= f.submit "Search", class: "btn btn-success" %>
     </div>
   </div>
 <% end %>
