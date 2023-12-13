@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :imports, only: [:new, :create]
   end
 
-  root "faculties#index"
+  # root "faculties#index"
 
   namespace :api do
     namespace :v1 do
