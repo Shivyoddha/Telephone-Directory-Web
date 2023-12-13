@@ -2,3 +2,4 @@
 //= link_tree ../builds
 //= link application.css
 //= link index.css
+//= link loginpage.css
