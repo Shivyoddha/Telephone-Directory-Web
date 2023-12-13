@@ -25,7 +25,8 @@
     </div>
 
     <div class="col-12 mt-3">
-      <%= f.submit "Search", class: "btn btn-success" %>
+      <%= f.submit "Search", class: "btn btn-success" %><%= link_to 'LogOut',destroy_user_session_path,method: :delete, class:"btn btn-danger", id:"log-out" %>
     </div>
+
   </div>
 <% end %>
