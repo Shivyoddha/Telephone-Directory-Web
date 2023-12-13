@@ -1,6 +1,6 @@
 class Faculty < ApplicationRecord
   belongs_to :department
-  has_one_attached :profile
+  has_one_attached :profile, dependent: :destroy
 
   filterrific(
     available_filters: [
