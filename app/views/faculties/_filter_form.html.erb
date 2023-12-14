@@ -1,32 +1,77 @@
 <style>
-  .filterrific-form select {
+  .filterrific-form select,
+  .filterrific-form input[type="text"] {
     text-decoration: none !important;
+    border: 1px solid transparent;
+    padding: 5px; /* Adjust padding as needed */
   }
 
   .filterrific-form select::-ms-expand {
     display: none;
   }
+
+  /* Style the advanced search button */
+  #advanced-search-btn {
+    background-color: #28a745; /* Green color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top :8%;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
 </style>
+
 <%= form_for_filterrific @filterrific, { class: 'filterrific-form', id: 'submission' } do |f| %>
   <div class="row g-3">
+    <!-- Name Field -->
     <div class="col-md-4">
-      <%= f.label :search_query, "Name", class: "form-label" ,style:"color:white;" %>
+      <%= f.label :search_query, "Name", class: "form-label", style: "color:white;" %>
       <%= f.text_field :search_query, class: "form-control" %>
     </div>
 
-    <div class="col-md-4">
-      <%= f.label :search_designation, "Designation contains", class: "form-label", style: "color:white;" %>
-      <%= f.text_field :search_designation, class: "form-control" %>
+    <!-- Spacer Column -->
+    <div class="col-md-4"></div>
+
+    <!-- Advanced Search Button -->
+    <div class="col-md-4 mt-3">
+      <button type="button" id="advanced-search-btn" class="btn btn-success">Advanced Search</button>
     </div>
 
-    <div class="col-md-4">
-      <%= f.label :with_department_id, "Department", class: "form-label" ,style:"color:white;"%>
-      <%= f.select :with_department_id, [['All Branches', nil]] + @filterrific.select_options[:with_department_id], { style: 'text-decoration: none;' }, class: "form-select" %>
+    <!-- Advanced Search Fields -->
+    <div class="col-md-4" id="filterrific_search_designation" style="display: none;">
+      <%= f.label :search_designation_advanced, "Search By Designation", class: "form-label", style: "color:white;" %>
+      <%= f.text_field :search_designation_advanced, class: "form-control" %>
+    </div>
+
+    <div class="col-md-4" id="filterrific_with_department_id" style="display: none;">
+      <%= f.label :with_department_id_advanced, "Search By Department", class: "form-label", style: "color:white;" %>
+      <%= f.select :with_department_id_advanced, [['All Branches', nil]] + @filterrific.select_options[:with_department_id], { style: 'text-decoration: none;' }, class: "form-select" %>
     </div>
 
     <div class="col-12 mt-3">
-      <%= f.submit "Search", class: "btn btn-success" %><%= link_to 'LogOut',destroy_user_session_path,method: :delete, class:"btn btn-danger", id:"log-out" %>
+      <%= f.submit "Search", class: "btn btn-success" %>
     </div>
-
   </div>
 <% end %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Add a click event listener to the Advanced Search button
+    document.getElementById('advanced-search-btn').addEventListener('click', function () {
+      // Toggle the visibility of the Advanced Search Fields
+      toggleVisibility('filterrific_search_designation');
+      toggleVisibility('filterrific_with_department_id');
+    });
+  });
+
+  // Function to toggle the visibility of an element
+  function toggleVisibility(elementId) {
+    var element = document.getElementById(elementId);
+    if (element.style.display === 'none') {
+      element.style.display = 'block';
+    } else {
+      element.style.display = 'none';
+    }
+  }
+</script>

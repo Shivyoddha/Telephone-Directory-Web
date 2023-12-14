@@ -6,7 +6,9 @@ class Faculty < ApplicationRecord
     available_filters: [
       :search_query,
       :with_department_id,
-      :search_designation, # Add the new filter
+      :search_designation,
+      :search_designation_advanced,
+      :with_department_id_advanced
     ]
   )
 
@@ -21,4 +23,12 @@ class Faculty < ApplicationRecord
   scope :search_designation, ->(designation) {
     where("designation LIKE ?", "%#{designation}%")
   }
+
+  scope :with_department_id_advanced, ->(department_id) {
+   where(department_id: department_id) if department_id.present?
+ }
+ 
+ scope :search_designation_advanced, ->(designation) {
+   where("designation LIKE ?", "%#{designation}%") if designation.present?
+ }
 end
