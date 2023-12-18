@@ -30,10 +30,10 @@ class Api::V1::FacultyByAllController < ApplicationController
       @faculty_by_all = Faculty.where(name_condition, "#{params[:name]}%")
       render json: @faculty_by_all
     elsif designation_condition.present?
-      @faculty_by_all = Faculty.where(designation_condition, "#{params[:name]}%")
+      @faculty_by_all = Faculty.where(designation_condition, "#{params[:designation]}%")
       render json: @faculty_by_all
     elsif department_condition.present?
-      @faculty_by_all = Faculty.where(department_condition, "#{params[:name]}%")
+      @faculty_by_all = Faculty.where(department_condition, params[:department_id])
       render json: @faculty_by_all
     else
       render_all_faculty
