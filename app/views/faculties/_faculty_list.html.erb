@@ -15,9 +15,9 @@
       </tr>
     </thead>
     <tbody>
-      <% faculties.each do |faculty| %>
+      <% faculties.each_with_index do |faculty, index| %>
         <tr>
-          <td> <%= faculty.id %> </td>
+          <td> <%= index + 1 %> </td>
           <td> <%= faculty.name %> </td>
           <td> <%= faculty.landline_office %> </td>
           <td> <%= faculty.mobile1 %> </td>

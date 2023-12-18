@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'home/about'
   devise_for :users
   resources :units
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
@@ -28,6 +29,9 @@ end
 devise_scope :user do
   root to: "devise/sessions#new"
   end
+
+  get 'home/about'
+  get 'home/team'
 
   devise_scope :user do
      get '/users/sign_out' => 'devise/sessions#destroy'

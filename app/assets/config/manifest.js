@@ -3,3 +3,5 @@
 //= link application.css
 //= link index.css
 //= link loginpage.css
+//= link about.css
+//= link team.css
