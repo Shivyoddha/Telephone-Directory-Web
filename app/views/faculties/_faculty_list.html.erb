@@ -30,22 +30,22 @@
 </style>
 <div class="container-fluid">
   <% @departments.each do |department| %>
-  <div class="department-heading">
-    <div class="department-title"><%= department.name %></div>
-  </div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th> Sr.No </th>
-          <th> Name </th>
-          <th> Landline (Office) </th>
-          <th> Mobile </th>
-          <th> Details </th>
-        </tr>
-      </thead>
-      <tbody>
         <% faculties_for_department = @faculties_by_department[department.name] %>
         <% if faculties_for_department.present? %>
+        <div class="department-heading">
+          <div class="department-title"><%= department.name %></div>
+        </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th> Sr.No </th>
+                <th> Name </th>
+                <th> Landline (Office) </th>
+                <th> Mobile </th>
+                <th> Details </th>
+              </tr>
+            </thead>
+            <tbody>
           <% faculties_for_department.each_with_index do |faculty, index| %>
             <tr>
               <td> <%= index + 1 %> </td>
@@ -125,10 +125,6 @@
           </td>
               </tr>
             <% end %>
-          <% else %>
-            <tr>
-              <td colspan="5"><center>No faculties available for this department</center></td>
-            </tr>
           <% end %>
         </tbody>
       </table>
