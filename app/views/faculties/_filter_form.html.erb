@@ -30,8 +30,10 @@
       <%= f.text_field :search_query, class: "form-control" %>
     </div>
 
-    <!-- Spacer Column -->
-    <div class="col-md-4"></div>
+    <!-- Search Button -->
+    <div class="col-md-4 mt-5" style="padding-left:5%;">
+      <%= f.submit "Search", class: "btn btn-success" %>
+    </div>
 
     <!-- Advanced Search Button -->
     <div class="col-md-4 mt-3">
@@ -47,10 +49,6 @@
     <div class="col-md-4" id="filterrific_with_department_id" style="display: none;">
       <%= f.label :with_department_id_advanced, "Search By Department", class: "form-label", style: "color:white;" %>
       <%= f.select :with_department_id_advanced, [['All Branches', nil]] + @filterrific.select_options[:with_department_id], { style: 'text-decoration: none;' }, class: "form-select" %>
-    </div>
-
-    <div class="col-12 mt-3">
-      <%= f.submit "Search", class: "btn btn-success" %>
     </div>
   </div>
 <% end %>

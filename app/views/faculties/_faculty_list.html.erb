@@ -1,31 +1,62 @@
-<!-- Include Bootstrap 5.3 CSS and JS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<style media="screen">
+  .department-heading {
+    background-color: #f8f9fa;
+    border: 1px solid #d1d1d1;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    text-align: center;
+  }
 
+  .department-title {
+    font-size: 24px;
+    color: black;
+  }
+
+  .table th,
+  .table td {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .table th {
+    background-color: #192f59;
+    color: #fff;
+  }
+
+  .table tbody tr:nth-child(odd) {
+    background-color: #eee;
+  }
+</style>
 <div class="container-fluid">
-  <table class="table">
-    <thead>
-      <tr>
-        <th> Sr.No </th>
-        <th> Name </th>
-        <th> Landline (Office) </th>
-        <th> Mobile </th>
-        <th> Details </th>
-      </tr>
-    </thead>
-    <tbody>
-      <% faculties.each_with_index do |faculty, index| %>
+  <% @departments.each do |department| %>
+  <div class="department-heading">
+    <div class="department-title"><%= department.name %></div>
+  </div>
+    <table class="table">
+      <thead>
         <tr>
-          <td> <%= index + 1 %> </td>
-          <td> <%= faculty.name %> </td>
-          <td> <%= faculty.landline_office %> </td>
-          <td> <%= faculty.mobile1 %> </td>
-          <td>
-            <!-- Button to trigger Bootstrap modal -->
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#facultyModal<%= faculty.id %>">
-              Click here
-            </button>
+          <th> Sr.No </th>
+          <th> Name </th>
+          <th> Landline (Office) </th>
+          <th> Mobile </th>
+          <th> Details </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% faculties_for_department = @faculties_by_department[department.name] %>
+        <% if faculties_for_department.present? %>
+          <% faculties_for_department.each_with_index do |faculty, index| %>
+            <tr>
+              <td> <%= index + 1 %> </td>
+              <td> <%= faculty.name %> </td>
+              <td> <%= faculty.landline_office %> </td>
+              <td> <%= faculty.mobile1 %> </td>
+              <td>
+                <!-- Button to trigger Bootstrap modal -->
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#facultyModal<%= faculty.id %>">
+                  Click here
+                </button>
 
             <div class="modal fade" id="facultyModal<%= faculty.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -92,8 +123,14 @@
               </div>
             </div>
           </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="5"><center>No faculties available for this department</center></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
