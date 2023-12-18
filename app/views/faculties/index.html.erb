@@ -16,13 +16,15 @@
 
   <div class="contents">
     <div class="contents-list">
-      <% Unit.all.each do |unit| %>
+      <% sorted_units = Unit.all.order(:title) %>
+       <% sorted_units.each do |unit| %>
         <div class="accordion">
           <label class="accordion-label" tabindex="0"><%= unit.title %></label>
           <div class="accordion-content">
-            <% unit.departments.each do |department| %>
+            <% sorted_departments = unit.departments.order(:name) %>
+             <% sorted_departments.each do |department| %>
               <p class="department-filter" data-unit="<%= unit.id %>" data-department="<%= department.id %>"><%= department.name %></p>
-            <% end %>
+             <% end %>
           </div>
         </div>
       <% end %>
