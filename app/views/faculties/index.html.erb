@@ -21,10 +21,14 @@
         <div class="accordion">
           <label class="accordion-label" tabindex="0"><%= unit.title %></label>
           <div class="accordion-content">
-            <% sorted_departments = unit.departments.order(:name) %>
-             <% sorted_departments.each do |department| %>
-              <p class="department-filter" data-unit="<%= unit.id %>" data-department="<%= department.id %>"><%= department.name %></p>
-             <% end %>
+            <% sorted_departments = unit.departments.where.not(name: 'Others').order(:name) %>
+              <% sorted_departments.each do |department| %>
+                <p class="department-filter" data-unit="<%= unit.id %>" data-department="<%= department.id %>"><%= department.name %></p>
+              <% end %>
+             <% others_department = unit.departments.find_by(name: 'Others') %>
+            <% if others_department.present? %>
+              <p class="department-filter" data-unit="<%= unit.id %>" data-department="<%= others_department.id %>"><%= others_department.name %></p>
+            <% end %>
           </div>
         </div>
       <% end %>
