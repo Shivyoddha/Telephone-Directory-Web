@@ -14,6 +14,9 @@ class Ability
       can :read, :dashboard
       can :manage, Department, id: user.department_id
       can :manage, Faculty, department: { id: user.department_id }
+      can :read, Position
+      cannot :create, Department
+      cannot :destroy, Department
     end
   end
 end

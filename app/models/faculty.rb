@@ -4,6 +4,9 @@ class Faculty < ApplicationRecord
   end
 
   belongs_to :department
+  belongs_to :designation
+  belongs_to :position1, class_name: 'Position', foreign_key: 'position1_id', optional: true
+  belongs_to :position2, class_name: 'Position', foreign_key: 'position2_id', optional: true
   has_one_attached :profile, dependent: :destroy
 
   filterrific(

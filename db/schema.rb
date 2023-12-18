@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_18_035826) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_18_070551) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -47,6 +47,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_18_035826) do
     t.index ["unit_id"], name: "index_departments_on_unit_id"
   end
 
+  create_table "designations", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "faculties", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -55,14 +61,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_18_035826) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "department_id"
-    t.string "position1"
-    t.string "position2"
     t.integer "mobile1"
     t.integer "mobile2"
     t.integer "landline_office"
     t.integer "landline_residential"
-    t.string "designation"
+    t.integer "landline_office_intercom"
+    t.integer "landline_office_direct"
+    t.integer "designation_id"
+    t.integer "position1_id"
+    t.integer "position2_id"
     t.index ["department_id"], name: "index_faculties_on_department_id"
+    t.index ["designation_id"], name: "index_faculties_on_designation_id"
+    t.index ["position1_id"], name: "index_faculties_on_position1_id"
+    t.index ["position2_id"], name: "index_faculties_on_position2_id"
+  end
+
+  create_table "positions", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "units", force: :cascade do |t|
@@ -92,5 +109,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_18_035826) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "departments", "units"
   add_foreign_key "faculties", "departments"
+  add_foreign_key "faculties", "designations"
+  add_foreign_key "faculties", "positions", column: "position1_id"
+  add_foreign_key "faculties", "positions", column: "position2_id"
   add_foreign_key "users", "departments"
 end
