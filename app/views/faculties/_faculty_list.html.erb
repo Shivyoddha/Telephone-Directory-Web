@@ -5,24 +5,42 @@
     padding: 15px;
     margin-bottom: 15px;
     border-radius: 5px;
-    border-radius-bottom :0px;
     text-align: center;
   }
 
   .department-title {
     font-size: 24px;
-    color: black;
+    background-color: #fff;
+    color: rgba(25,46,89,255);
   }
 
-  .table th,
-  .table td {
+  .firstend{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    
+  }
+
+  .lastend{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  
+  .table th {
     text-align: center;
     vertical-align: middle;
+    border: 1px solid #eee;
+  }
+
+  .table td {
+    text-align: left;
+    vertical-align: middle;
+    border: 1px solid #e6e6e6;
   }
 
   .table th {
-    background-color: #192f59;
+    background-color: rgba(25,46,89,255);
     color: #fff;
+    text-align: center;
   }
 
   .table tbody tr:nth-child(odd) {
@@ -32,16 +50,16 @@
   .modal-body dl dd {
     word-wrap: break-word; /* Add this style for word wrapping */
   }
+
 </style>
 <div class="container-fluid">
   <table class="table">
     <thead>
       <tr>
         <th class="firstend"> Sl. No. </th>
-        <th> Name </th>
-        <th> Designation </th>
-        <th> Sub - Department</th>
-        <th> Landline (Off.) </th>
+        <th > Name </th>
+        <th > Designation </th>
+        <th > Landline (Off.) </th>
         <th class="lastend"> Details </th>
       </tr>
     </thead>
@@ -50,27 +68,25 @@
         <% faculties_for_department = @faculties_by_department[department.name] %>
         <% if faculties_for_department.present? %>
           <tr>
-            <td colspan="6" class="department-heading">
-              <div class="department-title"><%= department.name %></div>
+            <td colspan="5" class="department-heading" style="text-align: center;">
+              <div class="department-title" style="font-weight: 500;"><%= department.name %></div>
             </td>
           </tr>
           <% faculties_for_department.each_with_index do |faculty, index| %>
-            <tr>
-              <td> <%= index + 1 %> </td>
-              <td> <%= faculty.name %> </td>
-              <td> <%= faculty.designation.title %> </td>
-              <td>
-                <%= faculty.sub_directory&.title || '-' %>
-             </td>
-              <td> <%= faculty.landline_office %> </td>
-              <td>
+            <tr style="line-height: 10%;">
+              <td style="width:0.7%; "> <%= index + 1 %> </td>
+              <td style="width:5%;"> <%= faculty.name %> </td>
+              
+              <td style="width:2%;"> <%= faculty.designation.title %> </td>
+              <td style="width:2%;"> <%= faculty.landline_office %> </td>
+              <td style="width:1%; text-align: center;">
                 <!-- Button to trigger Bootstrap modal -->
                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#facultyModal<%= faculty.id %>">
                   Click here
                 </button>
 
-
-
+               
+              
 
 
             <div class="modal fade" id="facultyModal<%= faculty.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
