@@ -100,7 +100,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_20_080105) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "issubsections"
     t.boolean "is_sub_directory"
   end
 
