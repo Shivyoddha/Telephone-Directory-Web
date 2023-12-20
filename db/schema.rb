@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_18_070551) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_20_080105) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -70,13 +70,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_18_070551) do
     t.integer "designation_id"
     t.integer "position1_id"
     t.integer "position2_id"
+    t.integer "sub_directory_id"
     t.index ["department_id"], name: "index_faculties_on_department_id"
     t.index ["designation_id"], name: "index_faculties_on_designation_id"
     t.index ["position1_id"], name: "index_faculties_on_position1_id"
     t.index ["position2_id"], name: "index_faculties_on_position2_id"
+    t.index ["sub_directory_id"], name: "index_faculties_on_sub_directory_id"
   end
 
   create_table "positions", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sub_directories", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sub_directory", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -87,6 +101,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_18_070551) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "issubsections"
+    t.boolean "is_sub_directory"
   end
 
   create_table "users", force: :cascade do |t|
@@ -112,5 +127,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_18_070551) do
   add_foreign_key "faculties", "designations"
   add_foreign_key "faculties", "positions", column: "position1_id"
   add_foreign_key "faculties", "positions", column: "position2_id"
+  add_foreign_key "faculties", "sub_directories"
   add_foreign_key "users", "departments"
 end
