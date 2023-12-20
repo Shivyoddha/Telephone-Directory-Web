@@ -18,7 +18,7 @@ class Faculty < ApplicationRecord
       :search_designation,
       :search_designation_advanced,
       :with_department_id_advanced,
-      :with_sub_directory_advanced
+      :sub_directory_id_advanced
     ]
   )
 
@@ -42,7 +42,7 @@ class Faculty < ApplicationRecord
    where("designation LIKE ?", "%#{designation}%") if designation.present?
  }
 
- scope :with_sub_directory_advanced, ->(sub_directory_id) {
-  where(sub_directory_id: sub_directory_id) if sub_directory_id.present?
+ scope :sub_directory_id_advanced, ->(sub_directory_id) {
+  joins(:sub_directory).where("sub_directories.id = ?", sub_directory_id) if sub_directory_id.present?
 }
 end

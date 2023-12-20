@@ -41,17 +41,21 @@
     </div>
 
     <!-- Advanced Search Fields -->
-    <div class="col-md-4" id="filterrific_with_department_id" style="display: none;">
+    <div class="col-md-4" id="filterrific_with_department_id" >
       <%= f.label :with_department_id_advanced, "Search By Department", class: "form-label", style: "color:white;" %>
       <%= f.select :with_department_id_advanced, [['All Branches', nil]] + @filterrific.select_options[:with_department_id], { style: 'text-decoration: none;' }, class: "form-select" %>
     </div>
-    
-    <div class="col-md-4" id="filterrific_search_designation" style="display: none;">
+
+    <div class="col-md-4" id="filterrific_search_designation" >
       <%= f.label :search_designation_advanced, "Search By Designation", class: "form-label", style: "color:white;" %>
       <%= f.text_field :search_designation_advanced, class: "form-control" %>
     </div>
 
-    
+    <div class="col-md-4" id="filterrific_sub_directory_id" >
+      <%= f.label :sub_directory_id_advanced, "Search By Sub-Department", class: "form-label", style: "color:white;" %>
+      <%= f.select :sub_directory_id_advanced, [['All Sub-Departments', nil]] + @filterrific.select_options[:sub_directory_id], { style: 'text-decoration: none;' }, class: "form-select" %>
+    </div>
+
   </div>
 <% end %>
 
@@ -62,7 +66,7 @@
       // Toggle the visibility of the Advanced Search Fields
       toggleVisibility('filterrific_with_department_id');
       toggleVisibility('filterrific_search_designation');
-      
+      toggleVisibility('filterrific_sub_directory_id');
     });
   });
 

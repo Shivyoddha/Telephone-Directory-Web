@@ -16,22 +16,18 @@
 
   <div class="contents">
     <div class="contents-list">
-     <% sorted_units = Unit.all.order(:title) %>
-      <% sorted_units.each do |unit| %>
+      <% sorted_units = Unit.all.order(:title) %>
+       <% sorted_units.each do |unit| %>
         <div class="accordion">
           <label class="accordion-label" tabindex="0"><%= unit.title %></label>
           <div class="accordion-content">
-            <% if unit.is_sub_directory? %>
-              <% sub_directories = unit.departments.where.not(name: 'Others').pluck(:sub_directory).uniq %>
-              <% sub_directories.each do |sub_directory| %>
-                <p class="sub-directory-filter" data-unit="<%= unit.id %>" data-sub-directory="<%= sub_directory %>"><%= sub_directory %></p>
-              <% end %>
-              <p class="sub-directory-filter" data-unit="<%= unit.id %>" data-sub-directory="Others">Others</p>
-            <% else %>
-              <% sorted_departments = unit.departments.where(name: 'Others').order(:name) %>
+            <% sorted_departments = unit.departments.where.not(name: "Others").order(:name) %>
               <% sorted_departments.each do |department| %>
                 <p class="department-filter" data-unit="<%= unit.id %>" data-department="<%= department.id %>"><%= department.name %></p>
               <% end %>
+             <% others_department = unit.departments.find_by(name: "Others") %>
+            <% if others_department.present? %>
+              <p class="department-filter" data-unit="<%= unit.id %>" data-department="<%= others_department.id %>"><%= others_department.name %></p>
             <% end %>
           </div>
         </div>
@@ -86,7 +82,7 @@
         }
 
         document.getElementById("filterrific_with_department_id").value = departmentId;
-
+        console.log('Department ID', document.getElementById("filterrific_with_department_id").value);
         // Log the submit button to the console for debugging
         const submitButton = filterForm.querySelector('[type="submit"]');
         console.log('Filter Form:', filterForm);
