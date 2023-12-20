@@ -1,6 +1,6 @@
 class Faculty < ApplicationRecord
   rails_admin do
-    label "NITK Staff"
+    label "All Data"
   end
 
   belongs_to :department

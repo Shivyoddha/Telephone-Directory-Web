@@ -16,14 +16,14 @@
   .firstend{
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
-    
+
   }
 
   .lastend{
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
   }
-  
+
   .table th,
   .table td {
     text-align: center;
@@ -67,7 +67,7 @@
             <tr>
               <td> <%= index + 1 %> </td>
               <td> <%= faculty.name %> </td>
-              
+
               <td> <%= faculty.designation.title %> </td>
               <td> <%= faculty.landline_office %> </td>
               <td>
@@ -76,8 +76,8 @@
                   Click here
                 </button>
 
-               
-              
+
+
 
 
             <div class="modal fade" id="facultyModal<%= faculty.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
