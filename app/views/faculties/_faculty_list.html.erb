@@ -75,7 +75,7 @@
                             <dd class="col-sm-8"><%= faculty.name %></dd>
 
                             <dt class="col-sm-4">Designation</dt>
-                            <dd class="col-sm-8"><%= faculty.designation %></dd>
+                            <dd class="col-sm-8"><%= faculty.designation.title %></dd>
 
                             <dt class="col-sm-4">Unit</dt>
                             <dd class="col-sm-8"><%= faculty.department.name %></dd>
@@ -110,7 +110,11 @@
                         </div>
                         <div class="col-md-6">
                           <!-- Right column with details -->
-                           <%= image_tag faculty.profile, class: "img-fluid" %>
+                          <% if faculty.profile.attached? %>
+                           <%= image_tag faculty.profile, class: 'img-fluid' %>
+                           <% else %>
+                           <%= image_tag 'https://via.placeholder.com/300', class: 'img-fluid' %>
+                           <% end %>
                         </div>
                       </div>
                     </div>
