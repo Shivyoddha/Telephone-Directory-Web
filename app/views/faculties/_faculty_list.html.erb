@@ -59,7 +59,9 @@
               <td> <%= index + 1 %> </td>
               <td> <%= faculty.name %> </td>
               <td> <%= faculty.designation.title %> </td>
-              <td> <%= faculty.sub_directory.title %> </td>
+              <td>
+                <%= faculty.sub_directory&.title || '-' %>
+             </td>
               <td> <%= faculty.landline_office %> </td>
               <td>
                 <!-- Button to trigger Bootstrap modal -->
