@@ -16,14 +16,14 @@
   .firstend{
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
-    
+
   }
 
   .lastend{
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
   }
-  
+
   .table th,
   .table td {
     text-align: center;
@@ -67,7 +67,7 @@
             <tr>
               <td> <%= index + 1 %> </td>
               <td> <%= faculty.name %> </td>
-              
+
               <td> <%= faculty.designation.title %> </td>
               <td> <%= faculty.landline_office %> </td>
               <td>
@@ -76,8 +76,8 @@
                   Click here
                 </button>
 
-               
-              
+
+
 
 
             <div class="modal fade" id="facultyModal<%= faculty.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -103,28 +103,33 @@
                             <dd class="col-sm-6 text-start"><%= faculty.department.name %></dd>
 
                             <dt class="col-sm-6 text-start">Position-1</dt>
-                            <dd class="col-sm-6 text-start"><%= faculty.position1.title %></dd>
+                            <dd class="col-sm-6 text-start"><%= faculty.position1&.title || '-' %></dd>
 
                             <dt class="col-sm-6 text-start">Position-2</dt>
-                            <dd class="col-sm-6 text-start"><%= faculty.position2.title %></dd>
+                            <dd class="col-sm-6 text-start"><%= faculty.position2&.title || '-' %></dd>
 
                             <dt class="col-sm-6 text-start">Landline (Off.)</dt>
-                            <dd class="col-sm-6 text-start"><%= faculty.landline_office %></dd>
+                            <dd class="col-sm-6 text-start"><%= faculty.landline_office || '-' %></dd>
 
                             <dt class="col-sm-6 text-start">Landline (Res.)</dt>
-                            <dd class="col-sm-6 text-start"><%= faculty.landline_residential %></dd>
+                            <dd class="col-sm-6 text-start"><%= faculty.landline_residential || '-' %></dd>
 
                             <dt class="col-sm-6 text-start">Mobile-1</dt>
-                            <dd class="col-sm-6 text-start"><%= faculty.mobile1 %></dd>
+                            <dd class="col-sm-6 text-start"><%= faculty.mobile1 || '-' %></dd>
 
                             <dt class="col-sm-6 text-start">Mobile-2</dt>
-                            <dd class="col-sm-6 text-start"><%= faculty.mobile2 %></dd>
+                            <dd class="col-sm-6 text-start"><%= faculty.mobile2 || '-' %></dd>
 
                             <dt class="col-sm-6 text-start">Email</dt>
-                            <dd class="col-sm-6 text-start"><%= faculty.email %></dd>
+                            <dd class="col-sm-6 text-start"><%= faculty.email || '-' %></dd>
 
                             <dt class="col-sm-6 text-start">Personal Webpage</dt>
-                            <dd class="col-sm-6 text-start overflow-visible"><a href="<%= faculty.site_name %>" target="_blank">Click Here</a></dd>
+                            <dd class="col-sm-6 text-start overflow-visible">
+                              <% if faculty.site_name.present? %>
+                              <a href="<%= faculty.site_name %>" target="_blank">Click Here</a>
+                              <% else %>-
+                              <% end %>
+                            </dd>
 
                             <dt class="col-sm-6 text-start">Last Updated</dt>
                             <dd class="col-sm-6 text-start"><%= faculty.updated_at.strftime('%B %d, %Y %I:%M %p') %></dd>
@@ -132,7 +137,11 @@
                         </div>
                         <div class="col-md-6 d-flex align-items-center justify-content-center">
                           <!-- Right column with details -->
+                          <% if faculty.profile.present? %>
                            <%= image_tag faculty.profile, class: "img-fluid", style:"max-width: 80%; height: auto;" %>
+                          <% else %>
+                            <%= image_tag 'user.png', style: "max-width: 60%; max-height: 60%;"  %>
+                          <% end %>
                         </div>
                       </div>
                     </div>
