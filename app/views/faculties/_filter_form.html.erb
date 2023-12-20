@@ -12,7 +12,7 @@
 
   /* Style the advanced search button */
   #advanced-search-btn {
-    background-color: #28a745; /* Green color */
+    background-color: #198754; /* Green color */
     color: white;
     border: none;
     padding: 10px 20px;
@@ -31,25 +31,27 @@
     </div>
 
     <!-- Search Button -->
-    <div class="col-md-4 mt-5" style="padding-left:5%;">
+    <div class="col-md-2 mt-5" style="padding-left:5%;">
       <%= f.submit "Search", class: "btn btn-success" %>
     </div>
 
     <!-- Advanced Search Button -->
-    <div class="col-md-4 mt-3">
-      <button type="button" id="advanced-search-btn" class="btn btn-success">Advanced Search</button>
+    <div class="col-md-4 mt-5">
+      <button type="button" id="advanced-search-btn" class="btn btn-success" style="padding: 6px 12px; margin: 0;">Advanced Search</button>
     </div>
 
     <!-- Advanced Search Fields -->
+    <div class="col-md-4" id="filterrific_with_department_id" style="display: none;">
+      <%= f.label :with_department_id_advanced, "Search By Department", class: "form-label", style: "color:white;" %>
+      <%= f.select :with_department_id_advanced, [['All Branches', nil]] + @filterrific.select_options[:with_department_id], { style: 'text-decoration: none;' }, class: "form-select" %>
+    </div>
+    
     <div class="col-md-4" id="filterrific_search_designation" style="display: none;">
       <%= f.label :search_designation_advanced, "Search By Designation", class: "form-label", style: "color:white;" %>
       <%= f.text_field :search_designation_advanced, class: "form-control" %>
     </div>
 
-    <div class="col-md-4" id="filterrific_with_department_id" style="display: none;">
-      <%= f.label :with_department_id_advanced, "Search By Department", class: "form-label", style: "color:white;" %>
-      <%= f.select :with_department_id_advanced, [['All Branches', nil]] + @filterrific.select_options[:with_department_id], { style: 'text-decoration: none;' }, class: "form-select" %>
-    </div>
+    
   </div>
 <% end %>
 
@@ -58,8 +60,9 @@
     // Add a click event listener to the Advanced Search button
     document.getElementById('advanced-search-btn').addEventListener('click', function () {
       // Toggle the visibility of the Advanced Search Fields
-      toggleVisibility('filterrific_search_designation');
       toggleVisibility('filterrific_with_department_id');
+      toggleVisibility('filterrific_search_designation');
+      
     });
   });
 

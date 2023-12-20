@@ -13,6 +13,17 @@
     color: black;
   }
 
+  .firstend{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+
+  }
+
+  .lastend{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+
   .table th,
   .table td {
     text-align: center;
@@ -27,42 +38,53 @@
   .table tbody tr:nth-child(odd) {
     background-color: #eee;
   }
+
+  .modal-body dl dd {
+    word-wrap: break-word; /* Add this style for word wrapping */
+  }
 </style>
 <div class="container-fluid">
-  <% @departments.each do |department| %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="firstend"> Sl. No. </th>
+        <th> Name </th>
+        <th> Designation </th>
+        <th> Landline (Off.) </th>
+        <th class="lastend"> Details </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @departments.each do |department| %>
         <% faculties_for_department = @faculties_by_department[department.name] %>
         <% if faculties_for_department.present? %>
-        <div class="department-heading">
-          <div class="department-title"><%= department.name %></div>
-        </div>
-          <table class="table">
-            <thead>
-              <tr>
-                <th> Sr.No </th>
-                <th> Name </th>
-                <th> Landline (Office) </th>
-                <th> Mobile </th>
-                <th> Details </th>
-              </tr>
-            </thead>
-            <tbody>
+          <tr>
+            <td colspan="5" class="department-heading">
+              <div class="department-title"><%= department.name %></div>
+            </td>
+          </tr>
           <% faculties_for_department.each_with_index do |faculty, index| %>
             <tr>
               <td> <%= index + 1 %> </td>
               <td> <%= faculty.name %> </td>
+
+              <td> <%= faculty.designation.title %> </td>
               <td> <%= faculty.landline_office %> </td>
-              <td> <%= faculty.mobile1 %> </td>
               <td>
                 <!-- Button to trigger Bootstrap modal -->
                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#facultyModal<%= faculty.id %>">
                   Click here
                 </button>
 
+
+
+
+
             <div class="modal fade" id="facultyModal<%= faculty.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Faculty Details</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Details</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
@@ -71,50 +93,55 @@
                         <div class="col-md-6">
                           <!-- Left column with image -->
                           <dl class="row">
-                            <dt class="col-sm-4">Name</dt>
-                            <dd class="col-sm-8"><%= faculty.name %></dd>
+                            <dt class="col-sm-6 text-start">Name</dt>
+                            <dd class="col-sm-6 text-start"><%= faculty.name %></dd>
 
-                            <dt class="col-sm-4">Designation</dt>
-                            <dd class="col-sm-8"><%= faculty.designation.title %></dd>
+                            <dt class="col-sm-6 text-start">Designation</dt>
+                            <dd class="col-sm-6 text-start"><%= faculty.designation.title %></dd>
 
-                            <dt class="col-sm-4">Unit</dt>
-                            <dd class="col-sm-8"><%= faculty.department.name %></dd>
+                            <dt class="col-sm-6 text-start">Unit</dt>
+                            <dd class="col-sm-6 text-start"><%= faculty.department.name %></dd>
 
-                            <dt class="col-sm-4">Position-1</dt>
-                            <dd class="col-sm-8"><%= faculty.position1 %></dd>
+                            <dt class="col-sm-6 text-start">Position-1</dt>
+                            <dd class="col-sm-6 text-start"><%= faculty.position1&.title || '-' %></dd>
 
-                            <dt class="col-sm-4">Position-2</dt>
-                            <dd class="col-sm-8"><%= faculty.position2 %></dd>
+                            <dt class="col-sm-6 text-start">Position-2</dt>
+                            <dd class="col-sm-6 text-start"><%= faculty.position2&.title || '-' %></dd>
 
-                            <dt class="col-sm-4">Landline (Off.)</dt>
-                            <dd class="col-sm-8"><%= faculty.landline_office %></dd>
+                            <dt class="col-sm-6 text-start">Landline (Off.)</dt>
+                            <dd class="col-sm-6 text-start"><%= faculty.landline_office || '-' %></dd>
 
-                            <dt class="col-sm-4">Landline (Res.)</dt>
-                            <dd class="col-sm-8"><%= faculty.landline_residential %></dd>
+                            <dt class="col-sm-6 text-start">Landline (Res.)</dt>
+                            <dd class="col-sm-6 text-start"><%= faculty.landline_residential || '-' %></dd>
 
-                            <dt class="col-sm-4">Mobile-1</dt>
-                            <dd class="col-sm-8"><%= faculty.mobile1 %></dd>
+                            <dt class="col-sm-6 text-start">Mobile-1</dt>
+                            <dd class="col-sm-6 text-start"><%= faculty.mobile1 || '-' %></dd>
 
-                            <dt class="col-sm-4">Mobile-2</dt>
-                            <dd class="col-sm-8"><%= faculty.mobile2 %></dd>
+                            <dt class="col-sm-6 text-start">Mobile-2</dt>
+                            <dd class="col-sm-6 text-start"><%= faculty.mobile2 || '-' %></dd>
 
-                            <dt class="col-sm-4">Email</dt>
-                            <dd class="col-sm-8"><%= faculty.email %></dd>
+                            <dt class="col-sm-6 text-start">Email</dt>
+                            <dd class="col-sm-6 text-start"><%= faculty.email || '-' %></dd>
 
-                            <dt class="col-sm-4">Personal Webpage</dt>
-                            <dd class="col-sm-8"><a href="<%= faculty.site_name %>" target="_blank"><%= faculty.site_name %></a></dd>
+                            <dt class="col-sm-6 text-start">Personal Webpage</dt>
+                            <dd class="col-sm-6 text-start overflow-visible">
+                              <% if faculty.site_name.present? %>
+                              <a href="<%= faculty.site_name %>" target="_blank">Click Here</a>
+                              <% else %>-
+                              <% end %>
+                            </dd>
 
-                            <dt class="col-sm-4">Last Updated</dt>
-                            <dd class="col-sm-8"><%= faculty.updated_at.strftime('%B %d, %Y %I:%M %p') %></dd>
+                            <dt class="col-sm-6 text-start">Last Updated</dt>
+                            <dd class="col-sm-6 text-start"><%= faculty.updated_at.strftime('%B %d, %Y %I:%M %p') %></dd>
                           </dl>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 d-flex align-items-center justify-content-center">
                           <!-- Right column with details -->
-                          <% if faculty.profile.attached? %>
-                           <%= image_tag faculty.profile, class: 'img-fluid' %>
-                           <% else %>
-                           <%= image_tag 'https://via.placeholder.com/300', class: 'img-fluid' %>
-                           <% end %>
+                          <% if faculty.profile.present? %>
+                           <%= image_tag faculty.profile, class: "img-fluid", style:"max-width: 80%; height: auto;" %>
+                          <% else %>
+                            <%= image_tag 'user.png', style: "max-width: 60%; max-height: 60%;"  %>
+                          <% end %>
                         </div>
                       </div>
                     </div>
@@ -126,11 +153,11 @@
                 </div>
               </div>
             </div>
-          </td>
-              </tr>
-            <% end %>
+              </td>
+            </tr>
           <% end %>
-        </tbody>
-      </table>
-    <% end %>
-  </div>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
