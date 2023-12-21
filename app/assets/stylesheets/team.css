@@ -1,0 +1,24 @@
+
+.card-img-top {
+  height: 200%; 
+  object-fit: cover; 
+}
+
+
+.card {
+  height: 100%; 
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.web-team {
+   background-color: rgba(25,46,89,255);
+}
+
+.web-team:hover {
+  background-color: #122242;
+}
