@@ -1,9 +1,4 @@
 <%= stylesheet_link_tag 'index' %>
-<style media="screen">
-  .subdirectory-option {
-   cursor: pointer;
-}
-</style>
 <div class="main-container">
   <div class="nitk-header">
     <div class="container">
@@ -32,13 +27,13 @@
                   <div class="department-with-subdirectory subdirectory-option">
                     <% subdirectories = SubDirectory.order(:title) %>
                      <%= department.name %>
-                    <div class="subdirectory-dropdown dropdown-options" style="display: none;">
+                    <ul class="subdirectory-dropdown dropdown-options tree" style="display: none;">
                       <% subdirectories.each do |subdirectory| %>
-                        <div class="dropdown-option subdirectory-option" data-subdirectory="<%= subdirectory.id %>"  data-unit="<%= unit.id %>" data-department="<%= department.id %>">
-                        <p><%= subdirectory.title %></p>
-                        </div>
+                        <li class="dropdown-option subdirectory-option" data-subdirectory="<%= subdirectory.id %>"  data-unit="<%= unit.id %>" data-department="<%= department.id %>">
+                        <%= subdirectory.title %>
+                        </li>
                       <% end %>
-                    </div>
+                    </li>
                   </div>
               </p>
             <% else %>
