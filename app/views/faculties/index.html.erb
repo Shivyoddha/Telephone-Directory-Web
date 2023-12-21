@@ -42,13 +42,13 @@
                   </div>
               </p>
             <% else %>
-              <p class="dropdown-option"  data-subdirectory="0" data-unit="<%= unit.id %>" data-department="<%= department.id %>"><%= department.name %></p>
+              <p class="dropdown-option subdirectory-option"  data-subdirectory="0" data-unit="<%= unit.id %>" data-department="<%= department.id %>"><%= department.name %></p>
             <% end %>
           <% end %>
 
             <% others_department = unit.departments.find_by(name: "Others") %>
             <% if others_department.present? %>
-              <p class="dropdown-option" data-unit="<%= unit.id %>" data-department="<%= others_department.id %>"><%= others_department.name %></p>
+              <p class="dropdown-option subdirectory-option" data-unit="<%= unit.id %>" data-department="<%= others_department.id %>"><%= others_department.name %></p>
             <% end %>
           </div>
         </div>
