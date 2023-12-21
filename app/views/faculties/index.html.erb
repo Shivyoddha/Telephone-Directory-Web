@@ -27,24 +27,24 @@
               <p class="department-with-subdirectory" data-unit="<%= unit.id %>" data-department="<%= department.id %>">
                   <div class="department-with-subdirectory">
                     <% subdirectories = SubDirectory.order(:title) %>
-                      <%= department.name %>
+                     <%= department.name %>
                     <div class="subdirectory-dropdown dropdown-options" style="display: none;">
                       <% subdirectories.each do |subdirectory| %>
-                        <div class="dropdown-option" data-subdirectory-id="<%= subdirectory.id %>">
-                          <%= subdirectory.title %>
+                        <div class="dropdown-option" data-subdirectory="<%= subdirectory.id %>"  data-unit="<%= unit.id %>" data-department="<%= department.id %>">
+                        <p><%= subdirectory.title %></p>
                         </div>
                       <% end %>
                     </div>
                   </div>
               </p>
             <% else %>
-              <p class="department-filter" data-unit="<%= unit.id %>" data-department="<%= department.id %>"><%= department.name %></p>
+              <p class="dropdown-option"  data-subdirectory="0" data-unit="<%= unit.id %>" data-department="<%= department.id %>"><%= department.name %></p>
             <% end %>
           <% end %>
 
             <% others_department = unit.departments.find_by(name: "Others") %>
             <% if others_department.present? %>
-              <p class="department-filter" data-unit="<%= unit.id %>" data-department="<%= others_department.id %>"><%= others_department.name %></p>
+              <p class="dropdown-option" data-unit="<%= unit.id %>" data-department="<%= others_department.id %>"><%= others_department.name %></p>
             <% end %>
           </div>
         </div>
@@ -85,19 +85,6 @@
     });
   });
 
-  document.addEventListener("DOMContentLoaded", function() {
-    const departmentFilters = document.querySelectorAll(".department-filter");
-
-    departmentFilters.forEach(filter => {
-      filter.addEventListener("click", function() {
-        const unitId = this.dataset.unit;
-        const departmentId = this.dataset.department;
-
-        // Call a function to update the filter and perform actions based on the selected unit and department
-        updateFilterAndHandleClick(unitId, departmentId);
-      });
-    });
-
     function updateFilterAndHandleClick(unitId, departmentId) {
       // Update the filter form with the selected unit and department
       const filterForm = document.getElementById("filterrific_filter");
@@ -116,5 +103,46 @@
       // Trigger a click event on the submit button to submit the form
       filterForm.submit();
     }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      const departmentFilters = document.querySelectorAll(".dropdown-option");
+
+      departmentFilters.forEach(filter => {
+        filter.addEventListener("click", function() {
+          const unitId = this.dataset.unit;
+          const departmentId = this.dataset.department
+          const subDirectoryId = this.dataset.subdirectory
+          console.log('Sub-directory ID',  subDirectoryId);
+          if (subDirectoryId == 0) {
+              updateFilterAndHandleClick(unitId, departmentId);
+          }
+
+          // Call a function to update the filter and perform actions based on the selected unit and department
+          updateFilterAndHandleClick1(unitId, departmentId, subDirectoryId);
+        });
+      });
+
+      function updateFilterAndHandleClick1(unitId, departmentId, subDirectoryId) {
+        // Update the filter form with the selected unit and department
+        const filterForm = document.getElementById("filterrific_filter");
+
+        if (!filterForm) {
+          console.error('Filter form not found.');
+          return;
+        }
+
+        document.getElementById("filterrific_with_department_id_advanced").value = departmentId;
+        document.getElementById("filterrific_sub_directory_id_advanced").value = subDirectoryId;
+        console.log('Department ID', document.getElementById("filterrific_with_department_id_advanced").value);
+
+        // Optionally, perform other actions based on the selected unit and department
+        // For example, you can show/hide content, make AJAX requests, etc.
+
+        // Trigger a click event on the submit button to submit the form
+        filterForm.submit();
+      }
   });
+
+
+
 </script>
