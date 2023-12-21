@@ -32,7 +32,7 @@
   }
 
   .table td {
-    text-align: left;
+    text-align: center;
     vertical-align: middle;
     border: 1px solid #e6e6e6;
   }
@@ -48,7 +48,14 @@
   }
 
   .modal-body dl dd {
-    word-wrap: break-word; /* Add this style for word wrapping */
+    word-wrap: break-word;
+  }
+
+
+  .row-item {
+    display: flex;
+    flex-direction: row;
+    line-height: 1.5;
   }
 
 </style>
@@ -57,7 +64,7 @@
     <thead>
       <tr>
         <th class="firstend"> Sl. No. </th>
-        <th > Name </th>
+        <th style="text-align: ;"> Name </th>
         <th > Designation </th>
         <th > Landline (Off.) </th>
         <th class="lastend"> Details </th>
@@ -75,7 +82,7 @@
           <% faculties_for_department.each_with_index do |faculty, index| %>
             <tr style="line-height: 10%;">
               <td style="width:0.7%; "> <%= index + 1 %> </td>
-              <td style="width:5%;"> <%= faculty.name %> </td>
+              <td style="width:5%; text-align: left;"> <%= faculty.name %> </td>
               
               <td style="width:2%;"> <%= faculty.designation.title %> </td>
               <td style="width:2%;"> <%= faculty.landline_office %> </td>
@@ -101,37 +108,48 @@
                       <div class="row">
                         <div class="col-md-6">
                           <!-- Left column with image -->
-                          <dl class="row">
-                            <dt class="col-sm-6 text-start">Name</dt>
+                          <dl class="row modal-row">
+                            <div class=row-item>
+                            <dt class="col-sm-6 text-start ">Name</dt>
                             <dd class="col-sm-6 text-start"><%= faculty.name %></dd>
-
-                            <dt class="col-sm-6 text-start">Designation</dt>
-                            <dd class="col-sm-6 text-start"><%= faculty.designation.title %></dd>
-
-                            <dt class="col-sm-6 text-start">Unit</dt>
-                            <dd class="col-sm-6 text-start"><%= faculty.department.name %></dd>
-
-                            <dt class="col-sm-6 text-start">Position-1</dt>
-                            <dd class="col-sm-6 text-start"><%= faculty.position1&.title || '-' %></dd>
-
-                            <dt class="col-sm-6 text-start">Position-2</dt>
-                            <dd class="col-sm-6 text-start"><%= faculty.position2&.title || '-' %></dd>
-
+                          </div>
+                          <div class=row-item>
+                            <dt class="col-sm-6 text-start ">Designation</dt>
+                            <dd class="col-sm-6 text-start col2"><%= faculty.designation.title %></dd>
+                          </div>
+                            <div class=row-item>
+                            <dt class="col-sm-6 text-start ">Unit</dt>
+                            <dd class="col-sm-6 text-start "><%= faculty.department.name %></dd>
+                          </div>
+                            <div class=row-item>
+                            <dt class="col-sm-6 text-start ">Position-1</dt>
+                            <dd class="col-sm-6 text-start "><%= faculty.position1&.title || '-' %></dd>
+                          </div>
+                            <div class=row-item>
+                            <dt class="col-sm-6 text-start ">Position-2</dt>
+                            <dd class="col-sm-6 text-start "><%= faculty.position2&.title || '-' %></dd>
+                          </div>
+                            <div class=row-item>
                             <dt class="col-sm-6 text-start">Landline (Off.)</dt>
                             <dd class="col-sm-6 text-start"><%= faculty.landline_office || '-' %></dd>
-
+                          </div>
+                            <div class=row-item>
                             <dt class="col-sm-6 text-start">Landline (Res.)</dt>
                             <dd class="col-sm-6 text-start"><%= faculty.landline_residential || '-' %></dd>
-
+                          </div>
+                            <div class=row-item>
                             <dt class="col-sm-6 text-start">Mobile-1</dt>
                             <dd class="col-sm-6 text-start"><%= faculty.mobile1 || '-' %></dd>
-
+                          </div>
+                            <div class=row-item>
                             <dt class="col-sm-6 text-start">Mobile-2</dt>
                             <dd class="col-sm-6 text-start"><%= faculty.mobile2 || '-' %></dd>
-
+                          </div>
+                            <div class=row-item>
                             <dt class="col-sm-6 text-start">Email</dt>
                             <dd class="col-sm-6 text-start"><%= faculty.email || '-' %></dd>
-
+                          </div>
+                            <div class=row-item>
                             <dt class="col-sm-6 text-start">Personal Webpage</dt>
                             <dd class="col-sm-6 text-start overflow-visible">
                               <% if faculty.site_name.present? %>
@@ -139,9 +157,11 @@
                               <% else %>-
                               <% end %>
                             </dd>
-
+                          </div>
+                            <div class=row-item>
                             <dt class="col-sm-6 text-start">Last Updated</dt>
                             <dd class="col-sm-6 text-start"><%= faculty.updated_at.strftime('%B %d, %Y %I:%M %p') %></dd>
+                          </div>
                           </dl>
                         </div>
                         <div class="col-md-6 d-flex align-items-center justify-content-center">
