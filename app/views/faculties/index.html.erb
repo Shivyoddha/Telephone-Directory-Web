@@ -1,5 +1,9 @@
 <%= stylesheet_link_tag 'index' %>
-
+<style media="screen">
+  .subdirectory-option {
+   cursor: pointer;
+}
+</style>
 <div class="main-container">
   <div class="nitk-header">
     <div class="container">
@@ -24,13 +28,13 @@
             <% sorted_departments = unit.departments.where.not(name: "Others").order(:name) %>
             <% sorted_departments.each do |department| %>
             <% if unit.is_sub_directory? %>
-              <p class="department-with-subdirectory" data-unit="<%= unit.id %>" data-department="<%= department.id %>">
-                  <div class="department-with-subdirectory">
+              <p class="department-with-subdirectory"  data-unit="<%= unit.id %>" data-department="<%= department.id %>">
+                  <div class="department-with-subdirectory subdirectory-option">
                     <% subdirectories = SubDirectory.order(:title) %>
                      <%= department.name %>
                     <div class="subdirectory-dropdown dropdown-options" style="display: none;">
                       <% subdirectories.each do |subdirectory| %>
-                        <div class="dropdown-option" data-subdirectory="<%= subdirectory.id %>"  data-unit="<%= unit.id %>" data-department="<%= department.id %>">
+                        <div class="dropdown-option subdirectory-option" data-subdirectory="<%= subdirectory.id %>"  data-unit="<%= unit.id %>" data-department="<%= department.id %>">
                         <p><%= subdirectory.title %></p>
                         </div>
                       <% end %>
