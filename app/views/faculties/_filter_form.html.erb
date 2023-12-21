@@ -40,17 +40,17 @@
     </div>
 
     <!-- Advanced Search Fields -->
-    <div class="col-md-4 col-sm-6" id="filterrific_with_department_id" >
+    <div class="col-md-4 col-sm-6" id="filterrific_with_department_id" style= "display:none;">
       <%= f.label :with_department_id_advanced, "Search By Department", class: "form-label", style: "color:white;" %>
       <%= f.select :with_department_id_advanced, [['All Branches', nil]] + @filterrific.select_options[:with_department_id], { style: 'text-decoration: none;' }, class: "form-select" %>
     </div>
 
-    <div class="col-md-4 col-sm-6" id="filterrific_search_designation" >
+    <div class="col-md-4 col-sm-6" id="filterrific_search_designation" style= "display:none;">
       <%= f.label :search_designation_advanced, "Search By Designation", class: "form-label", style: "color:white;" %>
       <%= f.text_field :search_designation_advanced, class: "form-control" %>
     </div>
 
-    <div class="col-md-4 col-sm-6" id="filterrific_sub_directory_id" >
+    <div class="col-md-4 col-sm-6" id="filterrific_sub_directory_id" style= "display:none;">
       <%= f.label :sub_directory_id_advanced, "Search By Sub-Department", class: "form-label", style: "color:white;" %>
       <%= f.select :sub_directory_id_advanced, [['All Sub-Departments', nil]] + @filterrific.select_options[:sub_directory_id], { style: 'text-decoration: none;' }, class: "form-select" %>
     </div>
