@@ -29,10 +29,7 @@
       <%= f.text_field :search_query, placeholder: "Search Name", class: "form-control", id: "filterrific_submit_button"  %>
     </div>
 
-    <!-- Search Button -->
-    <div class="col-md-1  col-sm-12" style="margin:30px 0px 0px">
-      <%= f.submit "Search", class: "btn btn-success" %>
-    </div>
+    
 
     <div class="col-md-4 col-sm-12" id="filterrific_with_department_id" style= "margin: 30px 0px 24px 0px; display:none;">
       
@@ -40,8 +37,14 @@
     </div>
 
     <!-- Advanced Search Button -->
-    <div class="col-md-3  col-sm-12" style="margin: 30px 0px 0px; !important">
+    <div class="col-md-2 col-sm-12" style="margin: 30px 0px 0px; !important">
       <button type="button" id="advanced-search-btn" class="btn btn-success" style="padding: 6px 12px; margin: 0px ;">Advanced Search</button>
+    </div>
+
+
+    <!-- Search Button -->
+    <div class="col-md-1  col-sm-12" style="margin:30px 0px 0px">
+      <%= f.submit "Search", class: "btn btn-success" %>
     </div>
 
     <!-- Advanced Search Fields -->
