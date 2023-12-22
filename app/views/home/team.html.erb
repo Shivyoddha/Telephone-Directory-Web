@@ -1,202 +1,247 @@
-<%= stylesheet_link_tag 'index' %>
-<%= stylesheet_link_tag 'team' %>
-<div class="main-container">
-  <div class="nitk-header">
-    <div class="container">
-      <header class="d-flex justify-content-center py-3">
-        <li class="nav-item"><a href="https://www.nitk.ac.in/" class="nav-link active" aria-current="page"><%= image_tag('header.png') %></a></li>
-      </header>
-    </div>
-  </div>
+<!doctype html>
+<html lang="en">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <main>
-    <section class="py-5 text-center container">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <title>Team Section</title>
+    <link href="./css/style.css" rel="stylesheet">
+ 
+  </head>
+ 
+  <body>
+
+<!--NITK HEADER-->
+    <div class="nitk-header">
+        <div class="container">
+          <header class="d-flex justify-content-center py-3">
+            <li class="nav-item"><a href="#" class="nav-link active" aria-current="page"><img src="header.png"></a></li>
+          </header>
+        </div>
+      </div>
+
+
+
+
+     <section id="team" class="team section-bg">
+        <div class="container">
+<!--Page title-->
+          <div class="page-title">
+            <h2>Our Team</h2>
+            <div class="underline"></div>
+            
+          </div>
+
+
+          <section class="py-5 text-center container">
       <div class="row py-lg-5">
         <div class="col-lg-6 col-md-8 mx-auto">
           <h1 class="fw-light">TELEPHONE DIRECTORY TEAM</h1>
           <p class="lead text-body-secondary">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
           <p>
-            <a href="#web-team" class="btn btn-primary my-2 web-team" >Web Team</a>
+            <a href="#web-team" class="btn btn-primary my-2 active">Web Team</a>
             <a href="#app-team" class="btn btn-success my-2">App Team</a>
           </p>
         </div>
       </div>
     </section>
-    
-          <div class="col">
-            <div class="card shadow-sm">
-              <%= image_tag('mr-br-chandravarkar.jpg' , class: 'card-img-top img-fluid', alt: 'Professor Image') %>
-              <div class="card-body">
-                <p class="card-text">Dr.B.R.Chandravarkar</p>
-                <p class="card-text">Department: CSE</p>
-                <p class="card-text"> Associate Professor </p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">GitHub</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">LinkedIn</button>
-                    </div>
-                  <small class="text-body-secondary">Facutly Incharge</small>
-                </div>
-              </div>
-            </div>
+<!--Section title for FACULTY ADVISOR-->
+          <div class="section-title">
+            <h3>Faculty Advisor</h3>
+          
+          <div class="underline"></div>
           </div>
-
-<div class="album py-5 bg-body-tertiary">
-      <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          <div class="col">
-            <div class="card shadow-sm">
-              <%= image_tag('Dir_Passport_size_photo.jpg' , class: 'card-img-top img-fluid', alt: 'Director Image') %>
-              <div class="card-body">
-              <p class="card-text">Faculty Staff</p>
-              <p class="card-text">Faculty Staff</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">GitHub</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">LinkedIn</button>
-                 </div>
-                  <small class="text-body-secondary">Faculty staff</small>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card shadow-sm">
-              <%= image_tag('Anish.jpg' , class: 'card-img-top img-fluid', alt: 'Mentor Image') %>
-                        <div class="card-body">
-                          <p class="card-text">Anish Kumbhar</p>
-                          <p class="card-text">Department: CSE</p>
-                          <p class="card-text"> B.Tech, 2025 </p>
-                          <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">GitHub</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">LinkedIn</button>
-                              </div>
-                            <small class="text-body-secondary">Project Lead</small>
-                          </div>
+          
+          <div class="row">
+            
+            <div class="col-lg-6 mt-4">
+                <div class="member d-flex align-items-start">
+                    <div class="teampic"><img src="mr-br-chandravarkar.jpg" class="img-fluid" alt=""></div>
+                    <div class="member-info">
+                        <h4>Dr. B R Chandavarkar</h4>
+                        <span>Associate Professor</span> <!-- Corrected spelling here -->
+                        <span>Dept. of CSE</span>
+                        <div class="social align-items-center"> <!-- Add align-items-center class here -->
+                            
                         </div>
-            </div>
-          </div>
-
-          <!-- Replace 'web_team_image_1.jpg', 'web_team_image_2.jpg', 'web_team_image_3.jpg' with actual image paths for the web team -->
-          <div class="col">
-            <div class="card shadow-sm">
-              <%= image_tag('Megha_final.jpg' , class: 'card-img-top img-fluid', alt: 'Web Team Image 3') %>
-              
-              <div class="card-body">
-                <p class="card-text">Megha Arya</p>
-                <p class="card-text">Department: CSE</p>
-                          <p class="card-text"> B.Tech, 2026 </p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">GitHub</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">LinkedIn</button>
-                  </div>
-                  <small class="text-body-secondary">Web Team</small>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
 
-          <div class="col" id="web-team">
-            <div class="card shadow-sm">
-              <%= image_tag('Poorva_final.jpg' , class: 'card-img-top img-fluid', alt: 'Web Team Image 1') %>
-              <div class="card-body">
-                <p class="card-text">Bhagwat Poorva Milind</p>
-                          <p class="card-text">Department: CSE</p>
-                          <p class="card-text"> B.Tech, 2026 </p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">GitHub</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">LinkedIn</button>
-                  </div>
-                  <small class="text-body-secondary">Web Team</small>
-                </div>
-              </div>
-            </div>
+<!--Section title for FACULTY STAFF-->
+             <div class="section-title">
+            <h3>Faculty Advisor</h3>
+          
+          <div class="underline"></div>
           </div>
-
-          <div class="col">
-            <div class="card shadow-sm">
-              <%= image_tag('Reema_final.jpg', class: 'card-img-top img-fluid', alt: 'Web Team Image 2') %>
-              <div class="card-body">
-                <p class="card-text">Reema Murthy</p>
-                <p class="card-text">Department: CSE</p>
-                          <p class="card-text"> B.Tech, 2026 </p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">GitHub</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">LinkedIn</button>
-                  </div>
-                  <small class="text-body-secondary">Web Team</small>
+          
+          <div class="row">
+            
+            <div class="col-lg-6 mt-4">
+                <div class="member d-flex align-items-start">
+                    <div class="teampic"><img src="image5.jpeg" class="img-fluid" alt=""></div>
+                    <div class="member-info">
+                        <h4>Faculty Staff</h4>
+                        <span> Professor</span> <!-- Corrected spelling here -->
+                        <span>Dept. of CSE</span>
+                        <div class="social align-items-center"> <!-- Add align-items-center class here -->
+                            
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-
-          <!-- Replace 'app_team_image_1.jpg', 'app_team_image_2.jpg', 'app_team_image_3.jpg' with actual image paths for the app team -->
-          <div class="col" id="app-team">
-            <div class="card shadow-sm">
-              <%= image_tag('Ansh.jpg' , class: 'card-img-top img-fluid', alt: 'App Team Image 1') %>
-              <div class="card-body">
-                <p class="card-text">Ansh Vivek Malhotra</p>
-                <p class="card-text">Department: CSE</p>
-                          <p class="card-text"> B.Tech, 2026 </p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">GitHub</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">LinkedIn</button>
-                  </div>
-                  <small class="text-body-secondary">App Team</small>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card shadow-sm">
-              <%= image_tag('Chirag.jpg' , class: 'card-img-top img-fluid', alt: 'App Team Image 2') %>
-              <div class="card-body">
-                <p class="card-text">Chirag S</p>
-                <p class="card-text">Department: CSE</p>
-                          <p class="card-text"> B.Tech, 2026 </p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">GitHub</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">LinkedIn</button>
-                  </div>
-                  <small class="text-body-secondary">App Team</small>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card shadow-sm">
-              <%= image_tag('Rishabh.jpg' , class: 'card-img-top img-fluid', alt: 'App Team Image 3') %>
-              <div class="card-body">
-                <p class="card-text">Rishabh Mahor</p>
-                <p class="card-text">Department: CSE</p>
-                          <p class="card-text"> B.Tech, 2026 </p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">GitHub</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">LinkedIn</button>
-                  </div>
-                  <small class="text-body-secondary">App Team</small>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
+
+<!--Section title for PROJECT LEAD-->
+<div class="section-title mt-5">
+    <h3>Project Lead </h3>
+  
+  <div class="underline"></div>
+  </div>
+  
+  <div class="row">
+    
+    <div class="col-lg-6 mt-4">
+        <div class="member d-flex align-items-start">
+            <div class="teampic"><img src="Anish.jpg" class="img-fluid" alt=""></div>
+            <div class="member-info">
+                <h4>Anish Kumbhar</h4>
+                <span>B.Tech, 2025</span> <!-- Corrected spelling here -->
+                <span>Dept. of CSE</span>
+                <div class="social align-items-center"> <!-- Add align-items-center class here -->
+                    <a href=""><i class="bi bi-github"></i></a>
+                    <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
     </div>
+  </div>
 
-  </main>
+<!--Section title for WEB TEAM-->
+            <div class="section-title mt-5">
+                <h3>Web Development Team</h3>
+                <div class="underline"></div>
+            </div>
 
-  <%= render 'faculties/footer' %>
+           
+<div class="row">
+            <div class="col-lg-6 mt-4">
+                <div class="member d-flex align-items-start">
+                    <div class="teampic"><img src="Megha_final.jpg" class="img-fluid" alt=""></div>
+                    <div class="member-info">
+                        <h4>Megha Arya</h4>
+                        <span>B.Tech, 2026 </span> 
+                        <span>Dept. of CSE</span>
+                        <div class="social align-items-center"> <!-- Add align-items-center class here -->
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
-</div>
+            <div class="col-lg-6 mt-4">
+                <div class="member d-flex align-items-start">
+                    <div class="teampic"><img src="Poorva_final.jpg" class="img-fluid" alt=""></div>
+                    <div class="member-info">
+                        <h4>Bhagwat Poorva Milind </h4>
+                        <span>B.Tech, 2026</span> <!-- Corrected spelling here -->
+                        <span>Dept. of CSE</span>
+                        <div class="social align-items-center"> <!-- Add align-items-center class here -->
+                            <a href=""><i class="bi bi-github"></i></a>
+                            <a href=""><i class="bi bi-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <div class="col-lg-6 mt-4">
+                <div class="member d-flex align-items-start">
+                    <div class="teampic"><img src="Reema.jpg" class="img-fluid" alt=""></div>
+                    <div class="member-info">
+                        <h4>Reema Murthy</h4>
+                        <span>B.Tech, 2026</span> <!-- Corrected spelling here -->
+                        <span>Dept. of CSE</span>
+                        <div class="social align-items-center"> <!-- Add align-items-center class here -->
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+          </div>
+          
+<!-- End of web team Section -->
+<!--Section title for APP TEAM-->     
+        
+      <div class="section-title mt-5">
+        <h3>Application Development Team</h3>
+        <div class="underline"></div>
+      </div>
+
+
+      <div class="row">
+       
+
+      <div class="col-lg-6 mt-4">
+        <div class="member d-flex align-items-start">
+            <div class="teampic"><img src="Ansh.jpg" class="img-fluid" alt=""></div>
+            <div class="member-info">
+                <h4>Ansh Malhotra</h4>
+                <span>B.Tech, 2026</span> 
+                <span>Dept. of CSE</span>
+                <div class="social align-items-center"> 
+                    <a href=""><i class="bi bi-github"></i></a>
+                    <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+    
+    <div class="col-lg-6 mt-4">
+        <div class="member d-flex align-items-start">
+            <div class="teampic"><img src="Chirag.jpg" class="img-fluid" alt=""></div>
+            <div class="member-info">
+                <h4>Chirag S</h4>
+                <span>B.Tech, 2026</span> 
+                <span>Dept. of CSE</span>
+                <div class="social align-items-center"> 
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-6 mt-4">
+        <div class="member d-flex align-items-start">
+            <div class="teampic"><img src="Rishabh.jpg" class="img-fluid" alt=""></div>
+            <div class="member-info">
+                <h4>Rishabh Mahor</h4>
+                <span>B.Tech, 2026</span> 
+                <span>Dept. of CSE</span>
+                <div class="social">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+              
+            </div>
+    </div>
+</section>
+
+  <!--end of app team section--> 
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    
+  </body>
+</html>
