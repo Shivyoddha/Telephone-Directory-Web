@@ -1,6 +1,6 @@
 class Faculty < ApplicationRecord
   rails_admin do
-    label "All Data"
+    label "All_Data"
   end
 
   belongs_to :department

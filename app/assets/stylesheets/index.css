@@ -17,6 +17,12 @@ img{
   justify-content: center;
   width:100%;
   box-shadow: 0px 11px 5px -1px rgba(0, 0, 0, 0.3);
+  height: auto;
+}
+
+.py-3 {
+    padding-top: 0.5rem!important;
+    padding-bottom: 0.5rem!important;
 }
 
 .telephone-header{
@@ -203,4 +209,8 @@ ul.tree li:last-child:before {
   .subdirectory-option {
     cursor: pointer;
   }
+}
+
+.accordion-container {
+  overflow-y: scroll;
 }

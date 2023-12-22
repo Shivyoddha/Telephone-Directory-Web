@@ -3,7 +3,7 @@
   <div class="nitk-header">
     <div class="container">
       <header class="d-flex justify-content-center py-3">
-        <li class="nav-item"><a href="https://www.nitk.ac.in/" class="nav-link active" aria-current="page"><%= image_tag 'header.png' %></a></li>
+        <div class="nav-item"><a href="https://www.nitk.ac.in/" class="nav-link active" aria-current="page"><%= image_tag 'header.png' %></a></div>
       </header>
     </div>
   </div>
@@ -33,7 +33,7 @@
                         <%= subdirectory.title %>
                         </li>
                       <% end %>
-                    </li>
+                    </ul>
                   </div>
               </p>
             <% else %>
@@ -51,7 +51,7 @@
     </div>
     <div class="search-area">
       <div class="search-header">
-        <div class="p-4 rounded text-body-emphasis" style="width:100%;background-color:#192f59;">
+        <div class=" p-4 rounded text-body-emphasis" style="width:100%;background-color:#192f59;">
           <p class="lead mb-0" style="color:white;"><a href="#" class="text-body-emphasis fw-bold"><%= render 'filter_form' %></a></p>
         </div>
       </div>
