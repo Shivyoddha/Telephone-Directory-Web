@@ -1,14 +1,41 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Units</h1>
-
-<div id="units">
-  <% @units.each do |unit| %>
-    <%= render unit %>
-    <p>
-      <%= link_to "Show this unit", unit %>
-    </p>
+<div id="accordion">
+  <% @filters.each do |filter| %>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="heading<%= filter.id %>">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= filter.id %>" aria-expanded="true" aria-controls="collapse<%= filter.id %>">
+          <%= filter.name %>
+        </button>
+      </h2>
+      <div id="collapse<%= filter.id %>" class="accordion-collapse collapse" aria-labelledby="heading<%= filter.id %>" data-bs-parent="#accordion">
+        <div class="accordion-body">
+        
+          <div id="filterContent<%= filter.id %>">
+            Filtered content for <%= filter.name %> goes here.
+          </div>
+        </div>
+      </div>
+    </div>
   <% end %>
 </div>
 
 <%= link_to "New unit", new_unit_path %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const accordionItems = document.querySelectorAll('.accordion-item');
+
+    accordionItems.forEach(item => {
+      item.addEventListener('click', function () {
+        // Close all accordions on click except the selected one
+        const thisCollapse = this.querySelector('.accordion-collapse');
+        accordionItems.forEach(accItem => {
+          if (accItem !== this) {
+            accItem.querySelector('.accordion-collapse').classList.remove('show');
+          }
+        });
+        // Toggle collapse of the selected accordion
+        thisCollapse.classList.toggle('show');
+      });
+    });
+  });
+</script>
