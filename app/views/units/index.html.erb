@@ -2,13 +2,12 @@
   <% @filters.each do |filter| %>
     <div class="accordion-item">
       <h2 class="accordion-header" id="heading<%= filter.id %>">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= filter.id %>" aria-expanded="true" aria-controls="collapse<%= filter.id %>">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= filter.id %>" aria-expanded="false" aria-controls="collapse<%= filter.id %>" onclick="applyFilter('<%= filter.id %>')">
           <%= filter.name %>
         </button>
       </h2>
       <div id="collapse<%= filter.id %>" class="accordion-collapse collapse" aria-labelledby="heading<%= filter.id %>" data-bs-parent="#accordion">
         <div class="accordion-body">
-        
           <div id="filterContent<%= filter.id %>">
             Filtered content for <%= filter.name %> goes here.
           </div>
@@ -24,18 +23,30 @@
   document.addEventListener('DOMContentLoaded', function () {
     const accordionItems = document.querySelectorAll('.accordion-item');
 
-    accordionItems.forEach(item => {
-      item.addEventListener('click', function () {
-        // Close all accordions on click except the selected one
-        const thisCollapse = this.querySelector('.accordion-collapse');
-        accordionItems.forEach(accItem => {
-          if (accItem !== this) {
-            accItem.querySelector('.accordion-collapse').classList.remove('show');
-          }
+    function applyFilter(filterId) {
+      const filterContent = document.getElementById(`filterContent${filterId}`);
+      
+      fetch(`/your_controller_action_path/${filterId}`) // Replace with your actual controller action path
+        .then(response => response.text())
+        .then(data => {
+          // Update content with AJAX response
+          filterContent.innerHTML = data;
+          
+          // Close all accordions
+          accordionItems.forEach(item => {
+            const collapse = item.querySelector('.accordion-collapse');
+            if (collapse.classList.contains('show')) {
+              collapse.classList.remove('show');
+            }
+          });
+          
+          // Open the selected accordion
+          const selectedAccordion = document.getElementById(`collapse${filterId}`);
+          selectedAccordion.classList.add('show');
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
         });
-        // Toggle collapse of the selected accordion
-        thisCollapse.classList.toggle('show');
-      });
-    });
+    }
   });
 </script>
