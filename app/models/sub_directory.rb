@@ -3,5 +3,4 @@ class SubDirectory < ApplicationRecord
     label "Sub_section"
   end
   has_many :faculties
-  belongs_to :department
 end
