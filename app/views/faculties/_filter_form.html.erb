@@ -11,42 +11,52 @@
   }
 
   #advanced-search-btn {
-    background-color: #198754; /* Green color */
+    background-color: #198754;
     color: white;
     border: none;
     padding: 10px 20px;
-    margin-top :8%;
+    margin-top: 8%;
     margin-bottom: 10px;
     cursor: pointer;
   }
 </style>
 
 <%= form_for_filterrific @filterrific, { class: 'filterrific-form', id: 'submission' } do |f| %>
-  <div class="row g-3" >
+  <div class="row g-3">
     <!-- Name Field -->
     <div class="col-md-4 col-sm-12" style="margin: 30px 0px 0px;">
-      
-      <%= f.text_field :search_query, placeholder: "Search Name", class: "form-control", id: "filterrific_submit_button"  %>
+      <%= f.text_field :search_query, placeholder: "Search Name", class: "form-control", id: "filterrific_submit_button" %>
     </div>
 
-    
-
-    <div class="col-md-4 col-sm-12" id="filterrific_with_department_id" style= "margin: 30px 0px 24px 0px; display:none;">
-      
+    <div class="col-md-4 col-sm-12" id="filterrific_with_department_id" style="margin: 30px 0px 24px 0px; display:none;">
       <%= f.select :with_department_id_advanced, [['All sections', nil]] + @filterrific.select_options[:with_department_id], { style: 'text-decoration: none;' }, class: "form-select" %>
     </div>
 
-    <!-- Advanced Search Button -->
-    <div class="col-md-2 col-sm-12" style="margin: 30px 0px 0px; !important">
-      <button type="button" id="advanced-search-btn" class="btn btn-success" style="padding: 6px 12px; margin: 0px ;">Advanced Search</button>
-    </div>
-
-
     <!-- Search Button -->
-    <div class="col-md-1  col-sm-12" style="margin:30px 0px 0px">
+    <div class="col-md-1 col-sm-12" style="margin:30px 0px 0px">
       <%= f.submit "Search", class: "btn btn-success" %>
     </div>
 
+    <!-- Advanced Search Button -->
+    <div class="col-md-2 col-sm-12" style="margin: 30px 0px 0px !important">
+      <button type="button" id="advanced-search-btn" class="btn btn-success" style="padding: 6px 12px; margin: 0px;">Advanced Search</button>
+    </div>
+
+    <!-- Reset Filters Button -->
+    <div class="col-md-1 col-sm-12" id="reset-filters-btn-container" style="margin: 30px 0px 0px; display: none;">
+      <%= f.submit "Reset", class: "btn btn-success", id: "reset-filters-btn" %>
+    </div>
+
+    <!-- Advanced Search fields -->
+    <div class="col-md-4 col-sm-6" id="filterrific_search_designation" style= "display:none;">
+      <%= f.label :search_designation_advanced, "Search By Designation", class: "form-label", style: "color:white;" %>
+      <%= f.text_field :search_designation_advanced, class: "form-control" %>
+    </div>
+
+    <div class="col-md-4 col-sm-6" id="filterrific_sub_directory_id" style= "display:none;">
+      <%= f.label :sub_directory_id_advanced, "Search By Sub-Department", class: "form-label", style: "color:white;" %>
+      <%= f.select :sub_directory_id_advanced, [['All Sub-Departments', nil]] + @filterrific.select_options[:sub_directory_id], { style: 'text-decoration: none;' }, class: "form-select" %>
+    </div>
   </div>
 <% end %>
 
@@ -58,7 +68,22 @@
       toggleVisibility('filterrific_with_department_id');
       toggleVisibility('filterrific_search_designation');
       toggleVisibility('filterrific_sub_directory_id');
+      updateResetButtonVisibility();
     });
+
+    // Add a click event listener to the Reset Filters button
+    document.getElementById('reset-filters-btn').addEventListener('click', function () {
+      // Reset all the filters by clearing the form fields
+      document.getElementById('filterrific_submit_button').value = '';
+      document.getElementById('filterrific_with_department_id_advanced').value = '';
+      document.getElementById('filterrific_sub_directory_id_advanced').value = '';
+      updateResetButtonVisibility();
+      // Optionally, you can submit the form after clearing the fields
+      document.getElementById('submission').submit();
+    });
+
+    // Check and update the Reset Filters button visibility on page load
+    updateResetButtonVisibility();
   });
 
   // Function to toggle the visibility of an element
@@ -68,6 +93,20 @@
       element.style.display = 'block';
     } else {
       element.style.display = 'none';
+    }
+  }
+
+  // Function to update the Reset Filters button visibility
+  function updateResetButtonVisibility() {
+    var resetButtonContainer = document.getElementById('reset-filters-btn-container');
+    var searchQuery = document.getElementById('filterrific_submit_button').value;
+    var departmentId = document.getElementById('filterrific_with_department_id_advanced').value;
+    var subDirectoryId = document.getElementById('filterrific_sub_directory_id_advanced').value;
+
+    if (searchQuery || departmentId || subDirectoryId) {
+      resetButtonContainer.style.display = 'block';
+    } else {
+      resetButtonContainer.style.display = 'none';
     }
   }
 </script>
