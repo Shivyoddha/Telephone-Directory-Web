@@ -3,7 +3,7 @@
   <div class="nitk-header">
     <div class="container">
       <header class="d-flex justify-content-center py-3">
-        <li class="nav-item"><a href="https://www.nitk.ac.in/" class="nav-link active" aria-current="page"><%= image_tag 'header.png' %></a></li>
+        <div class="nav-item"><a href="https://www.nitk.ac.in/" class="nav-link active" aria-current="page"><%= image_tag 'header.png' %></a></div>
       </header>
     </div>
   </div>
@@ -33,7 +33,7 @@
                         <%= subdirectory.title %>
                         </li>
                       <% end %>
-                    </li>
+                    </ul>
                   </div>
               </p>
             <% else %>
@@ -51,7 +51,7 @@
     </div>
     <div class="search-area">
       <div class="search-header">
-        <div class="p-4 rounded text-body-emphasis" style="width:100%;background-color:#192f59;">
+        <div class=" p-4 rounded text-body-emphasis" style="width:100%;background-color:#192f59;">
           <p class="lead mb-0" style="color:white;"><a href="#" class="text-body-emphasis fw-bold"><%= render 'filter_form' %></a></p>
         </div>
       </div>
@@ -63,85 +63,96 @@
 </div>
 <%= render 'faculties/footer' %>
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const accordions = document.querySelectorAll('.accordion');
+document.addEventListener("DOMContentLoaded", function () {
+  const accordions = document.querySelectorAll(".accordion");
 
-    accordions.forEach(accordion => {
-      const label = accordion.querySelector('.accordion-label');
+  accordions.forEach((accordion) => {
+    const label = accordion.querySelector(".accordion-label");
 
-      label.addEventListener('click', function() {
-        accordion.classList.toggle('open');
+    label.addEventListener("click", function () {
+      // Close all other accordions
+      accordions.forEach((otherAccordion) => {
+        if (otherAccordion !== accordion) {
+          otherAccordion.classList.remove("open");
+        }
       });
-    });
 
-    const departmentContainers = document.querySelectorAll('.department-with-subdirectory');
-
-    departmentContainers.forEach(container => {
-      container.addEventListener('click', function() {
-        const dropdown = container.querySelector('.subdirectory-dropdown');
-        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
-      });
+      // Toggle the clicked accordion
+      accordion.classList.toggle("open");
     });
   });
 
-    function updateFilterAndHandleClick(unitId, departmentId) {
-      // Update the filter form with the selected unit and department
-      const filterForm = document.getElementById("filterrific_filter");
+  const departmentContainers = document.querySelectorAll(".department-with-subdirectory");
 
-      if (!filterForm) {
-        console.error('Filter form not found.');
-        return;
-      }
+  departmentContainers.forEach((container) => {
+    container.addEventListener("click", function () {
+      const clickedDropdown = container.querySelector(".subdirectory-dropdown");
+      const allDropdowns = document.querySelectorAll(".subdirectory-dropdown");
 
-      document.getElementById("filterrific_with_department_id_advanced").value = departmentId;
-      console.log('Department ID', document.getElementById("filterrific_with_department_id_advanced").value);
+      // Close all other subdirectories
+      allDropdowns.forEach((otherDropdown) => {
+        if (otherDropdown !== clickedDropdown) {
+          otherDropdown.style.display = "none";
+        }
+      });
 
-      // Optionally, perform other actions based on the selected unit and department
-      // For example, you can show/hide content, make AJAX requests, etc.
+      // Toggle the clicked subdirectory
+      clickedDropdown.style.display = clickedDropdown.style.display === "none" ? "block" : "none";
+    });
+  });
 
-      // Trigger a click event on the submit button to submit the form
-      filterForm.submit();
+  function updateFilterAndHandleClick(unitId, departmentId) {
+    // Update the filter form with the selected unit and department
+    const filterForm = document.getElementById("filterrific_filter");
+
+    if (!filterForm) {
+      console.error("Filter form not found.");
+      return;
     }
 
-    document.addEventListener("DOMContentLoaded", function() {
-      const departmentFilters = document.querySelectorAll(".dropdown-option");
+    document.getElementById("filterrific_with_department_id_advanced").value = departmentId;
+    console.log("Department ID", document.getElementById("filterrific_with_department_id_advanced").value);
 
-      departmentFilters.forEach(filter => {
-        filter.addEventListener("click", function() {
-          const unitId = this.dataset.unit;
-          const departmentId = this.dataset.department
-          const subDirectoryId = this.dataset.subdirectory
-          console.log('Sub-directory ID',  subDirectoryId);
-          if (subDirectoryId == 0) {
-              updateFilterAndHandleClick(unitId, departmentId);
-          }
+    // Optionally, perform other actions based on the selected unit and department
+    // For example, you can show/hide content, make AJAX requests, etc.
 
-          // Call a function to update the filter and perform actions based on the selected unit and department
-          updateFilterAndHandleClick1(unitId, departmentId, subDirectoryId);
-        });
-      });
+    // Trigger a click event on the submit button to submit the form
+    filterForm.submit();
+  }
 
-      function updateFilterAndHandleClick1(unitId, departmentId, subDirectoryId) {
-        // Update the filter form with the selected unit and department
-        const filterForm = document.getElementById("filterrific_filter");
+  const departmentFilters = document.querySelectorAll(".dropdown-option");
 
-        if (!filterForm) {
-          console.error('Filter form not found.');
-          return;
-        }
+  departmentFilters.forEach((filter) => {
+    filter.addEventListener("click", function () {
+      const unitId = this.dataset.unit;
+      const departmentId = this.dataset.department;
+      const subDirectoryId = this.dataset.subdirectory;
+      console.log("Sub-directory ID", subDirectoryId);
 
-        document.getElementById("filterrific_with_department_id_advanced").value = departmentId;
-        document.getElementById("filterrific_sub_directory_id_advanced").value = subDirectoryId;
-        console.log('Department ID', document.getElementById("filterrific_with_department_id_advanced").value);
-
-        // Optionally, perform other actions based on the selected unit and department
-        // For example, you can show/hide content, make AJAX requests, etc.
-
-        // Trigger a click event on the submit button to submit the form
-        filterForm.submit();
+      if (subDirectoryId == 0) {
+        updateFilterAndHandleClick(unitId, departmentId);
       }
+
+      // Call a function to update the filter and perform actions based on the selected unit and department
+      updateFilterAndHandleClick1(unitId, departmentId, subDirectoryId);
+    });
   });
 
+  function updateFilterAndHandleClick1(unitId, departmentId, subDirectoryId) {
+    // Update the filter form with the selected unit and department
+    const filterForm = document.getElementById("filterrific_filter");
 
+    if (!filterForm) {
+      console.error("Filter form not found.");
+      return;
+    }
+
+    document.getElementById("filterrific_with_department_id_advanced").value = departmentId;
+    document.getElementById("filterrific_sub_directory_id_advanced").value = subDirectoryId;
+    console.log("Department ID", document.getElementById("filterrific_with_department_id_advanced").value);
+    
+    filterForm.submit();
+  }
+});
 
 </script>
