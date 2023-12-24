@@ -101,6 +101,24 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+
+  const departmentFilters = document.querySelectorAll(".dropdown-option");
+
+  departmentFilters.forEach((filter) => {
+    filter.addEventListener("click", function () {
+      const unitId = this.dataset.unit;
+      const departmentId = this.dataset.department;
+      const subDirectoryId = this.dataset.subdirectory;
+      console.log("Sub-directory ID", subDirectoryId);
+
+      if (subDirectoryId == 0) {
+        updateFilterAndHandleClick(unitId, departmentId);
+      } else {
+        updateFilterAndHandleClick1(unitId, departmentId, subDirectoryId);
+      }
+    });
+  });
+
   function updateFilterAndHandleClick(unitId, departmentId) {
     // Update the filter form with the selected unit and department
     const filterForm = document.getElementById("filterrific_filter");
@@ -120,23 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
     filterForm.submit();
   }
 
-  const departmentFilters = document.querySelectorAll(".dropdown-option");
-
-  departmentFilters.forEach((filter) => {
-    filter.addEventListener("click", function () {
-      const unitId = this.dataset.unit;
-      const departmentId = this.dataset.department;
-      const subDirectoryId = this.dataset.subdirectory;
-      console.log("Sub-directory ID", subDirectoryId);
-
-      if (subDirectoryId == 0) {
-        updateFilterAndHandleClick(unitId, departmentId);
-      }
-
-      // Call a function to update the filter and perform actions based on the selected unit and department
-      updateFilterAndHandleClick1(unitId, departmentId, subDirectoryId);
-    });
-  });
+ 
 
   function updateFilterAndHandleClick1(unitId, departmentId, subDirectoryId) {
     // Update the filter form with the selected unit and department
@@ -150,9 +152,37 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("filterrific_with_department_id_advanced").value = departmentId;
     document.getElementById("filterrific_sub_directory_id_advanced").value = subDirectoryId;
     console.log("Department ID", document.getElementById("filterrific_with_department_id_advanced").value);
-    
-    filterForm.submit();
+     // Replace "your_endpoint_url_here" with the actual endpoint URL
+    const requestData = {
+      departmentId: departmentId,
+      subDirectoryId: subDirectoryId
+      // Add any other data needed for the AJAX call
+    };
+
+    fetch("your_endpoint_url_here", {
+      method: "POST",
+      body: JSON.stringify(requestData),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok.");
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log("AJAX call successful!", data);
+      // Optionally perform actions based on the response
+    })
+    .catch(error => {
+      console.error("AJAX call failed!", error);
+    });
   }
 });
+    
+    filterForm.submit();
+  
 
 </script>
