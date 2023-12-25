@@ -68,17 +68,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
   accordions.forEach((accordion) => {
     const label = accordion.querySelector(".accordion-label");
+    const content = accordion.querySelector(".accordion-content");
+
 
     label.addEventListener("click", function () {
       // Close all other accordions
       accordions.forEach((otherAccordion) => {
         if (otherAccordion !== accordion) {
           otherAccordion.classList.remove("open");
+           otherAccordion.querySelector(".accordion-content").style.display = "none";
         }
       });
 
       // Toggle the clicked accordion
       accordion.classList.toggle("open");
+      content.style.display = content.style.display === "none" ? "block" : "none";
     });
   });
 
