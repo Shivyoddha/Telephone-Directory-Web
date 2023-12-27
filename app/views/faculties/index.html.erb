@@ -20,15 +20,14 @@
         <div class="accordion">
           <label class="accordion-label" tabindex="0"><%= unit.title %></label>
           <div class="accordion-content">
-            <% sorted_departments = unit.departments.where.not(name: "Others").order(:name) %>
+            <% sorted_departments = unit.departments %>
             <% sorted_departments.each do |department| %>
-            <% if unit.is_sub_directory? %>
+             <% if department.sub_directories.present? %>
               <p class="department-with-subdirectory"  data-unit="<%= unit.id %>" data-department="<%= department.id %>">
                   <div class="department-with-subdirectory subdirectory-option">
-                    <% subdirectories = SubDirectory.order(:title) %>
                      <%= department.name %>
                     <ul class="subdirectory-dropdown dropdown-options tree" style="display: none;">
-                      <% subdirectories.each do |subdirectory| %>
+                      <% department.sub_directories.each do |subdirectory| %>
                         <li class="dropdown-option subdirectory-option" data-subdirectory="<%= subdirectory.id %>"  data-unit="<%= unit.id %>" data-department="<%= department.id %>">
                         <%= subdirectory.title %>
                         </li>
@@ -40,11 +39,6 @@
               <p class="dropdown-option subdirectory-option"  data-subdirectory="0" data-unit="<%= unit.id %>" data-department="<%= department.id %>"><%= department.name %></p>
             <% end %>
           <% end %>
-
-            <% others_department = unit.departments.find_by(name: "Others") %>
-            <% if others_department.present? %>
-              <p class="dropdown-option subdirectory-option" data-unit="<%= unit.id %>" data-department="<%= others_department.id %>"><%= others_department.name %></p>
-            <% end %>
           </div>
         </div>
       <% end %>
@@ -70,13 +64,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const label = accordion.querySelector(".accordion-label");
 
     label.addEventListener("click", function () {
-      // Close all other accordions
-      accordions.forEach((otherAccordion) => {
-        if (otherAccordion !== accordion) {
-          otherAccordion.classList.remove("open");
-        }
-      });
-
       // Toggle the clicked accordion
       accordion.classList.toggle("open");
     });
@@ -89,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const clickedDropdown = container.querySelector(".subdirectory-dropdown");
       const allDropdowns = document.querySelectorAll(".subdirectory-dropdown");
 
-      // Close all other subdirectories
+      // Close all other subdirectories except the clicked one
       allDropdowns.forEach((otherDropdown) => {
         if (otherDropdown !== clickedDropdown) {
           otherDropdown.style.display = "none";
@@ -98,9 +85,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Toggle the clicked subdirectory
       clickedDropdown.style.display = clickedDropdown.style.display === "none" ? "block" : "none";
+
+      // Perform filtering when opening the department
+      const unitId = container.dataset.unit;
+      const departmentId = container.dataset.department;
+      updateFilterAndHandleClick(unitId, departmentId);
     });
   });
-
 
   const departmentFilters = document.querySelectorAll(".dropdown-option");
 
@@ -109,7 +100,6 @@ document.addEventListener("DOMContentLoaded", function () {
       const unitId = this.dataset.unit;
       const departmentId = this.dataset.department;
       const subDirectoryId = this.dataset.subdirectory;
-      console.log("Sub-directory ID", subDirectoryId);
 
       if (subDirectoryId == 0) {
         updateFilterAndHandleClick(unitId, departmentId);
@@ -129,7 +119,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     document.getElementById("filterrific_with_department_id_advanced").value = departmentId;
-    console.log("Department ID", document.getElementById("filterrific_with_department_id_advanced").value);
 
     // Optionally, perform other actions based on the selected unit and department
     // For example, you can show/hide content, make AJAX requests, etc.
@@ -137,8 +126,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Trigger a click event on the submit button to submit the form
     filterForm.submit();
   }
-
- 
 
   function updateFilterAndHandleClick1(unitId, departmentId, subDirectoryId) {
     // Update the filter form with the selected unit and department
@@ -151,8 +138,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("filterrific_with_department_id_advanced").value = departmentId;
     document.getElementById("filterrific_sub_directory_id_advanced").value = subDirectoryId;
-    console.log("Department ID", document.getElementById("filterrific_with_department_id_advanced").value);
-     // Replace "your_endpoint_url_here" with the actual endpoint URL
+
+    // Replace "your_endpoint_url_here" with the actual endpoint URL
     const requestData = {
       departmentId: departmentId,
       subDirectoryId: subDirectoryId
@@ -179,10 +166,9 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch(error => {
       console.error("AJAX call failed!", error);
     });
+
+    // Trigger a click event on the submit button to submit the form
+    filterForm.submit();
   }
 });
-    
-    filterForm.submit();
-  
-
 </script>
