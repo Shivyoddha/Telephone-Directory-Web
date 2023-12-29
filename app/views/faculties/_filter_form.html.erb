@@ -19,45 +19,67 @@
     margin-bottom: 10px;
     cursor: pointer;
   }
+
+  #reset-filters-btn {
+  float: right;
+  background-color: #192f59;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 0 5px 0 5px;
+  border-top: none;
+  border-right: none;
+  transition: background-color 0.3s ease;
+}
+
+  #reset-filters-btn-container{
+    margin-left: auto;
+  }
+
+  #reset-filters-btn:hover {
+  background-color: #198754;
+  color: #ffF;
+  }
+
 </style>
 
 <%= form_for_filterrific @filterrific, { class: 'filterrific-form', id: 'submission' } do |f| %>
-  <div class="row g-3">
-    <!-- Name Field -->
-    <div class="col-md-4 col-sm-12" style="margin: 30px 0px 0px;">
-      <%= f.text_field :search_query, placeholder: "Search Name", class: "form-control", id: "filterrific_submit_button" %>
-    </div>
-
-    <div class="col-md-4 col-sm-12" id="filterrific_with_department_id" style="margin: 30px 0px 24px 0px; display:none;">
-      <%= f.select :with_department_id_advanced, [['All sections', nil]] + @filterrific.select_options[:with_department_id], { style: 'text-decoration: none;' }, class: "form-select" %>
-    </div>
-
-    <!-- Search Button -->
-    <div class="col-md-1 col-sm-12" style="margin:30px 0px 0px">
-      <%= f.submit "Search", class: "btn btn-success" %>
-    </div>
-
-    <!-- Advanced Search Button -->
-    <div class="col-md-2 col-sm-12" style="margin: 30px 0px 0px !important">
-    <button type="button" id="advanced-search-btn" class="btn btn-success" style="padding: 6px 12px; margin: 0px;">Advanced Search</button>
-        </div>
-
-    <!-- Reset Filters Button -->
-    <div class="col-md-1 col-sm-12" id="reset-filters-btn-container" style="margin: 30px 0px 0px; display: none;">
-      <%= f.submit "Home", class: "btn btn-success", id: "reset-filters-btn" %>
-    </div>
-
-    <!-- Advanced Search fields -->
-    <div class="col-md-4 col-sm-6" id="filterrific_search_designation" style= "display:none;">
-      <%= f.label :search_designation_advanced, "Search By Designation", class: "form-label", style: "color:white;" %>
-      <%= f.text_field :search_designation_advanced, class: "form-control" %>
-    </div>
-
-    <div class="col-md-4 col-sm-6" id="filterrific_sub_directory_id" style= "display:none;">
-      <%= f.label :sub_directory_id_advanced, "Search By Sub-Department", class: "form-label", style: "color:white;" %>
-      <%= f.select :sub_directory_id_advanced, [['All Sub-Departments', nil]] + @filterrific.select_options[:sub_directory_id], { style: 'text-decoration: none;' }, class: "form-select" %>
-    </div>
+<div class="row g-3">
+  <!-- Name Field -->
+  <div class="col-md-4 col-sm-12" style="margin: 30px 0px 0px 10px;">
+    <%= f.text_field :search_query, placeholder: "Search Name", class: "form-control", id: "filterrific_submit_button" %>
   </div>
+
+  <div class="col-md-4 col-sm-12" id="filterrific_with_department_id" style="margin: 30px 0px 24px 0px; display:none;">
+    <%= f.select :with_department_id_advanced, [['All sections', nil]] + @filterrific.select_options[:with_department_id], { style: 'text-decoration: none;' }, class: "form-select" %>
+  </div>
+
+  <!-- Search Button -->
+  <div class="col-md-1 col-sm-12" style="margin:30px 0px 0px;">
+    <%= f.submit "Search", class: "btn btn-success" %>
+  </div>
+
+  <!-- Advanced Search Button -->
+  <div class="col-md-2 col-sm-12" style="margin: 30px 0px 0px !important">
+    <button type="button" id="advanced-search-btn" class="btn btn-success" style="padding: 6px 12px; margin: 0px;">Advanced Search</button>
+  </div>
+
+  <!-- Advanced Search fields -->
+  <div class="col-md-4 col-sm-6" id="filterrific_search_designation" style= "display:none;">
+    <%= f.label :search_designation_advanced, "Search By Designation", class: "form-label", style: "color:white;" %>
+    <%= f.text_field :search_designation_advanced, class: "form-control" %>
+  </div>
+
+  <div class="col-md-4 col-sm-6" id="filterrific_sub_directory_id" style= "display:none;">
+    <%= f.label :sub_directory_id_advanced, "Search By Sub-Department", class: "form-label", style: "color:white;" %>
+    <%= f.select :sub_directory_id_advanced, [['All Sub-Departments', nil]] + @filterrific.select_options[:sub_directory_id], { style: 'text-decoration: none;' }, class: "form-select" %>
+  </div>
+
+  <!-- Reset Filters Button -->
+  <div class="col-md-1 col-sm-12" id="reset-filters-btn-container" style="display: none;">
+    <%= f.submit "Home", class: "btn", id: "reset-filters-btn" %>
+  </div>
+</div>
+
 <% end %>
 
 <script>
