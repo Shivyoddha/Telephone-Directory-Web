@@ -96,7 +96,7 @@
       <tr>
         <th class="firstend"> Sl. No. </th>
         <th style="text-align: ;"> Name </th>
-        <th > Section </th>
+        <th > Designation </th>
         <th > Contact </th>
         <th class="lastend"> Details </th>
       </tr>
@@ -115,7 +115,7 @@
               <td style="width:0.7%; "> <%= index + 1 %> </td>
               <td style="width:5%; text-align: left;"> <%= faculty.name %> </td>
 
-              <td style="width:8%;"> <%= faculty.department.name %> </td>
+              <td style="width:8%;"> <%= faculty.designation.title %> </td>
               <td style="width:3%;"> <%= faculty.landline_office %> </td>
               <td style="width:2%; text-align: center;">
                 <!-- Button to trigger Bootstrap modal -->
@@ -152,13 +152,11 @@
                             <dt class="col-sm-6 text-start ">Unit</dt>
                             <dd class="col-sm-6 text-start "><%= faculty.department.name %></dd>
                           </div>
-                            <div class=row-item>
-                            <dt class="col-sm-6 text-start ">Position-1</dt>
-                            <dd class="col-sm-6 text-start "><%= faculty.position1&.title || '-' %></dd>
-                          </div>
-                            <div class=row-item>
-                            <dt class="col-sm-6 text-start ">Position-2</dt>
-                            <dd class="col-sm-6 text-start "><%= faculty.position2&.title || '-' %></dd>
+                          <div class="row-item">
+                            <dt class="col-sm-6 text-start">Additional Charge</dt>
+                            <dd class="col-sm-6 text-start">
+                              <%= faculty.position1&.title || '-' %><%= faculty.position1&.title && faculty.position2&.title ? ', ' : '' %><%= faculty.position2&.title || '' %>
+                            </dd>
                           </div>
                             <div class=row-item>
                             <dt class="col-sm-6 text-start">Landline (Off.)</dt>
@@ -168,13 +166,11 @@
                             <dt class="col-sm-6 text-start">Landline (Res.)</dt>
                             <dd class="col-sm-6 text-start"><%= faculty.landline_residential || '-' %></dd>
                           </div>
-                            <div class=row-item>
-                            <dt class="col-sm-6 text-start">Mobile-1</dt>
-                            <dd class="col-sm-6 text-start"><%= faculty.mobile1 || '-' %></dd>
-                          </div>
-                            <div class=row-item>
-                            <dt class="col-sm-6 text-start">Mobile-2</dt>
-                            <dd class="col-sm-6 text-start"><%= faculty.mobile2 || '-' %></dd>
+                          <div class="row-item">
+                            <dt class="col-sm-6 text-start">Mobile</dt>
+                            <dd class="col-sm-6 text-start">
+                              <%= faculty.mobile1 ? faculty.mobile1 : '-' %><%= faculty.mobile1 && faculty.mobile2 ? ', ' : '' %><%= faculty.mobile2 ? faculty.mobile2 : '' %>
+                            </dd>
                           </div>
                             <div class=row-item>
                             <dt class="col-sm-6 text-start">Email</dt>

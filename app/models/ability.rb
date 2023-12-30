@@ -15,6 +15,8 @@ class Ability
       can :manage, Department, id: user.department_id
       can :manage, Faculty, department: { id: user.department_id }
       can :read, Position
+      can :read, Designation
+      can :read, SubDirectory
       cannot :create, Department
       cannot :destroy, Department
     end

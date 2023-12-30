@@ -55,120 +55,118 @@
     </div>
   </div>
 </div>
-<%= render 'faculties/footer' %>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const accordions = document.querySelectorAll(".accordion");
-
-  accordions.forEach((accordion) => {
-    const label = accordion.querySelector(".accordion-label");
-
-    label.addEventListener("click", function () {
-      // Toggle the clicked accordion
-      accordion.classList.toggle("open");
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    const accordions = document.querySelectorAll(".accordion");
+    accordions.forEach((accordion) => {
+      const label = accordion.querySelector(".accordion-label");
+      label.addEventListener("click", function () {
+        accordion.classList.toggle("open");
+      });
     });
-  });
 
-  const departmentContainers = document.querySelectorAll(".department-with-subdirectory");
 
-  departmentContainers.forEach((container) => {
-    container.addEventListener("click", function () {
-      const clickedDropdown = container.querySelector(".subdirectory-dropdown");
-      const allDropdowns = document.querySelectorAll(".subdirectory-dropdown");
 
-      // Close all other subdirectories except the clicked one
-      allDropdowns.forEach((otherDropdown) => {
-        if (otherDropdown !== clickedDropdown) {
-          otherDropdown.style.display = "none";
+    const departmentContainers = document.querySelectorAll(".department-with-subdirectory");
+    departmentContainers.forEach((container) => {
+      container.addEventListener("click", function () {
+        const clickedDropdown = container.querySelector(".subdirectory-dropdown");
+        const allDropdowns = document.querySelectorAll(".subdirectory-dropdown");
+
+        // Close all other subdirectories except the clicked one
+        allDropdowns.forEach((otherDropdown) => {
+          if (otherDropdown !== clickedDropdown) {
+            otherDropdown.style.display = "none";
+          }
+        });
+
+        // Toggle the clicked subdirectory
+        clickedDropdown.style.display = clickedDropdown.style.display === "none" ? "block" : "none";
+
+        // Perform filtering when opening the department
+        const unitId = container.dataset.unit;
+        const departmentId = container.dataset.department;
+        updateFilterAndHandleClick(unitId, departmentId);
+      });
+    });
+
+    const departmentFilters = document.querySelectorAll(".dropdown-option");
+
+    departmentFilters.forEach((filter) => {
+      filter.addEventListener("click", function () {
+        const unitId = this.dataset.unit;
+        const departmentId = this.dataset.department;
+        const subDirectoryId = this.dataset.subdirectory;
+
+        if (subDirectoryId == 0) {
+          updateFilterAndHandleClick(unitId, departmentId);
+        } else {
+          updateFilterAndHandleClick1(unitId, departmentId, subDirectoryId);
         }
       });
-
-      // Toggle the clicked subdirectory
-      clickedDropdown.style.display = clickedDropdown.style.display === "none" ? "block" : "none";
-
-      // Perform filtering when opening the department
-      const unitId = container.dataset.unit;
-      const departmentId = container.dataset.department;
-      updateFilterAndHandleClick(unitId, departmentId);
     });
-  });
 
-  const departmentFilters = document.querySelectorAll(".dropdown-option");
+    function updateFilterAndHandleClick(unitId, departmentId) {
+      // Update the filter form with the selected unit and department
+      const filterForm = document.getElementById("filterrific_filter");
 
-  departmentFilters.forEach((filter) => {
-    filter.addEventListener("click", function () {
-      const unitId = this.dataset.unit;
-      const departmentId = this.dataset.department;
-      const subDirectoryId = this.dataset.subdirectory;
-
-      if (subDirectoryId == 0) {
-        updateFilterAndHandleClick(unitId, departmentId);
-      } else {
-        updateFilterAndHandleClick1(unitId, departmentId, subDirectoryId);
+      if (!filterForm) {
+        console.error("Filter form not found.");
+        return;
       }
-    });
-  });
 
-  function updateFilterAndHandleClick(unitId, departmentId) {
-    // Update the filter form with the selected unit and department
-    const filterForm = document.getElementById("filterrific_filter");
+      document.getElementById("filterrific_with_department_id_advanced").value = departmentId;
 
-    if (!filterForm) {
-      console.error("Filter form not found.");
-      return;
+      // Optionally, perform other actions based on the selected unit and department
+      // For example, you can show/hide content, make AJAX requests, etc.
+
+      // Trigger a click event on the submit button to submit the form
+      filterForm.submit();
     }
 
-    document.getElementById("filterrific_with_department_id_advanced").value = departmentId;
+    function updateFilterAndHandleClick1(unitId, departmentId, subDirectoryId) {
+      // Update the filter form with the selected unit and department
+      const filterForm = document.getElementById("filterrific_filter");
 
-    // Optionally, perform other actions based on the selected unit and department
-    // For example, you can show/hide content, make AJAX requests, etc.
+      if (!filterForm) {
+        console.error("Filter form not found.");
+        return;
+      }
 
-    // Trigger a click event on the submit button to submit the form
-    filterForm.submit();
-  }
+      document.getElementById("filterrific_with_department_id_advanced").value = departmentId;
+      document.getElementById("filterrific_sub_directory_id_advanced").value = subDirectoryId;
 
-  function updateFilterAndHandleClick1(unitId, departmentId, subDirectoryId) {
-    // Update the filter form with the selected unit and department
-    const filterForm = document.getElementById("filterrific_filter");
+      // Replace "your_endpoint_url_here" with the actual endpoint URL
+      const requestData = {
+        departmentId: departmentId,
+        subDirectoryId: subDirectoryId
+        // Add any other data needed for the AJAX call
+      };
 
-    if (!filterForm) {
-      console.error("Filter form not found.");
-      return;
+      fetch("your_endpoint_url_here", {
+        method: "POST",
+        body: JSON.stringify(requestData),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok.");
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log("AJAX call successful!", data);
+        // Optionally perform actions based on the response
+      })
+      .catch(error => {
+        console.error("AJAX call failed!", error);
+      });
+
+      // Trigger a click event on the submit button to submit the form
+      filterForm.submit();
     }
-
-    document.getElementById("filterrific_with_department_id_advanced").value = departmentId;
-    document.getElementById("filterrific_sub_directory_id_advanced").value = subDirectoryId;
-
-    // Replace "your_endpoint_url_here" with the actual endpoint URL
-    const requestData = {
-      departmentId: departmentId,
-      subDirectoryId: subDirectoryId
-      // Add any other data needed for the AJAX call
-    };
-
-    fetch("your_endpoint_url_here", {
-      method: "POST",
-      body: JSON.stringify(requestData),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok.");
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log("AJAX call successful!", data);
-      // Optionally perform actions based on the response
-    })
-    .catch(error => {
-      console.error("AJAX call failed!", error);
-    });
-
-    // Trigger a click event on the submit button to submit the form
-    filterForm.submit();
-  }
-});
+  });
 </script>
+<%= render 'faculties/footer' %>
