@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_27_195514) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_30_121305) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -124,10 +124,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_27_195514) do
     t.datetime "updated_at", null: false
     t.boolean "admin"
     t.boolean "super_admin"
-    t.integer "department_id"
-    t.index ["department_id"], name: "index_users_on_department_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "users_departments", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "department_id"
+    t.index ["department_id"], name: "index_users_departments_on_department_id"
+    t.index ["user_id", "department_id"], name: "index_user_dep_on_ids", unique: true
+    t.index ["user_id"], name: "index_users_departments_on_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -139,5 +145,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_27_195514) do
   add_foreign_key "faculties", "positions", column: "position1_id"
   add_foreign_key "faculties", "positions", column: "position2_id"
   add_foreign_key "faculties", "sub_directories"
-  add_foreign_key "users", "departments"
 end
