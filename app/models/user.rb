@@ -4,6 +4,9 @@ class User < ApplicationRecord
   belongs_to :department
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  validates :email, presence: true
+  validates :password, presence: true
+  validates :password_confirmation, presence: true
 
   def admin?
     admin
