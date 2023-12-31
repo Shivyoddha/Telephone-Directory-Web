@@ -24,7 +24,7 @@
         <div class="accordion">
           <label class="accordion-label" tabindex="0"><%= unit.title %></label>
           <div class="accordion-content">
-            <% sorted_departments = unit.departments %>
+            <% sorted_departments = unit.departments.order(:custom_order, :name) %>
             <% sorted_departments.each do |department| %>
              <% if department.sub_directories.present? %>
               <p class="department-with-subdirectory"  data-unit="<%= unit.id %>" data-department="<%= department.id %>">
