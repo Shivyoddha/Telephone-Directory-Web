@@ -36,7 +36,7 @@ RailsAdmin.config do |config|
       field :password_confirmation do
         required false
       end
-      # other fields...
+      field :custom_order
     end
   end
 

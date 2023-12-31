@@ -12,7 +12,7 @@ class FacultiesController < ApplicationController
         ) or return
 
         # @faculties = @filterrific.find.distinct.page(params[:page])
-        faculties = @filterrific.find.distinct.order(:name) # Sort faculties by name alphabetically
+        faculties = @filterrific.find.distinct.order(:custom_order, :name)
         @faculties_by_department = faculties.group_by { |faculty| faculty.department.name }
 
         @departments = Department.order(:name) # Sort departments by name alphabetically

@@ -19,7 +19,7 @@
 
   <div class="contents">
     <div class="contents-list">
-      <% sorted_units = Unit.all %>
+      <% sorted_units = Unit.order(:custom_order, :name) %>
       <% sorted_units.each do |unit| %>
         <div class="accordion">
           <label class="accordion-label" tabindex="0"><%= unit.title %></label>
