@@ -1,5 +1,4 @@
 class FacultiesController < ApplicationController
-  before_action :set_faculty, only: %i[ show edit update destroy ]
 
   # GET /faculties or /faculties.json
   def index

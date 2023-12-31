@@ -120,15 +120,11 @@
 
   // Function to update the Reset Filters button visibility
   function updateResetButtonVisibility() {
-    var resetButtonContainer = document.getElementById('reset-filters-btn-container');
-    var searchQuery = document.getElementById('filterrific_submit_button').value;
+    var resetButtonContainer = document.getElementById('filterrific_with_department_id');
     var departmentId = document.getElementById('filterrific_with_department_id_advanced').value;
-    var subDirectoryId = document.getElementById('filterrific_sub_directory_id_advanced').value;
 
-    if (searchQuery || departmentId || subDirectoryId) {
+    if ( departmentId ) {
       resetButtonContainer.style.display = 'block';
-    } else {
-      resetButtonContainer.style.display = 'none';
-    }
+    } 
   }
 </script>

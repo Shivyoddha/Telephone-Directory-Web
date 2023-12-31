@@ -12,13 +12,9 @@
       TELEPHONE DIRECTORY
     </div>
 
-
-  <div id="reset-filters-btn-container">
-<button type="button" id="reset-filters-btn" class="btn" onclick="resetFilters()">Home</button>
+  </header>
 
 </div>
-<%= button_to 'Contact Us', home_team_path, class: "btn btn-secondary" %>
-</header>
 
 
   <div class="contents">
@@ -69,11 +65,15 @@
     accordions.forEach((accordion) => {
       const label = accordion.querySelector(".accordion-label");
       label.addEventListener("click", function () {
+        // Close all other accordions before opening the clicked one
+        accordions.forEach((otherAccordion) => {
+          if (otherAccordion !== accordion) {
+            otherAccordion.classList.remove("open");
+          }
+        });
         accordion.classList.toggle("open");
       });
     });
-
-
 
     const departmentContainers = document.querySelectorAll(".department-with-subdirectory");
     departmentContainers.forEach((container) => {
@@ -92,9 +92,7 @@
         clickedDropdown.style.display = clickedDropdown.style.display === "none" ? "block" : "none";
 
         // Perform filtering when opening the department
-        const unitId = container.dataset.unit;
-        const departmentId = container.dataset.department;
-        updateFilterAndHandleClick(unitId, departmentId);
+
       });
     });
 
@@ -105,7 +103,7 @@
         const unitId = this.dataset.unit;
         const departmentId = this.dataset.department;
         const subDirectoryId = this.dataset.subdirectory;
-
+        console.log(subDirectoryId)
         if (subDirectoryId == 0) {
           updateFilterAndHandleClick(unitId, departmentId);
         } else {
@@ -113,6 +111,17 @@
         }
       });
     });
+
+    // Check if a filter is already present and open the dropdown accordingly
+    const filterForm = document.getElementById("filterrific_filter");
+    const isFilterApplied = filterForm && filterForm.querySelector("#filterrific_with_department_id_advanced").value !== "";
+
+    if (isFilterApplied) {
+      const activeDropdown = document.querySelector(".subdirectory-dropdown[style='block']");
+      if (activeDropdown) {
+        activeDropdown.style.display = "block";
+      }
+    }
 
     function updateFilterAndHandleClick(unitId, departmentId) {
       // Update the filter form with the selected unit and department
@@ -124,7 +133,7 @@
       }
 
       document.getElementById("filterrific_with_department_id_advanced").value = departmentId;
-
+      document.getElementById("filterrific_sub_directory_id_advanced").value = 0;
       // Optionally, perform other actions based on the selected unit and department
       // For example, you can show/hide content, make AJAX requests, etc.
 
@@ -143,34 +152,6 @@
 
       document.getElementById("filterrific_with_department_id_advanced").value = departmentId;
       document.getElementById("filterrific_sub_directory_id_advanced").value = subDirectoryId;
-
-      // Replace "your_endpoint_url_here" with the actual endpoint URL
-      const requestData = {
-        departmentId: departmentId,
-        subDirectoryId: subDirectoryId
-        // Add any other data needed for the AJAX call
-      };
-
-      fetch("your_endpoint_url_here", {
-        method: "POST",
-        body: JSON.stringify(requestData),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok.");
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log("AJAX call successful!", data);
-        // Optionally perform actions based on the response
-      })
-      .catch(error => {
-        console.error("AJAX call failed!", error);
-      });
 
       // Trigger a click event on the submit button to submit the form
       filterForm.submit();
