@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_31_102235) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_31_103725) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -73,9 +73,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_31_102235) do
     t.integer "department_id"
     t.integer "mobile1"
     t.integer "mobile2"
-    t.integer "landline_residential"
-    t.integer "landline_office_intercom"
-    t.integer "landline_office_direct"
+    t.string "landline_residential"
+    t.string "landline_office_intercom"
+    t.string "landline_office_direct"
     t.integer "designation_id"
     t.integer "position1_id"
     t.integer "position2_id"
