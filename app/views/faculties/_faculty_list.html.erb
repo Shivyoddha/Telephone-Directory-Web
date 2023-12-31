@@ -116,7 +116,7 @@
               <td style="width:5%; text-align: left;"> <%= faculty.name %> </td>
 
               <td style="width:8%;"> <%= faculty.designation.title %> </td>
-              <td style="width:3%;"> <%= faculty.landline_office %> </td>
+              <td style="width:3%;"> <%= faculty.landline_office_intercom %> </td>
               <td style="width:2%; text-align: center;">
                 <!-- Button to trigger Bootstrap modal -->
                 <button type="button" class="btn details-btn" data-bs-toggle="modal" data-bs-target="#facultyModal<%= faculty.id %>">
@@ -160,7 +160,7 @@
                           </div>
                             <div class=row-item>
                             <dt class="col-sm-6 text-start">Landline (Off.)</dt>
-                            <dd class="col-sm-6 text-start"><%= faculty.landline_office || '-' %></dd>
+                            <dd class="col-sm-6 text-start"><%= faculty.landline_office_intercom || '-' %></dd>
                           </div>
                             <div class=row-item>
                             <dt class="col-sm-6 text-start">Landline (Res.)</dt>
