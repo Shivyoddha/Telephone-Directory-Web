@@ -10,6 +10,19 @@
     display: none;
   }
 
+  @media only screen and (max-width: 767px) {
+  .row.g-3 {
+    flex-direction: column;
+    align-items: center; /* Optional: Center the items horizontally */
+  }
+
+  .col-md-4,
+  .col-md-1 {
+    width: 100%; /* Make columns take full width on smaller screens */
+    margin: 10px 0; /* Adjust margin for spacing */
+  }
+}
+
   #advanced-search-btn {
     background-color: #198754;
     color: white;
