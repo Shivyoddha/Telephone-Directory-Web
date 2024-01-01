@@ -59,7 +59,6 @@
   .row-item {
     display: flex;
     flex-direction: row;
-    line-height: 1.5;
   }
 
   .section-title {
@@ -111,7 +110,7 @@
             </td>
           </tr>
           <% faculties_for_department.each_with_index do |faculty, index| %>
-            <tr style="line-height: 10%;">
+            <tr>
               <td style="width:0.7%; "> <%= index + 1 %> </td>
               <td style="width:5%; text-align: left;"> <%= faculty.name %> </td>
 
