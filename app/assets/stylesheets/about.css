@@ -111,5 +111,49 @@
         width: 20%; 
         margin-bottom: 10px; 
     }
+    /* The initial code remains unchanged */
+
+@media only screen and (max-width: 600px) {
+    .content {
+        padding-bottom: 20px; /* Adjust spacing for smaller screens */
+    }
+
+    .why {
+        flex-direction: column; /* Stack elements vertically for smaller screens */
+        align-items: center;
+        padding-left: 5%;
+        padding-right: 5%;
+        margin-bottom: 30px; /* Adjust margin for smaller screens */
+    }
+
+    .why-image {
+        padding-right: 5%;
+        margin-bottom: 20px; /* Adjust spacing */
+    }
+
+    .text-box {
+        max-width: 90%; /* Widen the text box for improved readability */
+        padding-right: 5%;
+    }
+
+    h1 {
+        font-size: 200%;
+    }
+
+    .coverage h1 {
+        padding-left: 5%;
+    }
+
+    .icons {
+        padding-right: 5%;
+        padding-left: 5%;
+    }
+
+    .icon {
+        width: 45%; /* Adjust width for better display */
+        margin-bottom: 10px;
+    }
+}
+
 }
 

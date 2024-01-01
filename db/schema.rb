@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_30_121305) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_31_204636) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -45,6 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_30_121305) do
     t.datetime "updated_at", null: false
     t.integer "unit_id"
     t.integer "sub_directory_id"
+    t.integer "custom_order"
     t.index ["sub_directory_id"], name: "index_departments_on_sub_directory_id"
     t.index ["unit_id"], name: "index_departments_on_unit_id"
   end
@@ -73,14 +74,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_30_121305) do
     t.integer "department_id"
     t.integer "mobile1"
     t.integer "mobile2"
-    t.integer "landline_office"
-    t.integer "landline_residential"
-    t.integer "landline_office_intercom"
-    t.integer "landline_office_direct"
+    t.string "landline_residential"
+    t.string "landline_office_intercom"
+    t.string "landline_office_direct"
     t.integer "designation_id"
     t.integer "position1_id"
     t.integer "position2_id"
     t.integer "sub_directory_id"
+    t.integer "custom_order"
     t.index ["department_id"], name: "index_faculties_on_department_id"
     t.index ["designation_id"], name: "index_faculties_on_designation_id"
     t.index ["position1_id"], name: "index_faculties_on_position1_id"
@@ -101,17 +102,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_30_121305) do
     t.integer "department_id"
   end
 
-  create_table "sub_directory", force: :cascade do |t|
-    t.string "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "units", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_sub_directory"
+    t.integer "custom_order"
   end
 
   create_table "users", force: :cascade do |t|
