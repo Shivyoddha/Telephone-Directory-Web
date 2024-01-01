@@ -102,6 +102,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_31_204636) do
     t.integer "department_id"
   end
 
+  create_table "sub_directory", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "units", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
