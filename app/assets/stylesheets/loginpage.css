@@ -117,4 +117,20 @@ p {
   body, html {
   overflow:auto;
   }
+  @media screen and (max-width: 768px) {
+  .image {
+    display: none; /* Hide the image for smaller screens */
+  }
+
+  .form-container {
+    flex: 1;
+    padding: 5vh;
+  }
+
+  .form {
+    min-width: unset; /* Reset min-width for responsiveness */
+  }
+
+  
+}
 }
