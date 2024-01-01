@@ -13,7 +13,7 @@
     </div>
     <div class="overlay">
         <div class="overlay-home">
-        <%= link_to 'Home', 'http://telephone.nitk.ac.in', class: "nav-link px-2 text-body-secondary home-link" %> 
+          <%= link_to 'Home', 'javascript:void(0);', class: "nav-link px-2 text-body-secondary home-link", onclick: "resetFilters1();" %>
         </div>
         <div class="overlay-contact">
           <%= link_to 'Contact Us', home_team_path, class: "nav-link px-2 text-body-secondary home-link" %>
@@ -163,5 +163,21 @@
       filterForm.submit();
     }
   });
+  function resetFilters1() {
+  // Update the filter form with default values or clear the form fields
+  const filterForm = document.getElementById("filterrific_filter");
+
+  if (!filterForm) {
+    console.error("Filter form not found.");
+    return;
+  }
+
+  // Set default values for filter fields or clear the fields as needed
+  document.getElementById("filterrific_with_department_id_advanced").value = '';
+  document.getElementById("filterrific_sub_directory_id_advanced").value = 0;
+
+  // Trigger a click event on the submit button to submit the form
+  filterForm.submit();
+}
 </script>
 <%= render 'faculties/footer' %>
