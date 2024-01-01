@@ -77,3 +77,39 @@
 .icon p {
     margin-top: 10px;
 }
+
+@media only screen and (max-width: 600px) {
+    .why {
+        padding-left: 5%;
+        padding-right: 5%;
+        margin-bottom: 30px; /* Adjust margin for smaller screens */
+    }
+
+    .why-image {
+        padding-right: 5%;
+    }
+
+    .text-box {
+        max-width: 80%;
+        padding-right: 5%;
+    }
+
+    h1 {
+        font-size: 200%;
+    }
+
+    .coverage h1 {
+        padding-left: 5%; 
+    }
+
+    .icons {
+        padding-right: 5%;
+        padding-left: 5%;
+    }
+
+    .icon {
+        width: 20%; 
+        margin-bottom: 10px; 
+    }
+}
+

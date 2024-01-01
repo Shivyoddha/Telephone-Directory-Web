@@ -214,3 +214,28 @@ ul.tree li:last-child:before {
 .accordion-container {
   overflow-y: scroll;
 }
+@media screen and (max-width: 767px) {
+  .contents {
+    flex-direction: column; 
+  }
+
+  .search-area {
+    flex: 1; 
+    height: auto; 
+  }
+
+  table {
+    
+    overflow-x: auto;
+    display: block;
+  }
+
+  .subdirectory-option {
+    padding: 3%;
+  }
+
+  .accordion-label::after {
+    font-size: 18px; 
+  }
+  
+}
