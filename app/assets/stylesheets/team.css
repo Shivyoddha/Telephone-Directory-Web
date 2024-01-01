@@ -19,6 +19,8 @@
    background-color: rgba(25,46,89,255);
 }
 
-.web-team:hover {
-  background-color: #122242;
+@media screen and (max-width: 768px) {
+  .web-team:hover {
+    background-color: rgba(25,46,89,0.8); 
+}
 }
