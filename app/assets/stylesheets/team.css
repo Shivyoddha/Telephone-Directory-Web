@@ -1,26 +1,27 @@
 
 .card-img-top {
-  height: 200%; 
-  object-fit: cover; 
+  width: 100%;
+  height: 200px; /* Set a specific height for the image or adjust as needed */
+  object-fit: cover;
 }
 
-
 .card {
-  height: 100%; 
+  height: auto; /* Remove fixed height to allow content to expand */
 }
 
 .card-body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 100%; /* Ensure the card body fills the available height */
 }
 
 .web-team {
-   background-color: rgba(25,46,89,255);
+  background-color: rgba(25, 46, 89, 1); /* Use solid color without transparency by default */
 }
 
 @media screen and (max-width: 768px) {
-  .web-team:hover {
-    background-color: rgba(25,46,89,0.8); 
-}
+  .web-team {
+    background-color: rgba(25, 46, 89, 0.8); /* Modify transparency on smaller screens */
+  }
 }
