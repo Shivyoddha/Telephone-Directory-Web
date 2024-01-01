@@ -29,6 +29,7 @@ RailsAdmin.config do |config|
 
   config.model 'User' do
     edit do
+      field :email
       field :password do
         help 'Leave it blank if you do not want to change the password'
         required false
