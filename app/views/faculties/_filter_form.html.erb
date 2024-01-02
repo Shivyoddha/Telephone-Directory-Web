@@ -40,6 +40,21 @@
   color: #ffF;
   }
 
+  @media only screen and (max-width: 767px) {
+    .col-md-1 {
+      width: 100%; /* Modify width for smaller screens */
+      margin: 10px 0; /* Adjust margin for spacing */
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    .col-md-1 button {
+      width: 100%; 
+      margin-top: 10px; 
+      margin-bottom: 10px; 
+    }
+  }
+
 </style>
 
 <%= form_for_filterrific @filterrific, { class: 'filterrific-form', id: 'submission' } do |f| %>
