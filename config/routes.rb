@@ -26,9 +26,7 @@ Rails.application.routes.draw do
   end
 end
 
-devise_scope :user do
-  root to: "devise/sessions#new"
-  end
+  root "faculties#index"
 
   get 'home/about'
   get 'home/team'
