@@ -10,23 +10,36 @@ RailsAdmin.config do |config|
   ## CancanCan
   config.authorize_with :cancancan
 
-  # Uncomment the following block if you want to restrict access
-  # config.authorize_with do
-  #   redirect_to main_app.root_path unless current_user && (current_user.super_admin? || current_user.admin?)
-  # end
+  config.model 'User' do
+    edit do
+      configure :super_admin do
+        visible do
+          user = bindings[:controller].current_user
+          user.super_admin?
+        end
+        required do
+          user = bindings[:controller].current_user
+          user.admin?
+        end
+      end
 
-  ## Pundit
-  # config.authorize_with :pundit
+      configure :admin do
+        visible do
+          user = bindings[:controller].current_user
+          user.super_admin?
+        end
+      end
 
-  ## PaperTrail
-  # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
+      configure :departments do
+        visible do
+          user = bindings[:controller].current_user
+          user.super_admin?
+        end
+      end
 
-  ## More at https://github.com/railsadminteam/rails_admin/wiki/Base-configuration
-
-  ## Gravatar integration
-  ## To disable Gravatar integration in Navigation Bar set to false
-  # config.show_gravatar = true
-
+      # Add more fields as needed
+    end
+  end
 
   config.actions do
     dashboard
