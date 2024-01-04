@@ -38,6 +38,12 @@ img{
   width:100%;
 }
 
+@media only screen and (max-width: 800px) {
+  .contents {
+    flex-direction: column;
+  }
+}
+
 .contents-list{
   display: flex;
   flex: 1;
@@ -213,4 +219,31 @@ ul.tree li:last-child:before {
 
 .accordion-container {
   overflow-y: scroll;
+}
+
+.telephone-header {
+  justify-content: center !important;
+  width: 100vw;
+  padding-left: 10%;
+}
+
+
+.overlay {
+  display: flex;
+  flex-direction: row;
+  right: 0;
+  align-items: center;
+}
+
+.home-link {
+  white-space: nowrap;
+  align-items: center;
+}
+
+.overlay-home {
+  flex: 1;
+}
+
+.overlay-contact {
+  flex: 1;
 }

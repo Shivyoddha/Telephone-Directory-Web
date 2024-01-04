@@ -5,9 +5,12 @@ class Faculty < ApplicationRecord
 
   belongs_to :department
   belongs_to :designation
-  belongs_to :sub_directory
+  belongs_to :sub_directory, optional: true
   belongs_to :position1, class_name: 'Position', foreign_key: 'position1_id', optional: true
   belongs_to :position2, class_name: 'Position', foreign_key: 'position2_id', optional: true
+  validates :name, presence: true
+  validates :landline_office_intercom, presence: true
+  validates :custom_order, presence: true, numericality: { only_integer: true }
 
   has_one_attached :profile, dependent: :destroy
 

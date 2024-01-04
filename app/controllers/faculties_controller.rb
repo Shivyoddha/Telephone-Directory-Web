@@ -1,5 +1,4 @@
 class FacultiesController < ApplicationController
-  before_action :set_faculty, only: %i[ show edit update destroy ]
 
   # GET /faculties or /faculties.json
   def index
@@ -12,11 +11,10 @@ class FacultiesController < ApplicationController
           }
         ) or return
 
-        # @faculties = @filterrific.find.distinct.page(params[:page])
-        faculties = @filterrific.find.distinct.order(:name) # Sort faculties by name alphabetically
+        faculties = @filterrific.find.distinct.order(:custom_order, :name)
         @faculties_by_department = faculties.group_by { |faculty| faculty.department.name }
 
-        @departments = Department.order(:name) # Sort departments by name alphabetically
+        @departments = Department.order(:custom_order, :name)
 
         respond_to do |format|
           format.html

@@ -9,22 +9,24 @@
   }
 
   .department-title {
-    font-size: 24px;
-    background-color: #fff;
-    color: rgba(25,46,89,255);
+    font-size: 20px;
+    background-color: #198754;
+    color: #fff;
+    padding: 6px;
+    border-radius: 5px;
   }
 
   .firstend{
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
-    
+
   }
 
   .lastend{
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
   }
-  
+
   .table th {
     text-align: center;
     vertical-align: middle;
@@ -57,16 +59,32 @@
   .row-item {
     display: flex;
     flex-direction: row;
-    line-height: 1.5;
   }
 
-  .table {
+  .section-title {
+     margin-bottom: 40px;
+   }
+
+   .team .member {
+     padding: 40px;
+   }
+
+   .table {
+    margin-bottom: 40px;
     border-spacing: 10px 20px;
   }
 
   .details-btn {
      --bs-btn-line-height: 1;
      --bs-btn-font-size: 0.75rem;
+     background-color: #192f59;
+     color: #fff;
+     margin: 2px;
+  }
+
+  .details-btn:hover {
+    background-color: #192f59;
+    color: #fff;
   }
 
 
@@ -77,7 +95,7 @@
       <tr>
         <th class="firstend"> Sl. No. </th>
         <th style="text-align: ;"> Name </th>
-        <th > Section </th>
+        <th > Designation </th>
         <th > Contact </th>
         <th class="lastend"> Details </th>
       </tr>
@@ -92,20 +110,20 @@
             </td>
           </tr>
           <% faculties_for_department.each_with_index do |faculty, index| %>
-            <tr style="line-height: 10%;">
-              <td style="width:0.7%; "> <%= index + 1 %> </td>
+            <tr>
+              <td style="width:2%; "> <%= index + 1 %> </td>
               <td style="width:5%; text-align: left;"> <%= faculty.name %> </td>
-              
-              <td style="width:2%;"> <%= faculty.department.name %> </td>
-              <td style="width:2%;"> <%= faculty.landline_office %> </td>
-              <td style="width:1%; text-align: center;">
+
+              <td style="width:8%;"> <%= faculty.designation.title %> </td>
+              <td style="width:3%;"> <%= faculty.landline_office_intercom %> </td>
+              <td style="width:2%; text-align: center;">
                 <!-- Button to trigger Bootstrap modal -->
-                <button type="button" class="btn btn-success details-btn" data-bs-toggle="modal" data-bs-target="#facultyModal<%= faculty.id %>">
+                <button type="button" class="btn details-btn" data-bs-toggle="modal" data-bs-target="#facultyModal<%= faculty.id %>">
                   Click here
                 </button>
 
-               
-              
+
+
 
 
             <div class="modal fade" id="facultyModal<%= faculty.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -133,29 +151,25 @@
                             <dt class="col-sm-6 text-start ">Unit</dt>
                             <dd class="col-sm-6 text-start "><%= faculty.department.name %></dd>
                           </div>
-                            <div class=row-item>
-                            <dt class="col-sm-6 text-start ">Position-1</dt>
-                            <dd class="col-sm-6 text-start "><%= faculty.position1&.title || '-' %></dd>
-                          </div>
-                            <div class=row-item>
-                            <dt class="col-sm-6 text-start ">Position-2</dt>
-                            <dd class="col-sm-6 text-start "><%= faculty.position2&.title || '-' %></dd>
+                          <div class="row-item">
+                            <dt class="col-sm-6 text-start">Additional Charge</dt>
+                            <dd class="col-sm-6 text-start">
+                              <%= faculty.position1&.title || '-' %><%= faculty.position1&.title && faculty.position2&.title ? ', ' : '' %><%= faculty.position2&.title || '' %>
+                            </dd>
                           </div>
                             <div class=row-item>
                             <dt class="col-sm-6 text-start">Landline (Off.)</dt>
-                            <dd class="col-sm-6 text-start"><%= faculty.landline_office || '-' %></dd>
+                            <dd class="col-sm-6 text-start"><%= faculty.landline_office_intercom || '-' %></dd>
                           </div>
                             <div class=row-item>
                             <dt class="col-sm-6 text-start">Landline (Res.)</dt>
                             <dd class="col-sm-6 text-start"><%= faculty.landline_residential || '-' %></dd>
                           </div>
-                            <div class=row-item>
-                            <dt class="col-sm-6 text-start">Mobile-1</dt>
-                            <dd class="col-sm-6 text-start"><%= faculty.mobile1 || '-' %></dd>
-                          </div>
-                            <div class=row-item>
-                            <dt class="col-sm-6 text-start">Mobile-2</dt>
-                            <dd class="col-sm-6 text-start"><%= faculty.mobile2 || '-' %></dd>
+                          <div class="row-item">
+                            <dt class="col-sm-6 text-start">Mobile</dt>
+                            <dd class="col-sm-6 text-start">
+                              <%= faculty.mobile1 ? faculty.mobile1 : '-' %><%= faculty.mobile1 && faculty.mobile2 ? ', ' : '' %><%= faculty.mobile2 ? faculty.mobile2 : '' %>
+                            </dd>
                           </div>
                             <div class=row-item>
                             <dt class="col-sm-6 text-start">Email</dt>

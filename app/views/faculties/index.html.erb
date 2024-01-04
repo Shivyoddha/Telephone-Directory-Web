@@ -11,24 +11,33 @@
     <div class="telephone-header">
       TELEPHONE DIRECTORY
     </div>
+    <div class="overlay">
+        <div class="overlay-home">
+          <%= link_to 'Home', 'javascript:void(0);', class: "nav-link px-2 text-body-secondary home-link", onclick: "resetFilters1();" %>
+        </div>
+        <div class="overlay-contact">
+          <%= link_to 'Contact Us', home_team_path, class: "nav-link px-2 text-body-secondary home-link" %>
+        </div>
+    </div>
   </header>
+</div>
+
 
   <div class="contents">
     <div class="contents-list">
-      <% sorted_units = Unit.all.order(:title) %>
+      <% sorted_units = Unit.order(:custom_order, :name) %>
       <% sorted_units.each do |unit| %>
         <div class="accordion">
           <label class="accordion-label" tabindex="0"><%= unit.title %></label>
           <div class="accordion-content">
-            <% sorted_departments = unit.departments.where.not(name: "Others").order(:name) %>
+            <% sorted_departments = unit.departments.order(:custom_order, :name) %>
             <% sorted_departments.each do |department| %>
-            <% if unit.is_sub_directory? %>
+             <% if department.sub_directories.present? %>
               <p class="department-with-subdirectory"  data-unit="<%= unit.id %>" data-department="<%= department.id %>">
                   <div class="department-with-subdirectory subdirectory-option">
-                    <% subdirectories = SubDirectory.order(:title) %>
                      <%= department.name %>
                     <ul class="subdirectory-dropdown dropdown-options tree" style="display: none;">
-                      <% subdirectories.each do |subdirectory| %>
+                      <% department.sub_directories.each do |subdirectory| %>
                         <li class="dropdown-option subdirectory-option" data-subdirectory="<%= subdirectory.id %>"  data-unit="<%= unit.id %>" data-department="<%= department.id %>">
                         <%= subdirectory.title %>
                         </li>
@@ -40,18 +49,13 @@
               <p class="dropdown-option subdirectory-option"  data-subdirectory="0" data-unit="<%= unit.id %>" data-department="<%= department.id %>"><%= department.name %></p>
             <% end %>
           <% end %>
-
-            <% others_department = unit.departments.find_by(name: "Others") %>
-            <% if others_department.present? %>
-              <p class="dropdown-option subdirectory-option" data-unit="<%= unit.id %>" data-department="<%= others_department.id %>"><%= others_department.name %></p>
-            <% end %>
           </div>
         </div>
       <% end %>
     </div>
     <div class="search-area">
       <div class="search-header">
-        <div class=" p-4 rounded text-body-emphasis" style="width:100%;background-color:#192f59;">
+        <div class="rounded text-body-emphasis" style="width:100%; height:70px !important; background-color:#192f59;">
           <p class="lead mb-0" style="color:white;"><a href="#" class="text-body-emphasis fw-bold"><%= render 'filter_form' %></a></p>
         </div>
       </div>
@@ -61,128 +65,119 @@
     </div>
   </div>
 </div>
-<%= render 'faculties/footer' %>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const accordions = document.querySelectorAll(".accordion");
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    const accordions = document.querySelectorAll(".accordion");
+    accordions.forEach((accordion) => {
+      const label = accordion.querySelector(".accordion-label");
+      label.addEventListener("click", function () {
+        // Close all other accordions before opening the clicked one
+        accordions.forEach((otherAccordion) => {
+          if (otherAccordion !== accordion) {
+            otherAccordion.classList.remove("open");
+          }
+        });
+        accordion.classList.toggle("open");
+      });
+    });
 
-  accordions.forEach((accordion) => {
-    const label = accordion.querySelector(".accordion-label");
+    const departmentContainers = document.querySelectorAll(".department-with-subdirectory");
+    departmentContainers.forEach((container) => {
+      container.addEventListener("click", function () {
+        const clickedDropdown = container.querySelector(".subdirectory-dropdown");
+        const allDropdowns = document.querySelectorAll(".subdirectory-dropdown");
 
-    label.addEventListener("click", function () {
-      // Close all other accordions
-      accordions.forEach((otherAccordion) => {
-        if (otherAccordion !== accordion) {
-          otherAccordion.classList.remove("open");
+        // Close all other subdirectories except the clicked one
+        allDropdowns.forEach((otherDropdown) => {
+          if (otherDropdown !== clickedDropdown) {
+            otherDropdown.style.display = "none";
+          }
+        });
+
+        // Toggle the clicked subdirectory
+        clickedDropdown.style.display = clickedDropdown.style.display === "none" ? "block" : "none";
+
+        // Perform filtering when opening the department
+
+      });
+    });
+
+    const departmentFilters = document.querySelectorAll(".dropdown-option");
+
+    departmentFilters.forEach((filter) => {
+      filter.addEventListener("click", function () {
+        const unitId = this.dataset.unit;
+        const departmentId = this.dataset.department;
+        const subDirectoryId = this.dataset.subdirectory;
+        console.log(subDirectoryId)
+        if (subDirectoryId == 0) {
+          updateFilterAndHandleClick(unitId, departmentId);
+        } else {
+          updateFilterAndHandleClick1(unitId, departmentId, subDirectoryId);
         }
       });
-
-      // Toggle the clicked accordion
-      accordion.classList.toggle("open");
     });
-  });
 
-  const departmentContainers = document.querySelectorAll(".department-with-subdirectory");
-
-  departmentContainers.forEach((container) => {
-    container.addEventListener("click", function () {
-      const clickedDropdown = container.querySelector(".subdirectory-dropdown");
-      const allDropdowns = document.querySelectorAll(".subdirectory-dropdown");
-
-      // Close all other subdirectories
-      allDropdowns.forEach((otherDropdown) => {
-        if (otherDropdown !== clickedDropdown) {
-          otherDropdown.style.display = "none";
-        }
-      });
-
-      // Toggle the clicked subdirectory
-      clickedDropdown.style.display = clickedDropdown.style.display === "none" ? "block" : "none";
-    });
-  });
-
-
-  const departmentFilters = document.querySelectorAll(".dropdown-option");
-
-  departmentFilters.forEach((filter) => {
-    filter.addEventListener("click", function () {
-      const unitId = this.dataset.unit;
-      const departmentId = this.dataset.department;
-      const subDirectoryId = this.dataset.subdirectory;
-      console.log("Sub-directory ID", subDirectoryId);
-
-      if (subDirectoryId == 0) {
-        updateFilterAndHandleClick(unitId, departmentId);
-      } else {
-        updateFilterAndHandleClick1(unitId, departmentId, subDirectoryId);
-      }
-    });
-  });
-
-  function updateFilterAndHandleClick(unitId, departmentId) {
-    // Update the filter form with the selected unit and department
+    // Check if a filter is already present and open the dropdown accordingly
     const filterForm = document.getElementById("filterrific_filter");
+    const isFilterApplied = filterForm && filterForm.querySelector("#filterrific_with_department_id_advanced").value !== "";
 
-    if (!filterForm) {
-      console.error("Filter form not found.");
-      return;
+    if (isFilterApplied) {
+      const activeDropdown = document.querySelector(".subdirectory-dropdown[style='block']");
+      if (activeDropdown) {
+        activeDropdown.style.display = "block";
+      }
     }
 
-    document.getElementById("filterrific_with_department_id_advanced").value = departmentId;
-    console.log("Department ID", document.getElementById("filterrific_with_department_id_advanced").value);
+    function updateFilterAndHandleClick(unitId, departmentId) {
+      // Update the filter form with the selected unit and department
+      const filterForm = document.getElementById("filterrific_filter");
 
-    // Optionally, perform other actions based on the selected unit and department
-    // For example, you can show/hide content, make AJAX requests, etc.
+      if (!filterForm) {
+        console.error("Filter form not found.");
+        return;
+      }
 
-    // Trigger a click event on the submit button to submit the form
-    filterForm.submit();
-  }
+      document.getElementById("filterrific_with_department_id_advanced").value = departmentId;
+      document.getElementById("filterrific_sub_directory_id_advanced").value = 0;
+      // Optionally, perform other actions based on the selected unit and department
+      // For example, you can show/hide content, make AJAX requests, etc.
 
- 
-
-  function updateFilterAndHandleClick1(unitId, departmentId, subDirectoryId) {
-    // Update the filter form with the selected unit and department
-    const filterForm = document.getElementById("filterrific_filter");
-
-    if (!filterForm) {
-      console.error("Filter form not found.");
-      return;
+      // Trigger a click event on the submit button to submit the form
+      filterForm.submit();
     }
 
-    document.getElementById("filterrific_with_department_id_advanced").value = departmentId;
-    document.getElementById("filterrific_sub_directory_id_advanced").value = subDirectoryId;
-    console.log("Department ID", document.getElementById("filterrific_with_department_id_advanced").value);
-     // Replace "your_endpoint_url_here" with the actual endpoint URL
-    const requestData = {
-      departmentId: departmentId,
-      subDirectoryId: subDirectoryId
-      // Add any other data needed for the AJAX call
-    };
+    function updateFilterAndHandleClick1(unitId, departmentId, subDirectoryId) {
+      // Update the filter form with the selected unit and department
+      const filterForm = document.getElementById("filterrific_filter");
 
-    fetch("your_endpoint_url_here", {
-      method: "POST",
-      body: JSON.stringify(requestData),
-      headers: {
-        "Content-Type": "application/json"
+      if (!filterForm) {
+        console.error("Filter form not found.");
+        return;
       }
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok.");
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log("AJAX call successful!", data);
-      // Optionally perform actions based on the response
-    })
-    .catch(error => {
-      console.error("AJAX call failed!", error);
-    });
+
+      document.getElementById("filterrific_with_department_id_advanced").value = departmentId;
+      document.getElementById("filterrific_sub_directory_id_advanced").value = subDirectoryId;
+
+      // Trigger a click event on the submit button to submit the form
+      filterForm.submit();
+    }
+  });
+  function resetFilters1() {
+  // Update the filter form with default values or clear the form fields
+  const filterForm = document.getElementById("filterrific_filter");
+
+  if (!filterForm) {
+    console.error("Filter form not found.");
+    return;
   }
-});
-    
-    filterForm.submit();
-  
 
+  // Set default values for filter fields or clear the fields as needed
+  document.getElementById("filterrific_with_department_id_advanced").value = '';
+  document.getElementById("filterrific_sub_directory_id_advanced").value = 0;
+
+  // Trigger a click event on the submit button to submit the form
+  filterForm.submit();
+}
 </script>
+<%= render 'faculties/footer' %>
