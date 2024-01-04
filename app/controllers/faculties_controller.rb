@@ -7,7 +7,7 @@ class FacultiesController < ApplicationController
           Faculty,
           params[:filterrific],
           select_options: {
-            with_department_id: Department.pluck(:name, :id),
+            with_department_id: Department.pluck(:name, :id).order(:name),
             sub_directory_id: SubDirectory.pluck(:title, :id)
           }
         ) or return
