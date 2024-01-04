@@ -17,7 +17,7 @@ class Ability
       can :read, Position
       can :read, Designation
       can :read, SubDirectory
-      cannot :create, Department
+      cannot :read, Department
       cannot :destroy, Department
     end
   end
