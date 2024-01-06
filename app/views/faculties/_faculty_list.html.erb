@@ -118,7 +118,7 @@
               <td style="width:5%; text-align: left;"> <%= faculty.name %> </td>
 
               <td style="width:8%;"> <%= faculty.designation.title %> </td>
-              <td style="width:3%;"> <%= faculty.landline_office_intercom %> </td>
+              <td style="width:3%;" class="unselectable"> <%= faculty.landline_office_intercom %> </td>
               <td style="width:2%; text-align: center;">
                 <!-- Button to trigger Bootstrap modal -->
                 <button type="button" class="btn details-btn" data-bs-toggle="modal" data-bs-target="#facultyModal<%= faculty.id %>">
@@ -162,15 +162,15 @@
                           </div>
                             <div class=row-item>
                             <dt class="col-sm-6 text-start">Landline (Off.)</dt>
-                            <dd class="col-sm-6 text-start"><%= faculty.landline_office_intercom || '-' %></dd>
+                            <dd class="col-sm-6 text-start unselectable"><%= faculty.landline_office_intercom || '-' %></dd>
                           </div>
                             <div class=row-item>
                             <dt class="col-sm-6 text-start">Landline (Res.)</dt>
-                            <dd class="col-sm-6 text-start"><%= faculty.landline_residential || '-' %></dd>
+                            <dd class="col-sm-6 text-start unselectable"><%= faculty.landline_residential || '-' %></dd>
                           </div>
                           <div class="row-item">
                             <dt class="col-sm-6 text-start">Mobile</dt>
-                            <dd class="col-sm-6 text-start">
+                            <dd class="col-sm-6 text-start unselectable">
                               <%= faculty.mobile1 ? faculty.mobile1 : '-' %><%= faculty.mobile1 && faculty.mobile2 ? ', ' : '' %><%= faculty.mobile2 ? faculty.mobile2 : '' %>
                             </dd>
                           </div>
