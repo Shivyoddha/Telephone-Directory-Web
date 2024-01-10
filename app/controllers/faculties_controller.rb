@@ -24,9 +24,14 @@ class FacultiesController < ApplicationController
   end
 
   def print
+    @user = User.find(params[:user_id])
     @faculties = Faculty.all
     @faculties_by_department = @faculties.group_by { |faculty| faculty.department.name }
-    @departments = Department.order(:custom_order, :name)
+    if @user.super_admin?
+      @departments = Department.order(:custom_order, :name)
+    else
+      @departments = Department.where(@user.department_ids).order(:custom_order, :name)
+    end
     respond_to do |format|
       format.html
       format.pdf do
@@ -35,7 +40,7 @@ class FacultiesController < ApplicationController
                layout: 'layouts/pdf',
                disposition: 'inline',
                margin: { top: 0, bottom: 0, left: 0, right: 0 },
-               locals: { faculties: @faculties }
+               locals: { faculties: @faculties, user: @user }
       end
     end
   end

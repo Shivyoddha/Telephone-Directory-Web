@@ -144,9 +144,9 @@ font-family: 'Poppins', sans-serif;
           </thead>
           <tbody>
             <% @departments.each do |department| %>
-              <% faculties_for_department = @faculties_by_department[department.name] %>
+              <% faculties_for_department = department.faculties %>
               <% if faculties_for_department.present? %>
-                <tr>
+                <tr class="page-break">
                   <td colspan="5" class="department-heading" style="text-align:center;">
                     <div class="department-title" style="font-weight: 500;"><%= department.name %></div>
                   </td>
@@ -161,7 +161,6 @@ font-family: 'Poppins', sans-serif;
                     </td>
                   </tr>
                 <% end %>
-                <div class="page-break"></div>
               <% end %>
             <% end %>
           </tbody>
