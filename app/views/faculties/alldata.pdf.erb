@@ -84,7 +84,7 @@ font-family: 'Poppins', sans-serif;
           background-color: rgba(25,46,89,255);
           color: #fff;
           text-align: center;
-
+          margin-top: 10px;
         }
 
         .table tbody tr:nth-child(odd) {
@@ -127,11 +127,14 @@ font-family: 'Poppins', sans-serif;
           color: #fff;
         }
 
-
+        .page-break {
+              page-break-before: always;
+            }
       </style>
+    <div class="page-break"></div>
       <div class="container-fluid">
         <table class="table">
-          <thead>
+          <thead style="margin-top:10px;">
             <tr>
               <td class="head"> Sl. No. </td>
               <td class="head"> Name </td>
