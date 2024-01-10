@@ -30,7 +30,7 @@ class FacultiesController < ApplicationController
     if @user.super_admin?
       @departments = Department.order(:custom_order, :name)
     else
-      @departments = Department.where(@user.department_ids).order(:custom_order, :name)
+      @departments = Department.where(id: @user.department_ids).order(:custom_order, :name)
     end
     respond_to do |format|
       format.html
