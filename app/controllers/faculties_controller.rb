@@ -4,12 +4,12 @@ class FacultiesController < ApplicationController
           Faculty,
           params[:filterrific],
           select_options: {
-            with_department_id: Department.pluck(:name, :id),
+            with_department_id: Department.pluck(:name, :id).sort_by(&:first),
             sub_directory_id: SubDirectory.pluck(:title, :id)
           }
         ) or return
 
-        faculties = @filterrific.find.distinct.order(:custom_order, :name)
+        faculties = @filterrific.find.distinct.order(:custom_order, :joining_date, :name)
         @faculties_by_department = faculties.group_by { |faculty| faculty.department.name }
 
         @departments = Department.order(:custom_order, :name)
