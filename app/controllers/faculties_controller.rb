@@ -1,6 +1,4 @@
 class FacultiesController < ApplicationController
-
-  # GET /faculties or /faculties.json
   def index
     @filterrific = initialize_filterrific(
           Faculty,
@@ -22,20 +20,33 @@ class FacultiesController < ApplicationController
         end
   end
 
-  # GET /faculties/1 or /faculties/1.json
   def show
   end
 
-  # GET /faculties/new
+  def print
+    @faculties = Faculty.all
+    @faculties_by_department = @faculties.group_by { |faculty| faculty.department.name }
+    @departments = Department.order(:custom_order, :name)
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: 'Telephone Directory Data',
+               template: 'faculties/alldata',
+               layout: 'layouts/pdf',
+               disposition: 'inline',
+               margin: { top: 0, bottom: 0, left: 0, right: 0 },
+               locals: { faculties: @faculties }
+      end
+    end
+  end
+
   def new
     @faculty = Faculty.new
   end
 
-  # GET /faculties/1/edit
   def edit
   end
 
-  # POST /faculties or /faculties.json
   def create
     @faculty = Faculty.new(faculty_params)
 
@@ -50,7 +61,6 @@ class FacultiesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /faculties/1 or /faculties/1.json
   def update
     respond_to do |format|
       if @faculty.update(faculty_params)
@@ -63,7 +73,6 @@ class FacultiesController < ApplicationController
     end
   end
 
-  # DELETE /faculties/1 or /faculties/1.json
   def destroy
     @faculty.destroy
 
@@ -74,7 +83,6 @@ class FacultiesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_faculty
       @faculty = Faculty.find(params[:id])
     end
