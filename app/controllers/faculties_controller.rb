@@ -1,4 +1,5 @@
 class FacultiesController < ApplicationController
+
   def index
     @filterrific = initialize_filterrific(
           Faculty,
@@ -9,7 +10,21 @@ class FacultiesController < ApplicationController
           }
         ) or return
 
-        faculties = @filterrific.find.distinct.order(:custom_order, :joining_date, :name)
+        # faculties = @filterrific.find.distinct.order(:custom_order, :joining_date, :name)
+        @faculties = @filterrific.find.distinct
+
+        if @faculties.present? # Ensure there are faculties to filter
+
+        if faculty.unit_id == 1
+          @faculties = @faculties.order(:custom_order, :joining_date)
+        elsif faculty.unit_id == 2
+          @faculties = @faculties.order(:custom_order, :designation)
+        else
+          @faculties = @faculties.order(:custom_order, :name)
+        end
+
+        end
+
         @faculties_by_department = faculties.group_by { |faculty| faculty.department.name }
 
         @departments = Department.order(:custom_order, :name)
