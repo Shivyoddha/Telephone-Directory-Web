@@ -189,11 +189,11 @@
                           </div>
                           <div class=row-item>
                           <dt class="col-sm-6 text-start">Date of joining</dt>
-                          <dd class="col-sm-6 text-start"><%= faculty.joining_date || '-' %></dd>
+                          <dd class="col-sm-6 text-start"><%= faculty.joining_date ? faculty.joining_date.strftime('%d-%m-%Y') : '-' %></dd>
                         </div>
                             <div class=row-item>
                             <dt class="col-sm-6 text-start">Last Updated</dt>
-                            <dd class="col-sm-6 text-start"><%= faculty.updated_at.strftime('%B %d, %Y %I:%M %p') %></dd>
+                            <dd class="col-sm-6 text-start"><%= faculty.updated_at.strftime('%d-%m-%Y %I:%M %p') %></dd>
                           </div>
                           </dl>
                         </div>
