@@ -4,12 +4,15 @@ Rails.application.routes.draw do
   resources :units
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :departments
-  resources :faculties
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
+
   namespace :admin do
     resources :imports, only: [:new, :create]
+  end
+
+  resources :faculties do
+    get 'print', on: :collection
+    get 'filter_and_print', on: :collection
   end
 
   # root "faculties#index"
@@ -30,6 +33,8 @@ end
 
   get 'home/about'
   get 'home/team'
+  get 'faculties/print'
+  post 'faculties/print'
 
   devise_scope :user do
      get '/users/sign_out' => 'devise/sessions#destroy'

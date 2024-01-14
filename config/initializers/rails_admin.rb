@@ -36,8 +36,30 @@ RailsAdmin.config do |config|
           user.super_admin?
         end
       end
+      configure :reset_password_sent_at do
+        visible do
+          user = bindings[:controller].current_user
+          user.super_admin?
+        end
+      end
 
-      # Add more fields as needed
+      configure :created_at do
+        visible do
+          user = bindings[:controller].current_user
+          user.super_admin?
+        end
+      end
+
+      configure :remember_created_at do
+        visible false
+      end
+
+      configure :reset_password_token do
+        visible false
+      end
+      configure :email
+      configure :password
+      configure :password_confirmation
     end
   end
 

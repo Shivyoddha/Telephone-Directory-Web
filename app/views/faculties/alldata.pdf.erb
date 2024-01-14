@@ -1,0 +1,169 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<style media="screen">
+  .container-11 {
+  display: -webkit-box;
+  margin: 0 0 2em 0;
+}
+
+#margin {
+margin: 3px;
+border: 2px dashed grey;
+padding: 15px;
+border-radius: 2px;
+}
+
+.heading{
+width: 100%;
+font-family: 'Poppins', sans-serif;
+}
+
+.logo{
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  align-items: center;
+}
+
+</style>
+<div id="margin">
+    <div class="container-11">
+          <div class="logo">
+              <%= image_tag wicked_pdf_asset_base64("header.png"),style:"height:80px;"%>
+          </div>
+      </div>
+      <div class="container-11">
+      <div class="heading">
+          <center><h1 class="fw-bold">TELEPHONE DIRECTORY NITK</h1>
+          <h3>National Institute of Technology Karnataka, Surathkal </h3>
+          <p><i>www.nitk.ac.in</i></p></center>
+      </div>
+      </div>
+      <style media="screen">
+        .department-heading {
+          background-color: white;
+          color: black;
+          border: 1px solid red;
+          padding: 15px;
+          margin-bottom: 15px;
+          border-radius: 5px;
+          text-align: center;
+        }
+
+        .department-title {
+          font-size: 20px;
+          background-color: #198754;
+          color: #fff;
+          padding: 6px;
+          border-radius: 5px;
+        }
+
+        .firstend{
+          border-top-left-radius: 5px;
+          border-bottom-left-radius: 5px;
+
+        }
+
+        .lastend{
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+        }
+
+        .table th {
+          text-align: center;
+          vertical-align: middle;
+          border: 1px solid #eee;
+        }
+
+        .table td {
+          text-align: center;
+          vertical-align: middle;
+          border: 1px solid #e6e6e6;
+          padding:1px;
+        }
+
+        .head{
+          background-color: rgba(25,46,89,255);
+          color: #fff;
+          text-align: center;
+          margin-top: 10px;
+        }
+
+        .table tbody tr:nth-child(odd) {
+          background-color: #eee;
+        }
+
+        .modal-body dl dd {
+          word-wrap: break-word;
+        }
+
+
+        .row-item {
+          display: flex;
+          flex-direction: row;
+        }
+
+        .section-title {
+           margin-bottom: 40px;
+         }
+
+         .team .member {
+           padding: 40px;
+         }
+
+         .table {
+          margin-bottom: 40px;
+          border-spacing: 10px 20px;
+        }
+
+        .details-btn {
+           --bs-btn-line-height: 1;
+           --bs-btn-font-size: 0.75rem;
+           background-color: #192f59;
+           color: #fff;
+           margin: 2px;
+        }
+
+        .details-btn:hover {
+          background-color: #192f59;
+          color: #fff;
+        }
+
+        .page-break {
+              page-break-before: always;
+            }
+      </style>
+      <div class="container-fluid">
+        <table class="table">
+          <thead style="margin-top:10px;">
+            <tr>
+              <td class="head"> Sl. No. </td>
+              <td class="head"> Name </td>
+              <td class="head"> Email </td>
+              <td class="head"> Designation </td>
+              <td class="head"> Contact </td>
+            </tr>
+          </thead>
+          <tbody>
+            <% @departments.each do |department| %>
+              <% faculties_for_department = department.faculties %>
+              <% if faculties_for_department.present? %>
+                <tr class="page-break">
+                  <td colspan="5" class="department-heading" style="text-align:center;">
+                    <div class="department-title" style="font-weight: 500;"><%= department.name %></div>
+                  </td>
+                </tr>
+                <% faculties_for_department.each_with_index do |faculty, index| %>
+                  <tr>
+                    <td style="width:2%; "> <%= index + 1 %> </td>
+                    <td style="width:5%; text-align: left;"> <%= faculty.name %> </td>
+                    <td style="width:5%;"> <%= faculty.email %> </td>
+                    <td style="width:3%;"> <%= faculty.designation.title %> </td>
+                    <td style="width:5%; text-align: center;"> <%= faculty.landline_office_intercom %>
+                    </td>
+                  </tr>
+                <% end %>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <%= javascript_include_tag "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" %>

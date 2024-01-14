@@ -171,7 +171,12 @@
                           <div class="row-item">
                             <dt class="col-sm-6 text-start">Mobile</dt>
                             <dd class="col-sm-6 text-start unselectable">
-                              <%= faculty.mobile1 ? faculty.mobile1 : '-' %><%= faculty.mobile1 && faculty.mobile2 ? ', ' : '' %><%= faculty.mobile2 ? faculty.mobile2 : '' %>
+                            <% if faculty.mobile1.present? %>
+                                  0<%= faculty.mobile1 %><%= faculty.mobile2.present? ? ', ' : '' %>
+                             <% end %>
+                            <% if faculty.mobile2.present? %>
+                                  0<%= faculty.mobile2 %>
+                            <% end %>
                             </dd>
                           </div>
                             <div class=row-item>
