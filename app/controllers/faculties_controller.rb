@@ -1,4 +1,6 @@
 class FacultiesController < ApplicationController
+
+
   def index
     @filterrific = initialize_filterrific(
           Faculty,
