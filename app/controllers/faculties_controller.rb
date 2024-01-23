@@ -11,9 +11,8 @@ class FacultiesController < ApplicationController
           }
         ) or return
 
-         faculties = @filterrific.find.distinct.order(:custom_order, :designation, :joining_date)
-
-         @faculties_by_department = faculties.group_by { |faculty| faculty.department.name }
+        faculties = @filterrific.find.distinct.order(:custom_order, :designation, :joining_date)
+        @faculties_by_department = faculties.group_by { |faculty| faculty.department.name }
 
         @departments = Department.order(:custom_order, :name)
 
