@@ -15,6 +15,15 @@ class Faculty < ApplicationRecord
 
   has_one_attached :profile, dependent: :destroy
 
+
+  def image_url
+    if profile.attached?
+      Rails.application.routes.url_helpers.rails_blob_url(profile, only_path: false, host: "telephone.nitk.ac.in")
+    else
+      nil
+    end
+  end
+
   filterrific(
     available_filters: [
       :search_query,
