@@ -87,6 +87,9 @@
     color: #fff;
   }
 
+  .unselectable {
+    user-select: none;
+  }
 
 </style>
 <div class="container-fluid">
@@ -115,7 +118,7 @@
               <td style="width:5%; text-align: left;"> <%= faculty.name %> </td>
 
               <td style="width:8%;"> <%= faculty.designation.title %> </td>
-              <td style="width:3%;"> <%= faculty.landline_office_intercom %> </td>
+              <td style="width:3%;" class="unselectable"> <%= faculty.landline_office_intercom %> </td>
               <td style="width:2%; text-align: center;">
                 <!-- Button to trigger Bootstrap modal -->
                 <button type="button" class="btn details-btn" data-bs-toggle="modal" data-bs-target="#facultyModal<%= faculty.id %>">
@@ -159,21 +162,26 @@
                           </div>
                             <div class=row-item>
                             <dt class="col-sm-6 text-start">Landline (Off.)</dt>
-                            <dd class="col-sm-6 text-start"><%= faculty.landline_office_intercom || '-' %></dd>
+                            <dd class="col-sm-6 text-start unselectable"><%= faculty.landline_office_intercom || '-' %></dd>
                           </div>
                             <div class=row-item>
                             <dt class="col-sm-6 text-start">Landline (Res.)</dt>
-                            <dd class="col-sm-6 text-start"><%= faculty.landline_residential || '-' %></dd>
+                            <dd class="col-sm-6 text-start unselectable"><%= faculty.landline_residential || '-' %></dd>
                           </div>
                           <div class="row-item">
                             <dt class="col-sm-6 text-start">Mobile</dt>
-                            <dd class="col-sm-6 text-start">
-                              <%= faculty.mobile1 ? faculty.mobile1 : '-' %><%= faculty.mobile1 && faculty.mobile2 ? ', ' : '' %><%= faculty.mobile2 ? faculty.mobile2 : '' %>
+                            <dd class="col-sm-6 text-start unselectable">
+                            <% if faculty.mobile1.present? %>
+                                  0<%= faculty.mobile1 %><%= faculty.mobile2.present? ? ', ' : '' %>
+                             <% end %>
+                            <% if faculty.mobile2.present? %>
+                                  0<%= faculty.mobile2 %>
+                            <% end %>
                             </dd>
                           </div>
                             <div class=row-item>
                             <dt class="col-sm-6 text-start">Email</dt>
-                            <dd class="col-sm-6 text-start"><%= faculty.email || '-' %></dd>
+                            <dd class="col-sm-6 text-start unselectable"><%= faculty.email || '-' %></dd>
                           </div>
                             <div class=row-item>
                             <dt class="col-sm-6 text-start">Personal Webpage</dt>
@@ -184,9 +192,13 @@
                               <% end %>
                             </dd>
                           </div>
+                          <div class=row-item>
+                          <dt class="col-sm-6 text-start">Date of joining</dt>
+                          <dd class="col-sm-6 text-start"><%= faculty.joining_date ? faculty.joining_date.strftime('%d-%m-%Y') : '-' %></dd>
+                        </div>
                             <div class=row-item>
                             <dt class="col-sm-6 text-start">Last Updated</dt>
-                            <dd class="col-sm-6 text-start"><%= faculty.updated_at.strftime('%B %d, %Y %I:%M %p') %></dd>
+                            <dd class="col-sm-6 text-start"><%= faculty.updated_at.strftime('%d-%m-%Y %I:%M %p') %></dd>
                           </div>
                           </dl>
                         </div>
