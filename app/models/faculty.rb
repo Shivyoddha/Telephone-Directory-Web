@@ -4,6 +4,7 @@ class Faculty < ApplicationRecord
   end
 
   belongs_to :department
+  belongs_to :unit
   belongs_to :designation
   belongs_to :sub_directory, optional: true
   belongs_to :position1, class_name: 'Position', foreign_key: 'position1_id', optional: true
@@ -13,6 +14,15 @@ class Faculty < ApplicationRecord
   validates :custom_order, presence: true, numericality: { only_integer: true }
 
   has_one_attached :profile, dependent: :destroy
+
+
+  def image_url
+    if profile.attached?
+      Rails.application.routes.url_helpers.rails_blob_url(profile, only_path: false, host: "telephone.nitk.ac.in")
+    else
+      nil
+    end
+  end
 
   filterrific(
     available_filters: [
