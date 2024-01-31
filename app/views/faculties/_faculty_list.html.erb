@@ -204,11 +204,8 @@
                         </div>
                         <div class="col-md-6 d-flex align-items-center justify-content-center">
                           <!-- Right column with details -->
-
-                          <% ActiveStorage::Current.url_options = { host: request.base_url, protocol: request.protocol } %>
                           <% if faculty.profile.present? %>
-                              Image URL: <%= url_for(faculty.profile) %>
-
+                           <%= image_tag faculty.profile, class: "img-fluid", style:"max-width: 80%; height: auto;" %>
                           <% else %>
                             <%= image_tag 'user.png', style: "max-width: 60%; max-height: 60%;"  %>
                           <% end %>
