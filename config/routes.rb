@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       resources :faculty_by_name
       resources :faculty_by_all
       resources :faculty_by_department
+      resources :designations
   end
 end
 
