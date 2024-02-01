@@ -147,12 +147,16 @@
                             <dd class="col-sm-6 text-start"><%= faculty.name %></dd>
                           </div>
                           <div class=row-item>
-                            <dt class="col-sm-6 text-start ">Designation/Title</dt>
-                            <dd class="col-sm-6 text-start col2"><%= faculty.designation.title %></dd>
-                          </div>
-                            <div class=row-item>
-                            <dt class="col-sm-6 text-start ">Unit</dt>
+                            <dt class="col-sm-6 text-start ">Section</dt>
                             <dd class="col-sm-6 text-start "><%= faculty.department.name %></dd>
+                          </div>
+                          <div class=row-item>
+                              <% if faculty.designation.title == 'Other' %>
+                            <dt class="col-sm-6 text-start ">Title</dt>
+                              <% else %>
+                            <dt class="col-sm-6 text-start ">Designation</dt>
+                              <% end %>
+                            <dd class="col-sm-6 text-start col2"><%= faculty.designation.title %></dd>
                           </div>
                           <div class="row-item">
                             <dt class="col-sm-6 text-start">Additional Charge</dt>
