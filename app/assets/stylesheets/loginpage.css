@@ -99,6 +99,16 @@ p {
   font-size: 20px;
 }
 
+.row::after {
+  display: none; /* Hide the separator line for smaller screens */
+}
+
+p {
+  color: rgba(25, 46, 89, 255);
+  font-size: 20px;
+}
+
+
 @media screen and (max-width: 768px) {
   .image {
     flex:0;
@@ -111,10 +121,5 @@ p {
 
   .form {
     min-width:auto;
-  }
-
-
-  body, html {
-  overflow:auto;
   }
 }
