@@ -1,5 +1,4 @@
 class Faculty < ApplicationRecord
-  is_impressionable
   rails_admin do
     label "All_Data"
   end
