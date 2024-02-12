@@ -1,6 +1,4 @@
 class FacultiesController < ApplicationController
-  impressionist actions: [:index]
-
   def index
     @filterrific = initialize_filterrific(
           Faculty,
@@ -11,9 +9,6 @@ class FacultiesController < ApplicationController
           }
         ) or return
         faculties = @filterrific.find.distinct.order(:custom_order, :designation, :joining_date)
-        faculties.each do |faculty|
-          impressionist(faculty)
-        end
         @faculties_by_department = faculties.group_by { |faculty| faculty.department.name }
         @departments = Department.order(:custom_order, :name)
 
