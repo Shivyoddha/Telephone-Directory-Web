@@ -12,8 +12,8 @@ class Ability
     elsif user.admin?
       can :access, :rails_admin
       can :read, :dashboard
-      can :read, User, id: user.id
-      can :manage, User
+      can :manage, User, id: user.id
+      can :create, Designation
       can :read, Department, id: user.department_ids
       can :manage, Faculty, department: { id: user.department_ids }
       can :read, Position
