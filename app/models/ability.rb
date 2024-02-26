@@ -13,7 +13,6 @@ class Ability
       can :access, :rails_admin
       can :read, :dashboard
       can :manage, User, id: user.id
-      can :create, Designation
       can :read, Department, id: user.department_ids
       can :manage, Faculty, department: { id: user.department_ids }
       can :read, Position
