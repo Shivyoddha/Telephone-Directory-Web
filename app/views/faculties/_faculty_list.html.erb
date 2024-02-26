@@ -164,7 +164,7 @@
                             <dd class="col-sm-6 text-start col2"><%= faculty.designation.title %></dd>
                           </div>
                         <% end %>
-                        <% if faculty.position1.title != nil %>
+                        <% if faculty.position1&.title != nil %>
                           <div class="row-item">
                             <dt class="col-sm-6 text-start">Additional Charge</dt>
                             <dd class="col-sm-6 text-start">
