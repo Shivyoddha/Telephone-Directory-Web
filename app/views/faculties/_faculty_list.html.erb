@@ -154,7 +154,7 @@
                             <dd class="col-sm-6 text-start "><%= faculty.department.name %></dd>
                           </div>
                         <% end %>
-                        <% if faculty.designation.title != nil %>
+                        <% if faculty.designation.title != nil || faculty.designation.title == '-' %>
                           <div class=row-item>
                               <% if faculty.designation.title == 'Other' %>
                             <dt class="col-sm-6 text-start ">Title</dt>
