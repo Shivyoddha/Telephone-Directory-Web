@@ -142,14 +142,19 @@
                         <div class="col-md-6">
                           <!-- Left column with image -->
                           <dl class="row modal-row">
+                          <% if faculty.name != nil %>
                             <div class=row-item>
                             <dt class="col-sm-6 text-start ">Name</dt>
                             <dd class="col-sm-6 text-start"><%= faculty.name %></dd>
                           </div>
+                          <% end %>
+                        <% if faculty.department.name != nil %>
                           <div class=row-item>
                             <dt class="col-sm-6 text-start ">Section</dt>
                             <dd class="col-sm-6 text-start "><%= faculty.department.name %></dd>
                           </div>
+                        <% end %>
+                        <% if faculty.designation.title != nil %>
                           <div class=row-item>
                               <% if faculty.designation.title == 'Other' %>
                             <dt class="col-sm-6 text-start ">Title</dt>
@@ -158,20 +163,28 @@
                               <% end %>
                             <dd class="col-sm-6 text-start col2"><%= faculty.designation.title %></dd>
                           </div>
+                        <% end %>
+                        <% if faculty.position1.title != nil %>
                           <div class="row-item">
                             <dt class="col-sm-6 text-start">Additional Charge</dt>
                             <dd class="col-sm-6 text-start">
                               <%= faculty.position1&.title || '-' %><%= faculty.position1&.title && faculty.position2&.title ? ', ' : '' %><%= faculty.position2&.title || '' %>
                             </dd>
                           </div>
+                        <% end %>
+                        <% if faculty.landline_office_intercom %>
                             <div class=row-item>
                             <dt class="col-sm-6 text-start">Landline (Off.)</dt>
                             <dd class="col-sm-6 text-start unselectable"><%= faculty.landline_office_intercom || '-' %></dd>
                           </div>
+                        <% end %>
+                        <% if faculty.landline_residential != nil %>
                             <div class=row-item>
                             <dt class="col-sm-6 text-start">Landline (Res.)</dt>
                             <dd class="col-sm-6 text-start unselectable"><%= faculty.landline_residential || '-' %></dd>
                           </div>
+                        <% end %>
+                        <% if faculty.mobile1 != nil %>
                           <div class="row-item">
                             <dt class="col-sm-6 text-start">Mobile</dt>
                             <dd class="col-sm-6 text-start unselectable">
@@ -183,10 +196,14 @@
                             <% end %>
                             </dd>
                           </div>
+                        <% end %>
+                        <% if faculty.email %>
                             <div class=row-item>
                             <dt class="col-sm-6 text-start">Email</dt>
                             <dd class="col-sm-6 text-start unselectable"><%= faculty.email || '-' %></dd>
                           </div>
+                        <% end %>
+                        <% if faculty.site_name != nil %>
                             <div class=row-item>
                             <dt class="col-sm-6 text-start">Personal Webpage</dt>
                             <dd class="col-sm-6 text-start overflow-visible">
@@ -196,16 +213,21 @@
                               <% end %>
                             </dd>
                           </div>
+                        <% end %>
+                        <% if faculty.joining_date != nil%>
                           <div class=row-item>
                           <dt class="col-sm-6 text-start">Date of joining</dt>
                           <dd class="col-sm-6 text-start"><%= faculty.joining_date ? faculty.joining_date.strftime('%d-%m-%Y') : '-' %></dd>
                         </div>
+                        <% end %>
+                        <% if faculty.updated_at != nil %>
                             <div class=row-item>
                             <dt class="col-sm-6 text-start">Last Updated</dt>
                             <dd class="col-sm-6 text-start"><%= faculty.updated_at.strftime('%d-%m-%Y %I:%M %p') %></dd>
                           </div>
                           </dl>
                         </div>
+                        <% end %>
                         <div class="col-md-6 d-flex align-items-center justify-content-center">
                           <!-- Right column with details -->
                           <% if faculty.profile.present? %>
