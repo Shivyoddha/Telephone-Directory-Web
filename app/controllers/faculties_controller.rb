@@ -4,7 +4,7 @@ class FacultiesController < ApplicationController
           Faculty,
           params[:filterrific],
           select_options: {
-            with_department_id: Department.pluck(:name, :id).sort_by(&:first),
+            with_department_id: Department.where.not(name: "Backup").pluck(:name, :id).sort_by(&:first),
             sub_directory_id: SubDirectory.pluck(:title, :id)
           }
         ) or return
