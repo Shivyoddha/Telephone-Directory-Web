@@ -149,7 +149,7 @@
                           </div>
                           <% end %>
 <% @depart = Department.find(faculty.department_id)%>
-<%= @depart.title %>
+<%= @depart.name %>
 <% @unitty = Unit.find(@depart.unit_id) %>
 <%= @unitty.title %>
 <% if @unitty == 'Administration' %>
