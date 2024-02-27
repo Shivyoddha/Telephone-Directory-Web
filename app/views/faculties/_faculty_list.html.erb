@@ -230,7 +230,12 @@
                             </dd>
                           </div>
                         <% end %>
-                        <% if faculty.joining_date != nil%>
+                        <% if faculty.designation.title == 'Professor' || faculty.designation.title == 'Associate Professor' || faculty.designation.title == 'Assistant Professor' || faculty.designation.title == 'Professor & HOD' || faculty.designation.title == 'Professor (Higher Administrative Grade)' %>
+                          <div class=row-item>
+                          <dt class="col-sm-6 text-start">Date of joining</dt>
+                          <dd class="col-sm-6 text-start"><%= faculty.joining_date ? faculty.joining_date.strftime('%d-%m-%Y') : '-' %></dd>
+                        </div>
+                        <% elsif faculty.joining_date != nil %>
                           <div class=row-item>
                           <dt class="col-sm-6 text-start">Date of joining</dt>
                           <dd class="col-sm-6 text-start"><%= faculty.joining_date ? faculty.joining_date.strftime('%d-%m-%Y') : '-' %></dd>
