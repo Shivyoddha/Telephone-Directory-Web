@@ -149,10 +149,8 @@
                           </div>
                           <% end %>
 <% @depart = Department.find(faculty.department_id)%>
-<%= @depart.name %>
 <% @unitty = Unit.find(@depart.unit_id) %>
-<%= @unitty.title %>
-<% if @unitty == 'Administration' %>
+<% if @unitty.title == 'Administration' %>
                         <% if faculty.designation.title != nil && faculty.designation.title != '-' && faculty.designation.title != '-NA-' && faculty.department.name != nil %>
                           <div class=row-item>
                             <dt class="col-sm-6 text-start ">Designation</dt>
