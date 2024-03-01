@@ -1,365 +1,3 @@
-<style>
-  .team .member {
-  position: relative;
-  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
-  padding: 30px;
-  border-radius: 5px;
-  background: #87addb14;
-  /* Set fixed height and width for the card */
-  width: 500px; /* Adjust the width as needed */
-  height: 300px; /* Adjust the height as needed */
-  }
-
-
-
-  .team .member .teampic {
-  overflow: hidden;
-  width: 180px;
-   height: 200px; /* Adjust the image size as needed */
-  border-radius: 10%;
-  }
-
-
-  a {
-      display: block;
-      width: 100%;
-     padding-top: 20px;
-  }
-
-  .team .member .member-info {
-  padding-left: 30px;
-  }
-
-  .team .member h4 {
-  font-weight: 700;
-  margin-bottom: 5px;
-  font-size: 20px;
-  color:#16622f;
-  }
-
-  .team .member span {
-  display: block;
-  font-size: 15px;
-  padding-bottom: 10px;
-  position: relative;
-  font-weight: 500;
-  }
-
-  .team .member span::after {
-  content: "";
-  position: absolute;
-  display: block;
-  width: 50px;
-  height: 2px;
-  background:#192f59;
-  bottom: 0;
-  left: 0;
-  }
-
-  .team .member p {
-  margin: 10px 0 0 0;
-  font-size: 14px;
-  }
-
-  .team .member .social {
-  margin-top: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  }
-
-  .team .member .social a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  background: #eff2f8;
-  }
-
-  .team .member a i {
-  color: #156144;
-  font-size: 40px;
-  margin: 0 2px;
-  }
-
-  .team .member .social a+a {
-  margin-left: 8px;
-  }
-
-  section {
-  padding: 60px 0;
-  overflow: hidden;
-  }
-
-  .section-title {
-  text-align: center;
-  padding-bottom: 30px;
-  color:#1c3d76
-  }
-  .page-title {
-      text-align: center;
-      padding-bottom: 30px;
-      }
-
-
-   .underline{
-      width: 150px;
-      height: 1.5px;
-      background-color: black;
-      margin: auto;
-      margin-top: 30px;
-  }
-
-
- .btn-round {
-
-position: relative;
-bottom: 10px;
-
-position: fixed;
-bottom: 70px;
-right: 20px;
-border-radius: 50%;
-width: 40px;
-height: 40px;
-text-align: center;
-line-height: 40px;
-font-weight: bold;
-}
-
-@media (max-width: 767px) {
-/* Adjust for smaller screens if needed */
-.btn-round {
-  bottom: 10px;
-  right: 10px;
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
-}
-}
-
-.github-icon{
-padding : 0;
-text-decoration: none;
-font-size: 100px;
-}
-</style>
-
-  <div class="main-container">
-    <div class="nitk-header">
-      <div class="container">
-        <header class="d-flex justify-content-center py-3">
-          <li class="nav-item">
-            <a href="https://www.nitk.ac.in/" class="nav-link active" aria-current="page">
-              <%= image_tag('header.png') %>
-            </a>
-          </li>
-        </header>
-      </div>
-    </div>
-
-    <section id="team" class="team section-bg">
-      <div class="container">
-        <div class="page-title text-center">
-          <h2>Our Team</h2>
-          <div class="underline"></div>
-        </div>
-
-        <div class="section-title">
-          <h3>Director</h3>
-          <div class="underline"></div>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-6 mx-auto mt-4">
-            <div class="member d-flex align-items-start">
-              <%= image_tag('Director.jpg', class: 'teampic img-fluid', alt: 'faculty advisor' , style: "border-radius:0px;") %>
-              <div class="member-info">
-                <h4>Prof. B Ravi </h4>
-                <span>Director NITK</span>
-                <div class="social align-items-center">
-                  <a href="https://github.com/Poorvab2525" class ="github-icon"><i class="fa-brands fa-square-github fa-2xl" style="color: #000000;"></i></a>
-                  <a href="https://github.com/Poorvab2525" class ="github-icon"><i class="fa-brands fa-linkedin fa-2xl" style="color: #74C0FC;"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        <br>
-
-        <!-- Faculty Advisor -->
-        <div class="section-title mt-5">
-          <h3>Professor In-charge</h3>
-          <div class="underline"></div>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-6 mx-auto mt-4">
-            <div class="member d-flex align-items-start">
-              <%= image_tag('DrBRC.jpeg', class: 'teampic img-fluid', alt: 'faculty advisor') %>
-              <div class="member-info">
-                <h4>Dr. B R Chandavarkar</h4>
-                <span>Associate Professor</span>
-                <span>Dept. of CSE</span>
-                <div class="social align-items-center">
-                  <a href="https://github.com/Poorvab2525" class ="github-icon"><i class="fa-brands fa-square-github fa-2xl" style="color: #000000;"></i></a>
-                  <a href="https://github.com/Poorvab2525" class ="github-icon"><i class="fa-brands fa-linkedin fa-2xl" style="color: #74C0FC;"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        <br>
-          <!-- Staff -->
-          <div class="section-title mt-5">
-            <h3>Staff</h3>
-            <div class="underline"></div>
-          </div>
-
-          <div class="col-lg-6 mx-auto mt-4">
-            <div class="member d-flex align-items-start">
-              <%= image_tag('dummy.webp', class: 'teampic img-fluid', alt: 'staff') %>
-              <div class="member-info">
-                <h4>Mr. Santosh</h4>
-                <span>Technical Staff</span>
-                <span>Dept. of CSE</span>
-                <div class="social align-items-center">
-                 <a href="https://github.com/Poorvab2525" class ="github-icon"><i class="fa-brands fa-square-github fa-2xl" style="color: #000000;"></i></a>
-                  <a href="https://github.com/Poorvab2525" class ="github-icon"><i class="fa-brands fa-linkedin fa-2xl" style="color: #74C0FC;"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project Lead -->
-          <div class="section-title mt-5">
-            <h3>Project Lead</h3>
-            <div class="underline"></div>
-          </div>
-
-          <div class="col-lg-6 mx-auto mt-4">
-            <div class="member d-flex align-items-start">
-              <%= image_tag('Anish.jpg', class: 'teampic img-fluid', alt: 'Project Lead') %>
-              <div class="member-info">
-                <h4>Anish Kumbhar</h4>
-                <span>B.Tech, 2025</span>
-                <span>Dept. of CSE</span>
-                <div class="social align-items-center">
-                  <a href="https://github.com/Shivyoddha" class ="github-icon"><i class="fa-brands fa-square-github fa-2xl" style="color: #000000;"></i></a>
-                  <a href="https://www.linkedin.com/in/anish-kumbhar-465980223" class ="github-icon"><i class="fa-brands fa-linkedin fa-2xl" style="color: #74C0FC;"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Web Development Team -->
-          <div class="section-title mt-5">
-            <h3>Web Development Team</h3>
-            <div class="underline"></div>
-          </div>
-
-          <div class="col-lg-6 mt-4">
-            <div class="member d-flex align-items-start">
-              <%= image_tag('Megha_final.jpg', id:"web-team", class: 'teampic img-fluid', alt: 'Web Team Image 1') %>
-              <div class="member-info">
-                <h4>Megha Arya</h4>
-                <span>B.Tech, 2026</span>
-                <span>Dept. of CSE</span>
-                <div class="social align-items-center">
-                 <a href="https://github.com/mayghhaa" class ="github-icon"><i class="fa-brands fa-square-github fa-2xl" style="color: #000000;"></i></a>
-                  <a href="https://www.linkedin.com/in/megha-arya-61576022b" class ="github-icon"><i class="fa-brands fa-linkedin fa-2xl" style="color: #74C0FC;"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6 mt-4">
-            <div class="member d-flex align-items-start">
-              <%= image_tag('Poorva_final.jpg', class: 'teampic img-fluid', alt: 'Web Team Image 2') %>
-              <div class="member-info">
-                <h4>Bhagwat Poorva Milind</h4>
-                <span>B.Tech, 2026</span>
-                <span>Dept. of CSE</span>
-                <div class="social align-items-center">
-                  <a href="https://github.com/Poorvab2525" class ="github-icon"><i class="fa-brands fa-square-github fa-2xl" style="color: #000000;"></i></a>
-                  <a href="https://www.linkedin.com/in/poorva-bhagwat" class ="github-icon"><i class="fa-brands fa-linkedin fa-2xl" style="color: #74C0FC;"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6 mt-4">
-            <div class="member d-flex align-items-start">
-              <%= image_tag('Reema_final.jpg', class: 'teampic img-fluid', alt: 'Web Team Image 3') %>
-              <div class="member-info">
-                <h4>Reema Murthy</h4>
-                <span>B.Tech, 2026</span>
-                <span>Dept. of CSE</span>
-                <div class="social align-items-center">
-                  <a href="https://github.com/Poorvab2525" class ="github-icon"><i class="fa-brands fa-square-github fa-2xl" style="color: #000000;"></i></a>
-                  <a href="https://github.com/Poorvab2525" class ="github-icon"><i class="fa-brands fa-linkedin fa-2xl" style="color: #74C0FC;"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Application Development Team -->
-        <div class="section-title mt-5">
-          <h3>Application Development Team</h3>
-          <div class="underline"></div>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-6 mt-4">
-            <div class="member d-flex align-items-start">
-              <%= image_tag('Ansh.jpg', id:"app-team", class: 'teampic img-fluid', alt: 'App Team Image 1') %>
-              <div class="member-info">
-                <h4>Ansh Malhotra</h4>
-                <span>B.Tech, 2026</span>
-                <span>Dept. of CSE</span>
-                <div class="social align-items-center">
-                  <a href="https://github.com/ANSHVIVEKMALHOTRA" class ="github-icon"><i class="fa-brands fa-square-github fa-2xl" style="color: #000000;"></i></a>
-                  <a href="https://www.linkedin.com/in/ansh-vivek-malhotra-569776255/" class ="github-icon"><i class="fa-brands fa-linkedin fa-2xl" style="color: #74C0FC;"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6 mt-4">
-            <div class="member d-flex align-items-start">
-              <%= image_tag('Chirag.jpg', class: 'teampic img-fluid', alt: 'App Team Image 2') %>
-              <div class="member-info">
-                <h4>Chirag S</h4>
-                <span>B.Tech, 2026</span>
-                <span>Dept. of CSE</span>
-                <div class="social align-items-center">
-                  <a href="https://github.com/Chiru2004" class ="github-icon"><i class="fa-brands fa-square-github fa-2xl" style="color: #000000;"></i></a>
-                  <a href="https://www.linkedin.com/in/chirag-s-854a2b283/" class ="github-icon"><i class="fa-brands fa-linkedin fa-2xl" style="color: #74C0FC;"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6 mt-4">
-            <div class="member d-flex align-items-start">
-              <%= image_tag('Rishabh.jpg', class: 'teampic img-fluid', alt: 'App Team Image 3') %>
-              <div class="member-info">
-                <h4>Rishabh Mahor</h4>
-                <span>B.Tech, 2026</span>
-                <span>Dept. of CSE</span>
-                <div class="social">
-                  <a href="https://github.com/Rishabh110204" class ="github-icon"><i class="fa-brands fa-square-github fa-2xl" style="color: #000000;"></i></a>
-                  <a href="https://www.linkedin.com/in/rishabh-mahor" class ="github-icon"><i class="fa-brands fa-linkedin fa-2xl" style="color: #74C0FC;"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -384,15 +22,15 @@ font-size: 100px;
   }
 
   th {
-    background-color: #87addb14;
-    color: #16622f;
+    background-color: #06692cf9;
+    color: #fff;
   }
 </style>
 </head>
 <body>
 
 <table>
-  <h2>Department/Center/Section Administrator</h2>
+  <h2>Administrators</h2>
   <thead>
     <tr>
       <th>Unit</th>
@@ -433,6 +71,11 @@ font-size: 100px;
     </tr>
     <tr>
       
+     
+      <td> Dept. of Civil Engineering</td>
+      <td> Dr. Vijay </td>
+      <td>vj@nitk.edu.in </td>
+      
       
     </tr>
     <tr>
@@ -466,8 +109,8 @@ font-size: 100px;
       <tr>
     
       <td> Dept. of Information Technology</td>
-      <td> Dr. Sowmya Kamath</td>
-      <td>sowmyakamath@nitk.edu.in </td>
+      <td> Mr Abey Eliyas</td>
+      <td>abey@nitk.edu.in </td>
     
     
     </tr>
@@ -546,81 +189,26 @@ font-size: 100px;
 
     <tr>
       
-      <td rowspan="10">Research</td>
+      <td rowspan="2">Research</td>
       <td rowspan="2">Central Research Facility</td>
       <td>   Nishanth Kumar</td>
       <td>   office.crf@nitk.edu.in </td>
+</tr>
+<tr> 
+
+      
+      <td>   Mr. Kiran</td>
+      <td>   kirankumar123639@gmail.com </td>
      
     </tr>
-
-
-    <tr>
-      
-    
-      
-      <td>  Kiran </td>
-      <td>   kirankumar123639@gmail.com  </td>
-      
-    </tr>
-
-    <tr>
-      <tr>
-    
-    </tr>
-      
-      <tr>
-    </tr>
-    
-    </tr>
-
-    <tr>
-    </tr>
-
-    <tr>
-      
-    </tr>
-
-    <tr>
-      
-    </tr>
-
-    <tr>
-      
  
-      <td> Science & Technology Entrepreneurs' Park (STEP) </td>
-      <td></td>
-      <td>   hegdesr@nitk.edu.in  </td>
-      
-    </tr>
-
-   
 
     <tr>
       
-      <tr>
-      
-        <td rowspan="8">Facilities</td>
-        <td>Career Development Centre [CDC]  </td>
-        <td></td>
-        <td> cdcentre@nitk.edu.in   </td>
-        
-      </tr>
-
-      <tr>
-        
-       
-        <td> Central Computer Centre  </td>
-        <td></td>
-        <td> chairmanccc@nitk.edu.in </td>
-        
-      </tr>
-
-      <tr>
-        
-       
-        <td>  Grievances </td>
-        <td> Dr. Kumar G N</td>
-        <td> gnkumar33@nitk.edu.in </td>
+        <td rowspan="6">Facilities</td>
+        <td>Central Computer Centre </td>
+        <td>Mr. Subhas</td>
+        <td> subhash@nitk.edu.in   </td>
         
       </tr>
 
@@ -628,7 +216,7 @@ font-size: 100px;
         
    
         <td>  Guest House </td>
-        <td> </td>
+        <td>Mr. Karunakar </td>
         <td> shyamfec@nitk.edu.in </td>
         
       </tr>
@@ -664,50 +252,24 @@ font-size: 100px;
         
         
         <td>   Security</td>
-        <td> </td>
+        <td> Sri. Ramprasad Bhat</td>
         <td>  security@nitk.edu.in</td>
         
       </tr>
 
       <tr>
-      <td rowspan="9">Students' Life</td>
-      <td>Hostels</td>
-      <td>Mr. Deviprasad </td>
-      <td>  hosteloffice@nitk.edu.in</td>
-      
-    </tr>
-
-    <tr>
-    </tr>
-
-    <tr>
-      
-      
-      <td> NCC</td>
-      <td> </td>
-      <td> sam@nitk.edu.in </td>
-      
-    </tr>
-
-    <tr>
-      
-     
-      <td> Sports</td>
-      <td>   Dr. Hem Prasad Nath</td>
-      <td>  dr.nath@nitk.edu.in</td>
-      
-    </tr>
-
-    <tr>
-    </tr>
-
-    <tr>
-    </tr>
-
-  </tbody>
-</table>
-
-</body>
-</html>
-
-<%= render 'faculties/footer' %>
+        <td rowspan="9">Students' Life</td>
+        <td>Hostels</td>
+        <td>Mr. Deviprasad </td>
+        <td>  hosteloffice@nitk.edu.in</td>
+        
+      </tr>
+  
+      <tr>
+        
+       
+        <td> Sports</td>
+        <td>   Dr. Hem Prasad Nath</td>
+        <td>  dr.nath@nitk.edu.in</td>
+        
+      </tr>
