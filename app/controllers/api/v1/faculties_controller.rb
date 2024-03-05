@@ -21,7 +21,7 @@ class Api::V1::FacultiesController < ApplicationController
     @faculties = Faculty.all
 
     
-  @faculties = @faculties.joins(:department).where.not(departments: { name: 'BackUp' }).order("custom_order ASC, designation_id ASC, joining_date ASC")
+  @faculties = @faculties.joins(:department).where.not(departments: { name: 'Backup' }).order("custom_order ASC, designation_id ASC, joining_date ASC")
   render json: @faculties, methods: [:image_url]
   end
 end
