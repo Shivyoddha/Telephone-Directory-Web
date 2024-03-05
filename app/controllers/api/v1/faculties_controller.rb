@@ -20,7 +20,7 @@ class Api::V1::FacultiesController < ApplicationController
   def index
     @faculties = Faculty.all
 
-    @faculties = @faculties.where.not(department: { name: 'BackUp' }).order("custom_order ASC, designation_id ASC, joining_date ASC")
+    @faculties = @faculties.order("custom_order ASC, designation_id ASC, joining_date ASC")
     render json: @faculties, methods: [:image_url]
   end
 end
