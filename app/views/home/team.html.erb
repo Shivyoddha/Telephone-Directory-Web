@@ -38,23 +38,28 @@
   }
 
   .team .member span {
-  display: block;
-  font-size: 15px;
-  padding-bottom: 10px;
-  position: relative;
-  font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 15px;
+    padding-bottom: 10px;
+    position: relative;
+    font-weight: 500;
   }
-
+  
   .team .member span::after {
-  content: "";
-  position: absolute;
-  display: block;
-  width: 50px;
-  height: 2px;
-  background:#192f59;
-  bottom: 0;
-  left: 0;
+    content: "";
+    position: absolute;
+    display: block;
+    width: 50px;
+    height: 2px;
+    background: #192f59;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
   }
+  
 
   .team .member p {
   margin: 10px 0 0 0;
@@ -171,19 +176,17 @@ font-size: 100px;
           <div class="underline"></div>
         </div>
 
-        <div class="row">
-          <div class="col-lg-6 mx-auto mt-4">
-            <div class="member d-flex align-items-start">
+        <div class="row justify-content-center">
+            <div class="member d-flex justify-content-center">
               <%= image_tag('Director.jpg', class: 'teampic img-fluid', alt: 'faculty advisor' , style: "border-radius:0px;") %>
               <div class="member-info">
                 <h4>Prof. B Ravi </h4>
                 <span>Director NITK</span>
-                <div class="social align-items-center">
+                <div class="social justify-content-center">
                   <a href="https://github.com/Poorvab2525" class ="github-icon"><i class="fa-brands fa-square-github fa-2xl" style="color: #000000;"></i></a>
                   <a href="https://github.com/Poorvab2525" class ="github-icon"><i class="fa-brands fa-linkedin fa-2xl" style="color: #74C0FC;"></i></a>
                 </div>
               </div>
-            </div>
           </div>
         <br>
 
@@ -193,21 +196,19 @@ font-size: 100px;
           <div class="underline"></div>
         </div>
 
-        <div class="row">
-          <div class="col-lg-6 mx-auto mt-4">
-            <div class="member d-flex align-items-start">
+        <div class="row justify-content-center">
+            <div class="member d-flex justify-content-center">
               <%= image_tag('DrBRC.jpeg', class: 'teampic img-fluid', alt: 'faculty advisor') %>
               <div class="member-info">
                 <h4>Dr. B R Chandavarkar</h4>
                 <span>Associate Professor</span>
                 <span>Dept. of CSE</span>
-                <div class="social align-items-center">
+                <div class="social justify-content-center">
                   <a href="https://github.com/Poorvab2525" class ="github-icon"><i class="fa-brands fa-square-github fa-2xl" style="color: #000000;"></i></a>
                   <a href="https://github.com/Poorvab2525" class ="github-icon"><i class="fa-brands fa-linkedin fa-2xl" style="color: #74C0FC;"></i></a>
                 </div>
               </div>
             </div>
-          </div>
         <br>
           <!-- Staff -->
           <div class="section-title mt-5">
@@ -215,14 +216,14 @@ font-size: 100px;
             <div class="underline"></div>
           </div>
 
-          <div class="col-lg-6 mx-auto mt-4">
-            <div class="member d-flex align-items-start">
+          <div class="row justify-content-center">
+            <div class="member d-flex justify-content-center">
               <%= image_tag('dummy.webp', class: 'teampic img-fluid', alt: 'staff') %>
               <div class="member-info">
                 <h4>Mr. Santosh</h4>
                 <span>Technical Staff</span>
                 <span>Dept. of CSE</span>
-                <div class="social align-items-center">
+                <div class="social justify-content-center">
                  <a href="https://github.com/Poorvab2525" class ="github-icon"><i class="fa-brands fa-square-github fa-2xl" style="color: #000000;"></i></a>
                   <a href="https://github.com/Poorvab2525" class ="github-icon"><i class="fa-brands fa-linkedin fa-2xl" style="color: #74C0FC;"></i></a>
                 </div>
@@ -236,14 +237,14 @@ font-size: 100px;
             <div class="underline"></div>
           </div>
 
-          <div class="col-lg-6 mx-auto mt-4">
-            <div class="member d-flex align-items-start">
+          <div class="row justify-content-center">
+            <div class="member d-flex justify-content-between">
               <%= image_tag('Anish.jpg', class: 'teampic img-fluid', alt: 'Project Lead') %>
               <div class="member-info">
                 <h4>Anish Kumbhar</h4>
                 <span>B.Tech, 2025</span>
                 <span>Dept. of CSE</span>
-                <div class="social align-items-center">
+                <div class="social justify-content-center">
                   <a href="https://github.com/Shivyoddha" class ="github-icon"><i class="fa-brands fa-square-github fa-2xl" style="color: #000000;"></i></a>
                   <a href="https://www.linkedin.com/in/anish-kumbhar-465980223" class ="github-icon"><i class="fa-brands fa-linkedin fa-2xl" style="color: #74C0FC;"></i></a>
                 </div>
@@ -257,49 +258,46 @@ font-size: 100px;
             <div class="underline"></div>
           </div>
 
-          <div class="col-lg-6 mt-4">
-            <div class="member d-flex align-items-start">
+          <div class= "row justify-content-between">
+            <div class="member d-flex justify-content-around" style ="max-width:30% !important; max-height:90% !important;">
               <%= image_tag('Megha_final.jpg', id:"web-team", class: 'teampic img-fluid', alt: 'Web Team Image 1') %>
               <div class="member-info">
                 <h4>Megha Arya</h4>
                 <span>B.Tech, 2026</span>
                 <span>Dept. of CSE</span>
-                <div class="social align-items-center">
+                <div class="social justify-content-center">
                  <a href="https://github.com/mayghhaa" class ="github-icon"><i class="fa-brands fa-square-github fa-2xl" style="color: #000000;"></i></a>
                   <a href="https://www.linkedin.com/in/megha-arya-61576022b" class ="github-icon"><i class="fa-brands fa-linkedin fa-2xl" style="color: #74C0FC;"></i></a>
                 </div>
               </div>
-            </div>
           </div>
 
-          <div class="col-lg-6 mt-4">
-            <div class="member d-flex align-items-start">
+          
+            <div class="member d-flex justify-content-around" style ="max-width:30% !important;  max-height:90% !important;">
               <%= image_tag('Poorva_final.jpg', class: 'teampic img-fluid', alt: 'Web Team Image 2') %>
               <div class="member-info">
                 <h4>Bhagwat Poorva Milind</h4>
                 <span>B.Tech, 2026</span>
                 <span>Dept. of CSE</span>
-                <div class="social align-items-center">
+                <div class="social justify-content-center">
                   <a href="https://github.com/Poorvab2525" class ="github-icon"><i class="fa-brands fa-square-github fa-2xl" style="color: #000000;"></i></a>
                   <a href="https://www.linkedin.com/in/poorva-bhagwat" class ="github-icon"><i class="fa-brands fa-linkedin fa-2xl" style="color: #74C0FC;"></i></a>
                 </div>
               </div>
-            </div>
           </div>
 
-          <div class="col-lg-6 mt-4">
-            <div class="member d-flex align-items-start">
+          
+            <div class="member d-flex justify-content-around" style ="max-width:30% !important;  max-height:90% !important;">
               <%= image_tag('Reema_final.jpg', class: 'teampic img-fluid', alt: 'Web Team Image 3') %>
               <div class="member-info">
                 <h4>Reema Murthy</h4>
                 <span>B.Tech, 2026</span>
                 <span>Dept. of CSE</span>
-                <div class="social align-items-center">
+                <div class="social justify-content-center">
                   <a href="https://github.com/Poorvab2525" class ="github-icon"><i class="fa-brands fa-square-github fa-2xl" style="color: #000000;"></i></a>
                   <a href="https://github.com/Poorvab2525" class ="github-icon"><i class="fa-brands fa-linkedin fa-2xl" style="color: #74C0FC;"></i></a>
                 </div>
               </div>
-            </div>
           </div>
 
         </div>
@@ -310,45 +308,42 @@ font-size: 100px;
           <div class="underline"></div>
         </div>
 
-        <div class="row">
-          <div class="col-lg-6 mt-4">
-            <div class="member d-flex align-items-start">
+        <div class= "row justify-content-between">
+            <div class="member d-flex justify-content-around"  style ="max-width:30% !important;  max-height:90% !important;">
               <%= image_tag('Ansh.jpg', id:"app-team", class: 'teampic img-fluid', alt: 'App Team Image 1') %>
               <div class="member-info">
                 <h4>Ansh Malhotra</h4>
                 <span>B.Tech, 2026</span>
                 <span>Dept. of CSE</span>
-                <div class="social align-items-center">
+                <div class="social justify-content-center">
                   <a href="https://github.com/ANSHVIVEKMALHOTRA" class ="github-icon"><i class="fa-brands fa-square-github fa-2xl" style="color: #000000;"></i></a>
                   <a href="https://www.linkedin.com/in/ansh-vivek-malhotra-569776255/" class ="github-icon"><i class="fa-brands fa-linkedin fa-2xl" style="color: #74C0FC;"></i></a>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="col-lg-6 mt-4">
-            <div class="member d-flex align-items-start">
+          
+            <div class="member d-flex justify-content-around"  style ="max-width:30% !important;  max-height:90% !important;">
               <%= image_tag('Chirag.jpg', class: 'teampic img-fluid', alt: 'App Team Image 2') %>
               <div class="member-info">
                 <h4>Chirag S</h4>
                 <span>B.Tech, 2026</span>
                 <span>Dept. of CSE</span>
-                <div class="social align-items-center">
+                <div class="social justify-content-center">
                   <a href="https://github.com/Chiru2004" class ="github-icon"><i class="fa-brands fa-square-github fa-2xl" style="color: #000000;"></i></a>
                   <a href="https://www.linkedin.com/in/chirag-s-854a2b283/" class ="github-icon"><i class="fa-brands fa-linkedin fa-2xl" style="color: #74C0FC;"></i></a>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="col-lg-6 mt-4">
-            <div class="member d-flex align-items-start">
+          
+            <div class="member d-flex justify-content-around"  style ="max-width:30% !important;  max-height:90% !important;">
               <%= image_tag('Rishabh.jpg', class: 'teampic img-fluid', alt: 'App Team Image 3') %>
               <div class="member-info">
                 <h4>Rishabh Mahor</h4>
                 <span>B.Tech, 2026</span>
                 <span>Dept. of CSE</span>
-                <div class="social">
+                <div class="social justify-content-center">
                   <a href="https://github.com/Rishabh110204" class ="github-icon"><i class="fa-brands fa-square-github fa-2xl" style="color: #000000;"></i></a>
                   <a href="https://www.linkedin.com/in/rishabh-mahor" class ="github-icon"><i class="fa-brands fa-linkedin fa-2xl" style="color: #74C0FC;"></i></a>
                 </div>
@@ -360,279 +355,280 @@ font-size: 100px;
     </section>
   </div>
 
-
-<style>
-  body {
-    text-align: center;
-  }
-
-  table {
-    width: 80%; 
-    margin: 0 auto;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-
-  th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-  }
-
-  th {
-    background-color: #06692cf9;
-    color: #fff;
-  }
-</style>
-</head>
-<body>
-
-<table>
-  <h2>Administrators</h2>
-  <thead>
-    <tr>
-      <th>Unit</th>
-      <th>Department/Center/Section</th>
-      <th>Name of Faculty/Staff</th>
-      <th>Email ID</th>
-      
-      
-    </tr>
-  </thead>
-  <tbody>
-    <!-- Add your data rows here -->
-    <tr>
-      <td>Administration</td>
-      <td> Administration</td>
-      <td> Mr. Prateek</td>
-      <td>b1-assistant@nitk.edu.in</td>
-      
-      
-    </tr>
-    <tr>
-      
-      <td rowspan="15">Academics</td>
-      <td> Dept. of Chemical Engineering</td>
-      <td> Mr. M. Rajasekkaran</td>
-      <td>rajasekaran@nitk.edu.in</td>
-      
-      
-    </tr>
-    <tr>
-      
-      
-      <td> Dept. of Chemistry</td>
-      <td> Mr. Pradeep Crasta</td>
-      <td> pradeepcrasta@gmail.com</td>
-    
-      
-    </tr>
-    <tr>
-      
-     
-      <td> Dept. of Civil Engineering</td>
-      <td> Dr. Vijay </td>
-      <td>vj@nitk.edu.in </td>
-      
-      
-    </tr>
-    <tr>
-     
-    
-      <td> Dept. of Computer Science and Engineering</td>
-      <td> Mr. Pradeep D.</td>
-      <td>  pradeepd@nitk.edu.in</td>
-      
-    </tr>
-
-      <tr>
-      
-      <td> Dept. of  Electrical and Electronics Engineering</td>
-      <td> Ms. Sunitha </td>
-      <td>  programmereed@nitk.edu.in</td>
-     
-      
-    </tr>
-    
-    
-    <tr>
-    
-      <td> Dept. of  Electronics and Communication Engineering</td>
-      <td> Dr. Shikha Baghel </td>
-      <td> shikhabaghel@nitk.edu.in</td>
-     
-      
-    </tr>
-
-      <tr>
-    
-      <td> Dept. of Information Technology</td>
-      <td> Mr. Abey Eliyas</td>
-      <td>abey@nitk.edu.in </td>
-    
-    
-    </tr>
-
-    <tr>
-      
-      <td> Dept. of  Mathematical and Computational Sciences</td>
-      <td>Dr. Vidyadhan Upadhya </td>
-      <td>vidyadhar.upadhya@nitk.edu.in </td>
-      
-    </tr>
-
-    <tr>
-      
-     
-      <td rowspan="2">Dept. of Mechanical Engineering</td>
-      <td> Dr. Mervin Joe Thomas</td>
-      <td> mervinthomas@nitk.edu.in</td>
-      
-    </tr>
-
-    <tr>
-      
-      
-     
-      <td>  Mr. Karunya G.</td>
-      <td> karunya313@gmail.com </td>
-      
-    </tr>
-
-    <tr>
-      
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      text-align: center;
+    }
   
-      <td> Dept. of Metallurgical and Materials Engineering</td>
-      <td> Dr. Lipak Kumar</td>
-      <td>  lipak@nitk.edu.in </td>
-      
-    </tr>
-
-    <tr>
-      
-   
-      <td> Dept. of  Mining  Engineering</td>
-      <td> Mr.Shreyas</td>
-      <td>  jainshreyas911@gmail.com </td>
-     
-    </tr>
-
-    <tr>
-      
-     
-      <td> Dept. of Physics</td>
-      <td> Mr. Anand Das</td>
-      <td>  ananddastk@gmail.com </td>
-      
-    </tr>
-
-    
-    <tr>
-      
-     
-      <td> Dept. of Water Resources & Ocean Engg</td>
-      <td> Ms.Sweekritha</td>
-      <td>  sweekrithab@gmail.com  </td>
-     
-    </tr>
-
-    <tr>
-      
-     
-      <td> School of Humanities and Social Sciences</td>
-      <td>  Dr. Savita Bhat</td>
-      <td>   savitapbhat@nitk.edu.in </td>
-     
-    </tr>
-
-    <tr>
-      
-      <td rowspan="2">Research</td>
-      <td rowspan="2">Central Research Facility</td>
-      <td>  Mr. Nishanth Kumar</td>
-      <td>   office.crf@nitk.edu.in </td>
-</tr>
-<tr> 
-
-      
-      <td>   Mr. Kiran</td>
-      <td>   kirankumar123639@gmail.com </td>
-     
-    </tr>
- 
-
-    <tr>
-      
-        <td rowspan="6">Facilities</td>
-        <td>Central Computer Centre </td>
-        <td>Mr. Subhas</td>
-        <td> subhash@nitk.edu.in   </td>
+    table {
+      width: 80%; 
+      margin: 0 auto;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+  
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+  
+    th {
+      background-color: #06692cf9;
+      color: #fff;
+    }
+  </style>
+  </head>
+  <body>
+  
+  <table>
+    <h2>Administrators</h2>
+    <thead>
+      <tr>
+        <th>Unit</th>
+        <th>Department/Center/Section</th>
+        <th>Name of Faculty/Staff</th>
+        <th>Email ID</th>
+        
         
       </tr>
-
+    </thead>
+    <tbody>
+      <!-- Add your data rows here -->
       <tr>
+        <td>Administration</td>
+        <td> Administration</td>
+        <td> Mr. Prateek</td>
+        <td>b1-assistant@nitk.edu.in</td>
         
-   
-        <td>  Guest House </td>
-        <td>Mr. Karunakar </td>
-        <td> shyamfec@nitk.edu.in </td>
         
       </tr>
-
       <tr>
         
-     
-        <td>  Healthcare Centre </td>
-        <td>Mrs. Ashwitha </td>
-        <td> ashup24surath@gmail.com</td>
+        <td rowspan="15">Academics</td>
+        <td> Dept. of Chemical Engineering</td>
+        <td> Mr. M. Rajasekkaran</td>
+        <td>rajasekaran@nitk.edu.in</td>
+        
+        
+      </tr>
+      <tr>
+        
+        
+        <td> Dept. of Chemistry</td>
+        <td> Mr. Pradeep Crasta</td>
+        <td> pradeepcrasta@gmail.com</td>
+      
+        
+      </tr>
+      <tr>
+        
        
-      </tr>
-
-      <tr>
+        <td> Dept. of Civil Engineering</td>
+        <td> Dr. Vijay </td>
+        <td>vj@nitk.edu.in </td>
         
-   
-        <td>  Library</td>
-        <td>Dr. Mallikarjun A. </td>
-        <td>  mallikarjun@nitk.edu.in</td>
         
       </tr>
-
       <tr>
-        
-
-        <td>  Resident Engineer</td>
-        <td>Mr. Shamith </td>
-        <td>  shamithsuvarna123@gmail.com</td>
        
-      </tr>
-
-      <tr>
-        
-        
-        <td>   Security</td>
-        <td> Sri. Ramprasad Bhat</td>
-        <td>  security@nitk.edu.in</td>
+      
+        <td> Dept. of Computer Science and Engineering</td>
+        <td> Mr. Pradeep D.</td>
+        <td>  pradeepd@nitk.edu.in</td>
         
       </tr>
-
+  
+        <tr>
+        
+        <td> Dept. of  Electrical and Electronics Engineering</td>
+        <td> Ms. Sunitha </td>
+        <td>  programmereed@nitk.edu.in</td>
+       
+        
+      </tr>
+      
+      
       <tr>
-        <td rowspan="9">Students' Life</td>
-        <td>Hostels</td>
-        <td>Mr. Deviprasad </td>
-        <td>  hosteloffice@nitk.edu.in</td>
+      
+        <td> Dept. of  Electronics and Communication Engineering</td>
+        <td> Dr. Shikha Baghel </td>
+        <td> shikhabaghel@nitk.edu.in</td>
+       
+        
+      </tr>
+  
+        <tr>
+      
+        <td> Dept. of Information Technology</td>
+        <td> Mr. Abey Eliyas</td>
+        <td>abey@nitk.edu.in </td>
+      
+      
+      </tr>
+  
+      <tr>
+        
+        <td> Dept. of  Mathematical and Computational Sciences</td>
+        <td>Dr. Vidyadhan Upadhya </td>
+        <td>vidyadhar.upadhya@nitk.edu.in </td>
         
       </tr>
   
       <tr>
         
        
-        <td> Sports</td>
-        <td>   Dr. Hem Prasad Nath</td>
-        <td>  dr.nath@nitk.edu.in</td>
+        <td rowspan="2">Dept. of Mechanical Engineering</td>
+        <td> Dr. Mervin Joe Thomas</td>
+        <td> mervinthomas@nitk.edu.in</td>
         
       </tr>
-    </tbody>
-  </table>
+  
+      <tr>
+        
+        
+       
+        <td>  Mr. Karunya G.</td>
+        <td> karunya313@gmail.com </td>
+        
+      </tr>
+  
+      <tr>
+        
     
+        <td> Dept. of Metallurgical and Materials Engineering</td>
+        <td> Dr. Lipak Kumar</td>
+        <td>  lipak@nitk.edu.in </td>
+        
+      </tr>
+  
+      <tr>
+        
+     
+        <td> Dept. of  Mining  Engineering</td>
+        <td> Mr.Shreyas</td>
+        <td>  jainshreyas911@gmail.com </td>
+       
+      </tr>
+  
+      <tr>
+        
+       
+        <td> Dept. of Physics</td>
+        <td> Mr. Anand Das</td>
+        <td>  ananddastk@gmail.com </td>
+        
+      </tr>
+  
+      
+      <tr>
+        
+       
+        <td> Dept. of Water Resources & Ocean Engg</td>
+        <td> Ms.Sweekritha</td>
+        <td>  sweekrithab@gmail.com  </td>
+       
+      </tr>
+  
+      <tr>
+        
+       
+        <td> School of Humanities and Social Sciences</td>
+        <td>  Dr. Savita Bhat</td>
+        <td>   savitapbhat@nitk.edu.in </td>
+       
+      </tr>
+  
+      <tr>
+        
+        <td rowspan="2">Research</td>
+        <td rowspan="2">Central Research Facility</td>
+        <td>  Mr. Nishanth Kumar</td>
+        <td>   office.crf@nitk.edu.in </td>
+  </tr>
+  <tr> 
+  
+        
+        <td>   Mr. Kiran</td>
+        <td>   kirankumar123639@gmail.com </td>
+       
+      </tr>
+   
+  
+      <tr>
+        
+          <td rowspan="6">Facilities</td>
+          <td>Central Computer Centre </td>
+          <td>Mr. Subhas</td>
+          <td> subhash@nitk.edu.in   </td>
+          
+        </tr>
+  
+        <tr>
+          
+     
+          <td>  Guest House </td>
+          <td>Mr. Karunakar </td>
+          <td> shyamfec@nitk.edu.in </td>
+          
+        </tr>
+  
+        <tr>
+          
+       
+          <td>  Healthcare Centre </td>
+          <td>Mrs. Ashwitha </td>
+          <td> ashup24surath@gmail.com</td>
+         
+        </tr>
+  
+        <tr>
+          
+     
+          <td>  Library</td>
+          <td>Dr. Mallikarjun A. </td>
+          <td>  mallikarjun@nitk.edu.in</td>
+          
+        </tr>
+  
+        <tr>
+          
+  
+          <td>  Resident Engineer</td>
+          <td>Mr. Shamith </td>
+          <td>  shamithsuvarna123@gmail.com</td>
+         
+        </tr>
+  
+        <tr>
+          
+          
+          <td>   Security</td>
+          <td> Sri. Ramprasad Bhat</td>
+          <td>  security@nitk.edu.in</td>
+          
+        </tr>
+  
+        <tr>
+          <td rowspan="9">Students' Life</td>
+          <td>Hostels</td>
+          <td>Mr. Deviprasad </td>
+          <td>  hosteloffice@nitk.edu.in</td>
+          
+        </tr>
+    
+        <tr>
+          
+         
+          <td> Sports</td>
+          <td>   Dr. Hem Prasad Nath</td>
+          <td>  dr.nath@nitk.edu.in</td>
+          
+        </tr>
 
 <%= render 'faculties/footer' %>
