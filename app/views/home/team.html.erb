@@ -132,6 +132,13 @@ text-align: center;
 line-height: 40px;
 font-weight: bold;
 }
+ 
+.overlay {
+  display: flex;
+  flex-direction: row;
+  right: 0 !important;
+  justify-content: flex-end;
+}
 
 @media (max-width: 767px) {
 /* Adjust for smaller screens if needed */
@@ -161,6 +168,15 @@ font-size: 100px;
             </a>
           </li>
         </header>
+      </div>
+    </div>
+
+    <div class="overlay">
+      <div class="overlay-home">
+        <%= link_to 'Home', 'http://telephone.nitk.ac.in', class: "nav-link px-2 text-body-secondary" %>
+      </div>
+      <div class="overlay-contact">
+        <%= link_to 'Contact Us', home_team_path, class: "nav-link px-2 text-body-secondary" %>
       </div>
     </div>
 
@@ -387,7 +403,7 @@ font-size: 100px;
   <body>
   
   <table>
-    <h2>Administrators</h2>
+    <h2>Department/Center/Section/Administrator</h2>
     <thead>
       <tr>
         <th>Unit</th>
