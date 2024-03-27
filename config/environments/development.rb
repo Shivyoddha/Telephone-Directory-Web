@@ -14,7 +14,7 @@ Rails.application.configure do
   # Show full error reports.
   config.consider_all_requests_local = true
   config.hosts << "telephone.nitk.ac.in"
-  config.action_mailer.default_url_options = { host: 'telephone.nitk.ac.in', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'telephone.nitk.ac.in', port: 443 }
   # Enable server timing
   config.server_timing = true
 
