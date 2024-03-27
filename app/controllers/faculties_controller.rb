@@ -26,7 +26,7 @@ class FacultiesController < ApplicationController
     @faculties = Faculty.includes(:department).where.not(departments: { name: 'Backup' }).order("departments.custom_order ASC, faculties.designation_id ASC, faculties.joining_date ASC, faculties.name ASC")
     @faculties_by_department = @faculties.group_by { |faculty| faculty.department.name }
     if @user.super_admin?
-      @departments = Department.order(:custom_order, :name)
+      @departments = Department.where.not(name: 'Backup').order(:custom_order, :name)
     else
       @departments = Department.where(id: @user.department_ids).order(:custom_order, :name)
     end
