@@ -21,27 +21,30 @@ class FacultiesController < ApplicationController
   def show
   end
 
-  def print
-    @user = User.find(params[:user_id])
-    @faculties = Faculty.includes(:department).where.not(departments: { name: 'Backup' }).order("departments.custom_order ASC, faculties.designation_id ASC, faculties.joining_date ASC, faculties.name ASC")
-    @faculties_by_department = @faculties.group_by { |faculty| faculty.department.name }
-    if @user.super_admin?
-      @departments = Department.where.not(name: 'Backup').order(:custom_order, :name)
-    else
-      @departments = Department.where(id: @user.department_ids).order(:custom_order, :name)
-    end
-    respond_to do |format|
-      format.html
-      format.pdf do
-        render pdf: 'Telephone Directory Data',
-               template: 'faculties/alldata',
-               layout: 'layouts/pdf',
-               disposition: 'inline',
-               margin: { top: 0, bottom: 0, left: 0, right: 0 },
-               locals: { faculties: @faculties, user: @user }
-      end
+def print
+  @user = User.find(params[:user_id])
+  if @user.super_admin?
+    @departments = Department.where.not(name: 'Backup').order(:custom_order, :name)
+  else
+    @departments = Department.where(id: @user.department_ids).where.not(name: 'Backup').order(:custom_order, :name)
+  end
+
+  @faculties = Faculty.includes(:department).where(department_id: @departments.pluck(:id))
+                             .order("departments.custom_order ASC, faculties.designation_id ASC, faculties.joining_date ASC, faculties.name ASC")
+  @faculties_by_department = @faculties.group_by { |faculty| faculty.department.name }
+
+  respond_to do |format|
+    format.html
+    format.pdf do
+      render pdf: 'Telephone Directory Data',
+             template: 'faculties/alldata',
+             layout: 'layouts/pdf',
+             disposition: 'inline',
+             margin: { top: 0, bottom: 0, left: 0, right: 0 },
+             locals: { faculties: @faculties, user: @user }
     end
   end
+end
 
   def new
     @faculty = Faculty.new
