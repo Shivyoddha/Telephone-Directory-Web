@@ -30,7 +30,7 @@ def print
   end
 
   @faculties = Faculty.includes(:department).where(department_id: @departments.pluck(:id))
-                             .order("departments.custom_order ASC, faculties.custom_order ASC, faculties.designation_id ASC, faculties.joining_date ASC, faculties.name ASC")
+                             .order("faculties.custom_order ASC, faculties.designation_id ASC, faculties.joining_date ASC, faculties.name ASC")
   @faculties_by_department = @faculties.group_by { |faculty| faculty.department.name }
 
   respond_to do |format|
