@@ -144,7 +144,7 @@ font-family: 'Poppins', sans-serif;
           </thead>
           <tbody>
             <% @departments.each do |department| %>
-              <% faculties_for_department = department.faculties.order("departments.custom_order ASC, faculties.designation_id ASC, faculties.joining_date ASC, faculties.name ASC") %>
+              <% faculties_for_department = department.faculties.order("faculties.custom_order ASC,faculties.designation_id ASC, faculties.joining_date ASC, faculties.name ASC") %>
               <% if faculties_for_department.present? %>
                 <tr class="page-break">
                   <td colspan="5" class="department-heading" style="text-align:center;">
