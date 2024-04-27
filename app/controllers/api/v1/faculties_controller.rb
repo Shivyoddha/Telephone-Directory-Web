@@ -2,7 +2,7 @@ class Api::V1::FacultiesController < ApplicationController
   def index
     @faculties = Faculty.includes(:department, :designation)
                          .where.not(departments: { name: 'Backup' })
-                         .order("departments.custom_order ASC, faculties.custom_order ASC, designation.name ASC, faculties.joining_date ASC, faculties.name ASC")
+                         .order("departments.custom_order ASC, faculties.custom_order ASC, designation.title ASC, faculties.joining_date ASC, faculties.name ASC")
 
     render json: @faculties, methods: [:image_url]
   end
