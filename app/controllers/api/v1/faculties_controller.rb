@@ -6,7 +6,7 @@ class Api::V1::FacultiesController < ApplicationController
 
     sorted_faculties = faculties.sort_by do |faculty|
       [
-        faculty.department.custom_order,
+        [faculty.department.custom_order, faculty.department.id],
         faculty.custom_order,
         faculty.designation_id,
         faculty.joining_date,
