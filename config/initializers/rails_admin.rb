@@ -10,6 +10,44 @@ RailsAdmin.config do |config|
   ## CancanCan
   config.authorize_with :cancancan
 
+  config.model Faculty do
+    edit do
+      field :name
+      field :landline_office_intercom
+      field :custom_order
+      field :department
+      field :designation
+      field :sub_directory
+      field :position1
+      field :position2
+      field :profile, :active_storage do
+        delete_method :delete_profile  # Specify the delete method for profile
+      end
+    end
+
+    show do
+      field :name
+      field :landline_office_intercom
+      field :custom_order
+      field :department
+      field :designation
+      field :sub_directory
+      field :position1
+      field :position2
+      field :profile do
+        formatted_value do
+          if bindings[:object].profile.attached?
+            url_helpers = Rails.application.routes.url_helpers
+            path = url_helpers.rails_blob_path(bindings[:object].profile, only_path: true)
+            bindings[:view].link_to bindings[:object].profile.filename, path
+          else
+            "No attached file"
+          end
+        end
+      end
+    end
+  end
+
   config.model 'User' do
     edit do
       configure :super_admin do

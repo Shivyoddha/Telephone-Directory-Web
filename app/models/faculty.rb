@@ -13,7 +13,15 @@ class Faculty < ApplicationRecord
   validates :landline_office_intercom, presence: true
   validates :custom_order, presence: true, numericality: { only_integer: true }
 
-  has_one_attached :profile, dependent: :destroy
+  has_one_attached :profile
+
+  def delete_profile=(value)
+    profile.purge if value == '1'
+  end
+
+  def delete_profile
+    false
+  end
 
 
   def image_url
