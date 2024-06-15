@@ -19,6 +19,10 @@ class FacultiesController < ApplicationController
   end
 
   def show
+    @faculty = Faculty.find(params[:id])
+    respond_to do |format|
+      format.html { render partial: 'faculty_details', locals: { faculty: @faculty } }
+    end
   end
 
 def print

@@ -121,152 +121,9 @@
               <td style="width:3%;" class="unselectable"> <%= faculty.landline_office_intercom %> </td>
               <td style="width:2%; text-align: center;">
                 <!-- Button to trigger Bootstrap modal -->
-                <button type="button" class="btn details-btn" data-bs-toggle="modal" data-bs-target="#facultyModal<%= faculty.id %>">
+                <button type="button" class="btn details-btn" data-bs-toggle="modal" data-bs-target="#facultyModal" data-id="<%= faculty.id %>">
                   Click here
                 </button>
-
-
-
-
-
-            <div class="modal fade" id="facultyModal<%= faculty.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Details</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <div class="container">
-                      <div class="row">
-                        <div class="col-md-6">
-                          <!-- Left column with image -->
-                          <dl class="row modal-row">
-                          <% if faculty.name != nil %>
-                            <div class=row-item>
-                            <dt class="col-sm-6 text-start ">Name</dt>
-                            <dd class="col-sm-6 text-start"><%= faculty.name %></dd>
-                          </div>
-                          <% end %>
-<% @depart = Department.find(faculty.department_id)%>
-<% @unitty = Unit.find(@depart.unit_id) %>
-<% if @unitty.title == 'Administration' && (@depart.name == 'Chairperson' || @depart.name == 'Director' || @depart.name == 'Registrar') %>
-                          <div class=row-item>
-                            <dt class="col-sm-6 text-start ">Designation</dt>
-                            <dd class="col-sm-6 text-start col2"><%= faculty.designation.title %></dd>
-                          </div>
-<% elsif @unitty.title == 'Administration' %>
-                        <% if faculty.designation.title != nil && faculty.designation.title != '-' && faculty.designation.title != '-NA-' && faculty.department.name != nil %>
-                          <div class=row-item>
-                            <dt class="col-sm-6 text-start ">Designation</dt>
-                            <dd class="col-sm-6 text-start col2"><%= faculty.department.name %> (<%= faculty.designation.title %>) </dd>
-                          </div>
-                        <% end %>
-<% else %>
-                        <% if faculty.department.name != nil %>
-                          <div class=row-item>
-                            <dt class="col-sm-6 text-start ">Section</dt>
-                            <dd class="col-sm-6 text-start "><%= faculty.department.name %></dd>
-                          </div>
-                        <% end %>
-                        <% if faculty.designation.title != nil && faculty.designation.title != '-' && faculty.designation.title != '-NA-' %>
-                          <div class=row-item>
-                              <% if faculty.designation.title == 'Other' %>
-                            <dt class="col-sm-6 text-start ">Title</dt>
-                              <% else %>
-                            <dt class="col-sm-6 text-start ">Designation</dt>
-                              <% end %>
-                            <dd class="col-sm-6 text-start col2"><%= faculty.designation.title %></dd>
-                          </div>
-                        <% end %>
-<% end %>
-                        <% if faculty.position1&.title != nil %>
-                          <div class="row-item">
-                            <dt class="col-sm-6 text-start">Additional Charge</dt>
-                            <dd class="col-sm-6 text-start">
-                              <%= faculty.position1&.title || '-' %><%= faculty.position1&.title && faculty.position2&.title ? ', ' : '' %><%= faculty.position2&.title || '' %>
-                            </dd>
-                          </div>
-                        <% end %>
-                        <% if faculty.landline_office_intercom %>
-                            <div class=row-item>
-                            <dt class="col-sm-6 text-start">Landline (Off.)</dt>
-                            <dd class="col-sm-6 text-start unselectable"><%= faculty.landline_office_intercom || '-' %></dd>
-                          </div>
-                        <% end %>
-                        <% if faculty.landline_residential != nil %>
-                            <div class=row-item>
-                            <dt class="col-sm-6 text-start">Landline (Res.)</dt>
-                            <dd class="col-sm-6 text-start unselectable"><%= faculty.landline_residential || '-' %></dd>
-                          </div>
-                        <% end %>
-                        <% if faculty.mobile1 != nil %>
-                          <div class="row-item">
-                            <dt class="col-sm-6 text-start">Mobile</dt>
-                            <dd class="col-sm-6 text-start unselectable">
-                            <% if faculty.mobile1.present? %>
-                                  0<%= faculty.mobile1 %><%= faculty.mobile2.present? ? ', ' : '' %>
-                             <% end %>
-                            <% if faculty.mobile2.present? %>
-                                  0<%= faculty.mobile2 %>
-                            <% end %>
-                            </dd>
-                          </div>
-                        <% end %>
-                        <% if faculty.email %>
-                            <div class=row-item>
-                            <dt class="col-sm-6 text-start">Email</dt>
-                            <dd class="col-sm-6 text-start unselectable"><%= faculty.email || '-' %></dd>
-                          </div>
-                        <% end %>
-                        <% if faculty.site_name != nil %>
-                            <div class=row-item>
-                            <dt class="col-sm-6 text-start">Personal Webpage</dt>
-                            <dd class="col-sm-6 text-start overflow-visible">
-                              <% if faculty.site_name.present? %>
-                              <a href="<%= faculty.site_name %>" target="_blank">Click Here</a>
-                              <% else %>-
-                              <% end %>
-                            </dd>
-                          </div>
-                        <% end %>
-                        <% if faculty.designation.title == 'Professor' || faculty.designation.title == 'Associate Professor' || faculty.designation.title == 'Assistant Professor' || faculty.designation.title == 'Professor & HOD' || faculty.designation.title == 'Professor (Higher Administrative Grade)' %>
-                          <div class=row-item>
-                          <dt class="col-sm-6 text-start">Date of joining</dt>
-                          <dd class="col-sm-6 text-start"><%= faculty.joining_date ? faculty.joining_date.strftime('%d-%m-%Y') : '-' %></dd>
-                        </div>
-                        <% elsif faculty.joining_date != nil %>
-                          <div class=row-item>
-                          <dt class="col-sm-6 text-start">Date of joining</dt>
-                          <dd class="col-sm-6 text-start"><%= faculty.joining_date ? faculty.joining_date.strftime('%d-%m-%Y') : '-' %></dd>
-                        </div>
-                        <% end %>
-                        <% if faculty.updated_at != nil %>
-                            <div class=row-item>
-                            <dt class="col-sm-6 text-start">Last Updated</dt>
-                            <dd class="col-sm-6 text-start"><%= faculty.updated_at.strftime('%d-%m-%Y %I:%M %p') %></dd>
-                          </div>
-                          </dl>
-                        </div>
-                        <% end %>
-                        <div class="col-md-6 d-flex align-items-center justify-content-center">
-                          <!-- Right column with details -->
-                          <% if faculty.profile.present? %>
-                           <%= image_tag faculty.profile, class: "img-fluid", style:"max-width: 80%; height: auto;" %>
-                          <% else %>
-                            <%= image_tag 'user.png', style: "max-width: 60%; max-height: 60%;"  %>
-                          <% end %>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <!-- Close button for the modal -->
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
-            </div>
               </td>
             </tr>
           <% end %>
@@ -275,3 +132,49 @@
     </tbody>
   </table>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="facultyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row" id="faculty-details">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <!-- Close button for the modal -->
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  $('#facultyModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var facultyId = button.data('id');
+
+    var modal = $(this);
+    $.ajax({
+      url: '/faculties/' + facultyId,
+      method: 'GET',
+      success: function(data) {
+        modal.find('#faculty-details').html(data);
+      },
+      error: function() {
+        modal.find('#faculty-details').html('<p>Error loading faculty details</p>');
+      }
+    });
+  });
+});
+</script>

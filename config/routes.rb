@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :faculties do
     get 'print', on: :collection
     get 'filter_and_print', on: :collection
+    get 'faculties/:id', to: 'faculties#show', as: 'faculty'
   end
 
   # root "faculties#index"

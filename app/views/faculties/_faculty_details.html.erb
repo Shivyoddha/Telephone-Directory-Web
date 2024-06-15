@@ -1,0 +1,116 @@
+
+
+            <div class="col-md-6">
+              <!-- Left column with details -->
+              <dl class="row modal-row">
+                <% if faculty.name.present? %>
+                  <div class="row-item">
+                    <dt class="col-sm-6 text-start">Name</dt>
+                    <dd class="col-sm-6 text-start"><%= faculty.name %></dd>
+                  </div>
+                <% end %>
+
+                <% @depart = Department.find(faculty.department_id) %>
+                <% @unitty = Unit.find(@depart.unit_id) %>
+
+                <% if @unitty.title == 'Administration' && ['Chairperson', 'Director', 'Registrar'].include?(@depart.name) %>
+                  <div class="row-item">
+                    <dt class="col-sm-6 text-start">Designation</dt>
+                    <dd class="col-sm-6 text-start col2"><%= faculty.designation.title %></dd>
+                  </div>
+                <% elsif @unitty.title == 'Administration' %>
+                  <% if faculty.designation.title.present? && !['-', '-NA-'].include?(faculty.designation.title) && faculty.department.name.present? %>
+                    <div class="row-item">
+                      <dt class="col-sm-6 text-start">Designation</dt>
+                      <dd class="col-sm-6 text-start col2"><%= faculty.department.name %> (<%= faculty.designation.title %>)</dd>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <% if faculty.department.name.present? %>
+                    <div class="row-item">
+                      <dt class="col-sm-6 text-start">Section</dt>
+                      <dd class="col-sm-6 text-start"><%= faculty.department.name %></dd>
+                    </div>
+                  <% end %>
+                  <% if faculty.designation.title.present? && !['-', '-NA-'].include?(faculty.designation.title) %>
+                    <div class="row-item">
+                      <% if faculty.designation.title == 'Other' %>
+                        <dt class="col-sm-6 text-start">Title</dt>
+                      <% else %>
+                        <dt class="col-sm-6 text-start">Designation</dt>
+                      <% end %>
+                      <dd class="col-sm-6 text-start col2"><%= faculty.designation.title %></dd>
+                    </div>
+                  <% end %>
+                <% end %>
+
+                <% if faculty.position1&.title.present? %>
+                  <div class="row-item">
+                    <dt class="col-sm-6 text-start">Additional Charge</dt>
+                    <dd class="col-sm-6 text-start"><%= faculty.position1.title %><%= faculty.position2&.title.present? ? ', ' + faculty.position2.title : '' %></dd>
+                  </div>
+                <% end %>
+
+                <% if faculty.landline_office_intercom.present? %>
+                  <div class="row-item">
+                    <dt class="col-sm-6 text-start">Landline (Off.)</dt>
+                    <dd class="col-sm-6 text-start unselectable"><%= faculty.landline_office_intercom %></dd>
+                  </div>
+                <% end %>
+
+                <% if faculty.landline_residential.present? %>
+                  <div class="row-item">
+                    <dt class="col-sm-6 text-start">Landline (Res.)</dt>
+                    <dd class="col-sm-6 text-start unselectable"><%= faculty.landline_residential %></dd>
+                  </div>
+                <% end %>
+
+                <% if faculty.mobile1.present? %>
+                  <div class="row-item">
+                    <dt class="col-sm-6 text-start">Mobile</dt>
+                    <dd class="col-sm-6 text-start unselectable">
+                      0<%= faculty.mobile1 %><%= faculty.mobile2.present? ? ', 0' + faculty.mobile2 : '' %>
+                    </dd>
+                  </div>
+                <% end %>
+
+                <% if faculty.email.present? %>
+                  <div class="row-item">
+                    <dt class="col-sm-6 text-start">Email</dt>
+                    <dd class="col-sm-6 text-start unselectable"><%= faculty.email %></dd>
+                  </div>
+                <% end %>
+
+                <% if faculty.site_name.present? %>
+                  <div class="row-item">
+                    <dt class="col-sm-6 text-start">Personal Webpage</dt>
+                    <dd class="col-sm-6 text-start overflow-visible">
+                      <a href="<%= faculty.site_name %>" target="_blank">Click Here</a>
+                    </dd>
+                  </div>
+                <% end %>
+
+                <% if ['Professor', 'Associate Professor', 'Assistant Professor', 'Professor & HOD', 'Professor (Higher Administrative Grade)'].include?(faculty.designation.title) || faculty.joining_date.present? %>
+                  <div class="row-item">
+                    <dt class="col-sm-6 text-start">Date of joining</dt>
+                    <dd class="col-sm-6 text-start"><%= faculty.joining_date.strftime('%d-%m-%Y') %></dd>
+                  </div>
+                <% end %>
+
+                <% if faculty.updated_at.present? %>
+                  <div class="row-item">
+                    <dt class="col-sm-6 text-start">Last Updated</dt>
+                    <dd class="col-sm-6 text-start"><%= faculty.updated_at.strftime('%d-%m-%Y %I:%M %p') %></dd>
+                  </div>
+                <% end %>
+              </dl>
+            </div>
+
+            <div class="col-md-6 d-flex align-items-center justify-content-center">
+              <!-- Right column with image -->
+              <% if faculty.profile.present? %>
+                <%= image_tag faculty.profile, class: "img-fluid", style:"max-width: 80%; height: auto;" %>
+              <% else %>
+                <%= image_tag 'user.png', style: "max-width: 60%; max-height: 60%;" %>
+              <% end %>
+            </div>
