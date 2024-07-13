@@ -20,7 +20,7 @@ RailsAdmin.config do |config|
       field :department
       field :mobile1
       field :mobile2
-      field :landline_office_residential
+      field :landline_residential
       field :landline_office_intercom
       field :designation
       field :position1
