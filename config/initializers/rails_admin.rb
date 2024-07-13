@@ -18,6 +18,7 @@ RailsAdmin.config do |config|
       field :department
       field :designation
       field :sub_directory
+      field :joining_date
       field :position1
       field :position2
       field :profile, :active_storage do
