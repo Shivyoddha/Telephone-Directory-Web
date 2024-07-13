@@ -13,14 +13,19 @@ RailsAdmin.config do |config|
   config.model Faculty do
     edit do
       field :name
-      field :landline_office_intercom
-      field :custom_order
-      field :department
-      field :designation
-      field :sub_directory
+      field :email
+      field :site_name
       field :joining_date
+      field :department
+      field :mobile1
+      field :mobile2
+      field :landline_office_residential
+      field :landline_office_intercom
+      field :designation
       field :position1
       field :position2
+      field :sub_directory
+      field :custom_order
       field :profile, :active_storage do
         delete_method :delete_profile  # Specify the delete method for profile
       end
