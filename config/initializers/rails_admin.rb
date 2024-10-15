@@ -1,5 +1,6 @@
 RailsAdmin.config do |config|
   config.asset_source = :sprockets
+  config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
 
   ## Devise
   config.authenticate_with do

@@ -15,19 +15,23 @@ gem "sqlite3", "~> 1.4"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
-gem 'wicked_pdf'
+gem "wicked_pdf"
 
-gem 'wkhtmltopdf-binary'
+gem "paper_trail"
 
-gem 'rails_admin', '~> 3.0'
+gem "paper_trail-association_tracking"
 
-gem 'jquery-rails'
+gem "wkhtmltopdf-binary"
 
-gem 'cancancan'
+gem "rails_admin", "~> 3.0"
 
-gem 'roo'
+gem "jquery-rails"
 
-gem 'filterrific'
+gem "cancancan"
+
+gem "roo"
+
+gem "filterrific"
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem "jsbundling-rails"
@@ -85,7 +89,6 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
-
 end
 
 gem "devise", "~> 4.9"

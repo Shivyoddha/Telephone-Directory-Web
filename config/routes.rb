@@ -7,8 +7,10 @@ Rails.application.routes.draw do
 
 
   namespace :admin do
-    resources :imports, only: [:new, :create]
+    resources :imports
   end
+
+  get 'utility/history'
 
   resources :faculties do
     get 'print', on: :collection

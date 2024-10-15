@@ -11,6 +11,7 @@ class Ability
       can :manage, :all
     elsif user.admin?
       can :access, :rails_admin
+      can :access, UtilityController
       can :read, :dashboard
       can :manage, User, id: user.id
       can :read, Department, id: user.department_ids
@@ -21,5 +22,12 @@ class Ability
       cannot :create, Department
       cannot :destroy, Department
     end
+
+    if user.super_admin?
+      can :access, UtilityController
+    else
+      cannot :access, UtilityController
+    end
+
   end
 end
