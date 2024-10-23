@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Logs</title>
+    <style media="screen">
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f4f4f4;
+      }
+      .department-heading {
+        background-color: #f8f9fa;
+        border: 1px solid #d1d1d1;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        text-align: center;
+      }
+      .department-title {
+        font-size: 20px;
+        background-color: #198754;
+        color: #fff;
+        padding: 6px;
+        border-radius: 5px;
+      }
+      .table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        margin-bottom: 40px;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        border-radius: 5px;
+        overflow: hidden;
+      }
+      .table th, .table td {
+        text-align: left;
+        padding: 12px 15px;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .table th {
+        background-color: #192f59;
+        color: #fff;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-size: 0.9em;
+      }
+      .table tbody tr:nth-child(even) {
+        background-color: #f8f9fa;
+      }
+      .table tbody tr:hover {
+        background-color: #e9ecef;
+      }
+      .details-btn {
+        background-color: #192f59;
+        color: #fff;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      .details-btn:hover {
+        background-color: #0056b3;
+      }
+      .record-details {
+        display: none;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 15px;
+        margin-top: 10px;
+      }
+      .record-details ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      .record-details li {
+        margin-bottom: 5px;
+      }
+      .nitk-header {
+        background-color: #192f59;
+        padding: 10px 0;
+      }
+      .nitk-header img {
+        max-height: 60px;
+      }
+      h2 {
+        color: #192f59;
+        text-align: center;
+        margin-top: 30px;
+        margin-bottom: 30px;
+      }
+    </style>
+    <%= stylesheet_link_tag 'index' %>
+</head>
+<body>
+    <div class="main-container">
+      <div class="nitk-header">
+        <div class="container">
+          <header class="d-flex justify-content-center py-3">
+            <div class="nav-item"><a href="https://www.nitk.ac.in/" class="nav-link active" aria-current="page"><%= image_tag 'header.png' %></a></div>
+          </header>
+        </div>
+      </div>
+    </div>
+
+
+<div class="container mx-auto px-4 py-8">
+<center>
+  <% if @latest_import_errors.present? %>
+    <div class="mb-6 p-4 bg-yellow-100 rounded-lg">
+      <h3 class="font-semibold text-yellow-800 mb-2">Import Errors:</h3>
+      <ul class="list-disc pl-5">
+        <% @latest_import_errors.each do |error| %>
+          <li class="text-yellow-700"><%= error %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="grid grid-cols-1 gap-6">
+    <div class="bg-white shadow rounded-lg p-6">
+      <h2 class="text-xl font-semibold mb-4">Import Data</h2>
+      
+      <%= form_tag import_data_path, multipart: true, class: "space-y-4" do %>
+        <%= hidden_field_tag :model_name, 'Faculty' %>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Select CSV File</label>
+          <%= file_field_tag :file, accept: 'text/csv', class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+        </div>
+        
+        <div class="text-sm text-gray-600 mb-4">
+          <p>Upload the CSV file exported from Rails Admin</p>
+        </div>
+        
+        <%= submit_tag "Import Data", class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+      <% end %>
+    </div>
+  </div>
+  
+  <% if flash[:notice] %>
+    <div class="mt-4 p-4 bg-green-100 rounded-md">
+      <p class="text-green-700"><%= flash[:notice] %></p>
+    </div>
+  <% end %>
+  
+  <% if flash[:alert] %>
+    <div class="mt-4 p-4 bg-red-100 rounded-md">
+      <p class="text-red-700"><%= flash[:alert] %></p>
+    </div>
+  <% end %>
+</div>
+</center>
+</body>
+</html>

@@ -18,6 +18,9 @@ Rails.application.routes.draw do
     get 'faculties/:id', to: 'faculties#show', as: 'faculty'
   end
 
+  get 'utility/import_interface', as: 'import_interface'
+  post 'utility/import', as: 'import_data'
+
   # root "faculties#index"
 
   namespace :api do
