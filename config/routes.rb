@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   get 'home/about'
   devise_for :users
-  resources :units
+  #resources :units
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  resources :departments
+  #resources :departments
 
 
   namespace :admin do
