@@ -10,6 +10,16 @@ Rails.application.routes.draw do
     resources :imports
   end
 
+  resources :complaints do
+    member do
+      patch :update_status
+      patch :update_bsnl_status
+    end
+    collection do
+      get :show_telephone_stats
+    end
+  end
+
   get 'utility/history'
 
   resources :faculties do

@@ -1,6 +1,7 @@
 class UtilityController < ApplicationController
+  before_action :authenticate_user!
   def history
-    if current_user == nil || User.find(current_user.id).super_admin == false
+    if User.find(current_user.id).super_admin == false
       redirect_to root_url
     end
     @versions = PaperTrail::Version.order(created_at: :desc)
@@ -8,6 +9,9 @@ class UtilityController < ApplicationController
 
 
   def import_interface
+    if User.find(current_user.id).super_admin == false
+      redirect_to root_url
+    end
     @models = [Faculty, Department, SubDirectory]
     @latest_import_errors = session.delete(:import_errors)
   end

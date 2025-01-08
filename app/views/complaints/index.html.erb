@@ -1,0 +1,300 @@
+<%= stylesheet_link_tag 'index' %>
+<div class="main-container">
+  <div class="nitk-header">
+    <div class="container">
+      <header class="d-flex justify-content-center py-3">
+        <div class="nav-item"><a href="https://www.nitk.ac.in/" class="nav-link active" aria-current="page"><%= image_tag 'header.png' %></a></div>
+      </header>
+    </div>
+  </div>
+  <header class="d-flex justify-content-center py-3">
+    <div class="telephone-header">
+      TELEPHONE DIRECTORY
+    </div>
+    <div class="overlay">
+        <div class="overlay-home">
+          <%= link_to 'Home', root_path, class: "nav-link px-2 text-body-secondary home-link", onclick: "resetFilters1();" %>
+        </div>
+        <% if current_user && (current_user.email == 'bsnl@nitk.edu.in' || current_user.super_admin?) %>
+        <div class="overlay-home">
+          <%= link_to "Complaints", complaints_path, class: "nav-link px-2 text-body-secondary home-link" %>
+        </div>
+        <div class="overlay-home">
+          <%= link_to "New Complaint", new_complaint_path, class: "nav-link px-2 text-body-secondary home-link" %>
+        </div>
+        <% end %>
+        <div class="overlay-contact">
+          <%= link_to 'Contact Us', home_team_path, class: "nav-link px-2 text-body-secondary home-link" %>
+        </div>
+        <% if current_user.present? %>
+        <div class="overlay-contact">
+          <%= link_to 'Log Out',destroy_user_session_path,
+              method: :delete, class: "nav-link px-2 text-body-secondary home-link" %>
+        </div>
+        <% end %>
+    </div>
+  </header>
+<!-- app/views/complaints/index.html.erb -->
+<div class="container-fluid mt-4">
+  <!-- Top Statistics Cards -->
+  <div class="row mb-4">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Total Complaints</h5>
+          <h2 class="card-text"><%= @complaints.count %></h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Unresolved</h5>
+          <h2 class="card-text text-warning"><%= @unresolved_complaints.count %></h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Resolved</h5>
+          <h2 class="card-text text-success"><%= @resolved_complaints.count %></h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Three Column Layout -->
+  <div class="row">
+    <!-- Left Column - Telephone Summary -->
+    <div class="col-md-3">
+      <div class="card" style="height: calc(100vh - 200px); overflow-y: auto;">
+        <div class="card-body">
+          <h5 class="card-title">Telephone Summary</h5>
+          <div class="list-group">
+            <% @telephone_complaint_counts.each do |stats| %>
+              <div class="list-group-item">
+                <h6 class="mb-1"><%= stats[:telephone] %></h6>
+                <div class="d-flex justify-content-between align-items-center">
+                  <small>Total: <%= stats[:total] %></small>
+                  <div>
+                    <span class="badge bg-success">Resolved: <%= stats[:resolved] %></span>
+                    <span class="badge bg-warning">Pending: <%= stats[:unresolved] %></span>
+                  </div>
+                </div>
+                <button 
+                  class="btn btn-sm btn-outline-primary mt-2 view-stats-btn"
+                  data-telephone="<%= stats[:telephone] %>"
+                  data-bs-toggle="modal"
+                  data-bs-target="#statsModal">
+                  View Stats
+                </button>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Middle Column - Charts -->
+    <div class="col-md-6">
+      <div class="card" style="height: calc(100vh - 200px); overflow-y: auto;">
+        <div class="card-body">
+          <h5 class="card-title">Complaint Resolution Times</h5>
+          <canvas id="complaintsChart" style="height: 300px;"></canvas>
+          
+          <hr class="my-4">
+          
+          <h5 class="card-title">Monthly Resolution Trends</h5>
+          <canvas id="monthlyTrendsChart" style="height: 300px;"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column - Active Complaints -->
+    <div class="col-md-3">
+      <div class="card" style="height: calc(100vh - 200px); overflow-y: auto;">
+        <div class="card-body">
+          <h5 class="card-title">Active Complaints</h5>
+          <div class="list-group">
+            <% @unresolved_complaints.each do |complaint| %>
+              <div class="list-group-item">
+                <div class="d-flex w-100 justify-content-between">
+                  <h6 class="mb-1"><%= complaint.telephone %></h6>
+                  <small><%= time_ago_in_words(complaint.created_at) %> ago</small>
+                </div>
+                <p class="mb-1">Type: <%= JSON.parse(complaint.kind).join(", ") %></p>
+                <div class="btn-group mt-2" role="group">
+                <% if current_user.super_admin? %>
+                  <%= button_to 'Update Status', 
+                      update_status_complaint_path(complaint), 
+                      method: :patch, 
+                      class: 'btn btn-sm btn-primary',
+                      form_class: 'd-inline-block',
+                      remote: true unless complaint.status %>
+                  <% else %>
+                  <%= button_to 'Update (BSNL) Status',
+                      update_bsnl_status_complaint_path(complaint), 
+                      method: :patch,
+                      class: 'btn btn-sm btn-info ms-1',
+                      form_class: 'd-inline-block',
+                      remote: true unless complaint.bsnlstatus %>
+                </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for Individual Telephone Statistics -->
+<div class="modal fade" id="statsModal" tabindex="-1" aria-labelledby="statsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="statsModalLabel">Telephone Statistics</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <canvas id="individualChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript for Charts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Complaints Resolution Time Chart
+ // Complaints Resolution Time Chart (Line chart instead of scatter)
+const complaintsCtx = document.getElementById('complaintsChart').getContext('2d');
+new Chart(complaintsCtx, {
+  type: 'line',
+  data: {
+    labels: <%= raw @complaints.map { |c| c.id.to_s }.to_json %>,
+    datasets: [{
+      label: 'Resolution Time',
+      data: <%= raw @complaints.map { |c| (c.resolution_time || 0) / 1.hour }.to_json %>,
+      borderColor: 'rgba(54, 162, 235, 1)',
+      tension: 0.1,
+      fill: false
+    }]
+  },
+  options: {
+    responsive: true,
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Complaint ID'
+        }
+      },
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'Resolution Time (hours)'
+        }
+      }
+    }
+  }
+});
+
+// Maximum Resolution Time by Telephone (Bar chart)
+const trendsCtx = document.getElementById('monthlyTrendsChart').getContext('2d');
+new Chart(trendsCtx, {
+  type: 'bar',
+  data: {
+    labels: <%= raw @monthly_stats.map { |stat| "Telephone #{stat[:telephone]}" }.to_json %>,
+    datasets: [{
+      label: 'Maximum Resolution Time',
+      data: <%= raw @monthly_stats.map { |stat| 
+        stat[:data].map { |d| d[:average_time] }.max
+      }.to_json %>,
+      backgroundColor: 'rgba(54, 162, 235, 0.5)',
+      borderColor: 'rgba(54, 162, 235, 1)',
+      borderWidth: 1
+    }]
+  },
+  options: {
+    responsive: true,
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'Maximum Resolution Time (hours)'
+        }
+      }
+    },
+    plugins: {
+      legend: {
+        position: 'top'
+      }
+    }
+  }
+});
+
+// Individual telephone chart (modal)
+let individualChart = null;
+document.querySelectorAll('.view-stats-btn').forEach(button => {
+  button.addEventListener('click', function() {
+    const telephoneNo = this.dataset.telephone;
+    fetch(`/complaints/show_telephone_stats?telephone=${telephoneNo}`, {
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (individualChart) {
+        individualChart.destroy();
+      }
+      
+      const ctx = document.getElementById('individualChart').getContext('2d');
+      individualChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: Array.from({ length: data.length }, (_, i) => i + 1),
+          datasets: [{
+            label: `Resolution Time for Telephone ${telephoneNo}`,
+            data: data,
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 2,
+            tension: 0.1,
+            fill: false
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'Complaint Number'
+              }
+            },
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Resolution Time (hours)'
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              position: 'top'
+            }
+          }
+        }
+      });
+    });
+  });
+});
+});
+</script>

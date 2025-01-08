@@ -1,0 +1,140 @@
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h3 class="card-title mb-4">New Complaint</h3>
+
+      <%= form_with(model: complaint, class: "needs-validation") do |form| %>
+        <% if complaint.errors.any? %>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <h6 class="alert-heading mb-1">
+              <%= pluralize(complaint.errors.count, "error") %> prohibited this complaint from being saved:
+            </h6>
+            <ul class="mb-0 ps-4">
+              <% complaint.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <% end %>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="form-floating mb-3">
+              <%= form.text_field :telephone, 
+                  class: "form-control",
+                  placeholder: "Enter telephone number",
+                  required: true %>
+              <%= form.label :telephone, "Telephone Number" %>
+              <div class="invalid-feedback">
+                <%= complaint.errors[:telephone].first || "Please enter a valid telephone number" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Complaint Types</label>
+            <div class="complaint-types-container p-3 border rounded">
+              <% complaint_types = [
+                ["Network Issue", "network", "bi-reception-4"],
+                ["Bill Related", "bill", "bi-receipt"],
+                ["Service Quality", "quality", "bi-star"],
+                ["Technical Problem", "technical", "bi-tools"],
+                ["Other", "other", "bi-three-dots"]
+              ] %>
+              
+              <% complaint_types.each do |label, value, icon| %>
+                <div class="complaint-type-option mb-2">
+                  <%= form.check_box :kind, 
+                      { class: "btn-check", 
+                        multiple: true,
+                        id: value }, 
+                      value, 
+                      nil %>
+                  <%= form.label "kind_#{value}", class: "btn btn-outline-primary w-100", for: value do %>
+                    <i class="bi <%= icon %> me-2"></i><%= label %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+            <div class="invalid-feedback complaint-types-feedback">
+              Please select at least one complaint type
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex gap-2 mt-4">
+          <%= form.submit class: "btn btn-primary px-4" %>
+          <%= link_to 'Cancel', complaints_path, class: "btn btn-outline-secondary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% content_for :head do %>
+<style>
+.complaint-types-container {
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.complaint-types-container.is-invalid {
+  border-color: #dc3545 !important;
+}
+
+.btn-check:checked + .btn {
+  background-color: #0d6efd;
+  color: white;
+}
+
+.btn-check + .btn {
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.btn-check + .btn:hover {
+  background-color: #e9ecef;
+}
+
+.complaint-types-feedback {
+  display: none;
+}
+
+.complaint-types-container.is-invalid + .complaint-types-feedback {
+  display: block;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.querySelector('form');
+  const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+  const container = document.querySelector('.complaint-types-container');
+  
+  function validateComplaintTypes() {
+    const checked = form.querySelectorAll('input[type="checkbox"]:checked').length > 0;
+    if (!checked) {
+      container.classList.add('is-invalid');
+    } else {
+      container.classList.remove('is-invalid');
+    }
+    return checked;
+  }
+
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', validateComplaintTypes);
+  });
+
+  form.addEventListener('submit', function(event) {
+    if (!validateComplaintTypes()) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  });
+
+  // Initial validation state
+  validateComplaintTypes();
+});
+</script>
+<% end %>
