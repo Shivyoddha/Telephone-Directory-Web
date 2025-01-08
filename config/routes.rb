@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :imports
   end
 
-  resources :complaints do
+  resources :complaints, only: [:index, :new, :create, :edit, :update] do
     member do
       patch :update_status
       patch :update_bsnl_status

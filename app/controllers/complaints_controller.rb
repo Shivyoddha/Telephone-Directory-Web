@@ -43,7 +43,7 @@ class ComplaintsController < ApplicationController
     @complaint.status = false
     respond_to do |format|
       if @complaint.save
-        format.html { redirect_to complaint_url(@complaint), notice: "Complaint was successfully created." }
+        format.html { redirect_to complaints_path, notice: "Complaint was successfully created." }
         format.json { render :show, status: :created, location: @complaint }
       else
         format.html { render :new, status: :unprocessable_entity }
