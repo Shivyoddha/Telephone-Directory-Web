@@ -42,10 +42,10 @@
                 ["Technical Problem", "technical", "bi-tools"],
                 ["Other", "other", "bi-three-dots"]
               ] %>
-              
+
               <% complaint_types.each do |label, value, icon| %>
                 <div class="complaint-type-option mb-2">
-                  <%= form.check_box :kind, 
+                  <%= form.check_box :kind,
                       { class: "btn-check", 
                         multiple: true,
                         id: value }, 
@@ -59,6 +59,25 @@
             </div>
             <div class="invalid-feedback complaint-types-feedback">
               Please select at least one complaint type
+            </div>
+          </div>
+
+          <div class="col-12 mt-4">
+            <div class="form-floating">
+              <%= form.text_area :additional_detail,
+                  class: "form-control",
+                  placeholder: "Please provide any additional details about your complaint",
+                  style: "height: 150px; resize: vertical;",
+                  maxlength: 1000 %>
+              <%= form.label :additional_detail, "Additional Details" %>
+              <div class="form-text mt-1">
+                <span class="text-muted">
+                  Please provide any relevant details about your complaint (maximum 1000 characters)
+                </span>
+                <span class="chars-remaining float-end">
+                  <span id="char-count">1000</span> characters at max
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -104,6 +123,18 @@
 .complaint-types-container.is-invalid + .complaint-types-feedback {
   display: block;
 }
+
+.form-floating textarea.form-control {
+  padding-top: 1.625rem;
+}
+
+.form-floating textarea.form-control:focus {
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.chars-remaining {
+  font-size: 0.875rem;
+}
 </style>
 
 <script>
@@ -111,6 +142,9 @@ document.addEventListener('DOMContentLoaded', function() {
   const form = document.querySelector('form');
   const checkboxes = form.querySelectorAll('input[type="checkbox"]');
   const container = document.querySelector('.complaint-types-container');
+  const textarea = document.querySelector('textarea[name="complaint[additional_details]"]');
+  const charCount = document.getElementById('char-count');
+  const maxLength = parseInt(textarea.getAttribute('maxlength'));
   
   function validateComplaintTypes() {
     const checked = form.querySelectorAll('input[type="checkbox"]:checked').length > 0;
@@ -122,9 +156,21 @@ document.addEventListener('DOMContentLoaded', function() {
     return checked;
   }
 
+  function updateCharCount() {
+    const remaining = maxLength - textarea.value.length;
+    charCount.textContent = remaining;
+    if (remaining < 100) {
+      charCount.classList.add('text-warning');
+    } else {
+      charCount.classList.remove('text-warning');
+    }
+  }
+
   checkboxes.forEach(checkbox => {
     checkbox.addEventListener('change', validateComplaintTypes);
   });
+
+  textarea.addEventListener('input', updateCharCount);
 
   form.addEventListener('submit', function(event) {
     if (!validateComplaintTypes()) {
@@ -135,6 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Initial validation state
   validateComplaintTypes();
+  updateCharCount();
 });
 </script>
 <% end %>

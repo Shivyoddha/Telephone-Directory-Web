@@ -10,10 +10,11 @@ class Ability
 
     if user.super_admin?
       can :manage, :all
-    elsif user.email == 'bsnl@nitk.edu.in'
-      can :manage, ComplaintsController
+    elsif user.email === 'bsnl@nitk.edu.in'
+      can :manage, Complaint
+      can :access, Complaint
     else
-      cannot :access, ComplaintsController
+      cannot :access, Complaint
     end
 
     if user.admin?

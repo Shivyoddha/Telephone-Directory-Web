@@ -1,5 +1,6 @@
 class ComplaintsController < ApplicationController
   before_action :authenticate_user!
+  skip_before_action :verify_authenticity_token
   load_and_authorize_resource
   before_action :set_complaint, only: [:show, :edit, :update, :destroy, :update_status, :update_bsnl_status]
 
@@ -43,6 +44,7 @@ class ComplaintsController < ApplicationController
     @complaint.status = false
     respond_to do |format|
       if @complaint.save
+        BsnlMailer.with(id:current_user.id, complaint_id:@complaint.id).Mail.deliver_later
         format.html { redirect_to complaints_path, notice: "Complaint was successfully created." }
         format.json { render :show, status: :created, location: @complaint }
       else
@@ -154,6 +156,6 @@ class ComplaintsController < ApplicationController
   end
 
   def complaint_params
-    params.require(:complaint).permit(:telephone, :status, :bsnlstatus, kind: [])
+    params.require(:complaint).permit(:telephone, :status, :bsnlstatus, :additional_detail, kind: [])
   end
 end
