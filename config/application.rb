@@ -12,6 +12,7 @@ module TelephoneDirectoryWeb
     config.load_defaults 7.0
     config.assets.enabled = true
     config.middleware.use ActionDispatch::Session::CookieStore
+    config.active_record.yaml_column_permitted_classes = [ActiveSupport::TimeWithZone, ActiveSupport::TimeZone, Time, Date]
 
     # Configuration for the application, engines, and railties goes here.
     #

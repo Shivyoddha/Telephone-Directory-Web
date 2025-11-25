@@ -13,7 +13,7 @@
                 <% @depart = Department.find(faculty.department_id) %>
                 <% @unitty = Unit.find(@depart.unit_id) %>
 
-                <% if @unitty.title == 'Administration' && ['Chairperson', 'Director', 'Registrar'].include?(@depart.name) %>
+                <% if @unitty.title == 'Administration' && ['Chairperson', 'Director', 'Registrar', 'Deputy Director'].include?(@depart.name) %>
                   <div class="row-item">
                     <dt class="col-sm-6 text-start">Designation</dt>
                     <dd class="col-sm-6 text-start col2"><%= faculty.designation.title %></dd>

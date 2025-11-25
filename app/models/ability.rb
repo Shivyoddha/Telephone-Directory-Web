@@ -7,9 +7,17 @@ class Ability
     user ||= User.new # guest user (not logged in)
 
     Rails.logger.debug("User: #{user.inspect}")
+
     if user.super_admin?
       can :manage, :all
-    elsif user.admin?
+    elsif user.email === 'bsnl@nitk.edu.in'
+      can :manage, Complaint
+      can :access, Complaint
+    else
+      cannot :access, Complaint
+    end
+
+    if user.admin?
       can :access, :rails_admin
       can :read, :dashboard
       can :manage, User, id: user.id
@@ -21,5 +29,6 @@ class Ability
       cannot :create, Department
       cannot :destroy, Department
     end
+
   end
 end

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Logs</title>
+    <style media="screen">
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f4f4f4;
+      }
+      .department-heading {
+        background-color: #f8f9fa;
+        border: 1px solid #d1d1d1;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        text-align: center;
+      }
+      .department-title {
+        font-size: 20px;
+        background-color: #198754;
+        color: #fff;
+        padding: 6px;
+        border-radius: 5px;
+      }
+      .table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        margin-bottom: 40px;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        border-radius: 5px;
+        overflow: hidden;
+      }
+      .table th, .table td {
+        text-align: left;
+        padding: 12px 15px;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .table th {
+        background-color: #192f59;
+        color: #fff;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-size: 0.9em;
+      }
+      .table tbody tr:nth-child(even) {
+        background-color: #f8f9fa;
+      }
+      .table tbody tr:hover {
+        background-color: #e9ecef;
+      }
+      .details-btn {
+        background-color: #192f59;
+        color: #fff;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      .details-btn:hover {
+        background-color: #0056b3;
+      }
+      .record-details {
+        display: none;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 15px;
+        margin-top: 10px;
+      }
+      .record-details ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      .record-details li {
+        margin-bottom: 5px;
+      }
+      .nitk-header {
+        background-color: #192f59;
+        padding: 10px 0;
+      }
+      .nitk-header img {
+        max-height: 60px;
+      }
+      h2 {
+        color: #192f59;
+        text-align: center;
+        margin-top: 30px;
+        margin-bottom: 30px;
+      }
+    </style>
+    <%= stylesheet_link_tag 'index' %>
+</head>
+<body>
+    <div class="main-container">
+      <div class="nitk-header">
+        <div class="container">
+          <header class="d-flex justify-content-center py-3">
+            <div class="nav-item"><a href="https://www.nitk.ac.in/" class="nav-link active" aria-current="page"><%= image_tag 'header.png' %></a></div>
+          </header>
+        </div>
+      </div>
+    </div>
+
+    <h2>Change Logs</h2>
+
+        <table class="table">
+        <thead>
+            <tr>
+                <th>Who</th>
+                <th>Action</th>
+                <th>Model Affected</th>
+                <th>When</th>
+                <th>Record Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @versions.each_with_index do |version, index| %>
+                <tr>
+                    <td>
+                        <% if version.whodunnit.present? %>
+                            <% if version.whodunnit == 'User' %>
+                                Rails Admin
+                            <% elsif user = User.find_by(id: version.whodunnit) %>
+                                <%= user.email %>
+                            <% else %>
+                                Unknown User (ID: <%= version.whodunnit %>)
+                            <% end %>
+                        <% else %>
+                            <em>System</em>
+                        <% end %>
+                    </td>
+                    <td><%= version.event.capitalize %></td>
+                    <td><%= version.item_type %></td>
+                    <td><%= version.created_at.strftime("%d %b %Y %I:%M %p") %></td>
+                    <td>
+                        <button class="details-btn" onclick="toggleDetails(<%= index %>)">Show Details</button>
+                        <div id="details-<%= index %>" class="record-details">
+                            <% if version.event == "destroy" %>
+                                <p><strong>Deleted Record Content:</strong></p>
+                                <% if version.object %>
+                                    <ul>
+                                        <% begin %>
+                                            <% YAML.safe_load(version.object,
+                                                              permitted_classes: [ActiveSupport::TimeWithZone, ActiveSupport::TimeZone, Time, Date],
+                                                              aliases: true).each do |attribute, value| %>
+                                                <li>
+                                                    <strong><%= attribute.humanize %></strong>:
+                                                    <%= value.is_a?(Time) || value.is_a?(Date) ? value.strftime("%d %b %Y %I:%M %p") : value.inspect %>
+                                                </li>
+                                            <% end %>
+                                        <% rescue Psych::DisallowedClass => e %>
+                                            <li><em>Error loading object details: <%= e.message %></em></li>
+                                        <% rescue Psych::BadAlias => e %>
+                                            <li><em>Error with object references: <%= e.message %></em></li>
+                                        <% rescue => e %>
+                                            <li><em>Unexpected error: <%= e.message %></em></li>
+                                        <% end %>
+                                    </ul>
+                                <% else %>
+                                    <em>No record details available</em>
+                                <% end %>
+                            <% else %>
+                                <p><strong>Record Details:</strong></p>
+                                <ul>
+                                    <% version.item.attributes.each do |attribute, value| %>
+                                        <li>
+                                            <strong><%= attribute.humanize %></strong>:
+                                            <%= value.is_a?(ActiveSupport::TimeWithZone) || value.is_a?(Time) || value.is_a?(Date) ? value.strftime("%d %b %Y %I:%M %p") : value.inspect %>
+                                        </li>
+                                    <% end %>
+                                </ul>
+                            <% end %>
+                        </div>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+
+    <script>
+        function toggleDetails(index) {
+            var detailsDiv = document.getElementById('details-' + index);
+            var button = detailsDiv.previousElementSibling;
+            if (detailsDiv.style.display === 'none' || detailsDiv.style.display === '') {
+                detailsDiv.style.display = 'block';
+                button.textContent = 'Hide Details';
+            } else {
+                detailsDiv.style.display = 'none';
+                button.textContent = 'Show Details';
+            }
+        }
+    </script>
+</body>
+</html>

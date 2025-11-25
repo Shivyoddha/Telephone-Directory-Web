@@ -1,4 +1,5 @@
 class Department < ApplicationRecord
+  has_paper_trail
   rails_admin do
     label "Section"
   end

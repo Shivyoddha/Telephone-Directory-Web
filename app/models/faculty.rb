@@ -12,6 +12,7 @@ class Faculty < ApplicationRecord
   validates :name, presence: true
   validates :landline_office_intercom, presence: true
   validates :custom_order, presence: true, numericality: { only_integer: true }
+  has_paper_trail
 
   has_one_attached :profile
 

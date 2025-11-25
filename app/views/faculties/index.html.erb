@@ -15,16 +15,27 @@
         <div class="overlay-home">
           <%= link_to 'Home', 'javascript:void(0);', class: "nav-link px-2 text-body-secondary home-link", onclick: "resetFilters1();" %>
         </div>
+        <% if current_user && (current_user.email == 'bsnl@nitk.edu.in' || current_user.super_admin?) %>
+        <div class="overlay-contact">
+          <%= link_to "Complaints", complaints_path, class: "btn" %>
+        </div>
+        <% end %>
         <div class="overlay-contact">
           <%= link_to 'Contact Us', home_team_path, class: "nav-link px-2 text-body-secondary home-link" %>
         </div>
         <% if current_user.present? && current_user.super_admin? %>
-        <div class="overlay-home">
+        <div class="overlay-contact">
           <%= link_to "Print", faculties_print_path(format: :pdf, user_id: current_user.id), class: "btn" %>
         </div>
         <% elsif current_user.present? && current_user.admin? %>
-        <div class="overlay-home">
+        <div class="overlay-contact">
           <%= link_to "Print", faculties_print_path(format: :pdf, user_id: current_user.id), class: "btn" %>
+        </div>
+        <% end %>
+        <% if current_user.present?  %>
+        <div class="overlay-contact">
+          <%= link_to 'Log Out',destroy_user_session_path,
+              method: :delete, class: "nav-link px-2 text-body-secondary home-link" %>
         </div>
         <% end %>
     </div>

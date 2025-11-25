@@ -1,0 +1,38 @@
+<%= stylesheet_link_tag 'index' %>
+<div class="main-container">
+  <div class="nitk-header">
+    <div class="container">
+      <header class="d-flex justify-content-center py-3">
+        <div class="nav-item"><a href="https://www.nitk.ac.in/" class="nav-link active" aria-current="page"><%= image_tag 'header.png' %></a></div>
+      </header>
+    </div>
+  </div>
+  <header class="d-flex justify-content-center py-3">
+    <div class="telephone-header">
+      TELEPHONE DIRECTORY
+    </div>
+    <div class="overlay">
+        <div class="overlay-home">
+          <%= link_to 'Home', root_path, class: "nav-link px-2 text-body-secondary home-link", onclick: "resetFilters1();" %>
+        </div>
+        <% if current_user && (current_user.email == 'bsnl@nitk.edu.in' || current_user.super_admin?) %>
+        <div class="overlay-home">
+          <%= link_to "Complaints", complaints_path, class: "nav-link px-2 text-body-secondary home-link" %>
+        </div>
+        <div class="overlay-home">
+          <%= link_to "New Complaint", new_complaint_path, class: "nav-link px-2 text-body-secondary home-link" %>
+        </div>
+        <% end %>
+        <div class="overlay-contact">
+          <%= link_to 'Contact Us', home_team_path, class: "nav-link px-2 text-body-secondary home-link" %>
+        </div>
+        <% if current_user.present? %>
+        <div class="overlay-contact">
+          <%= link_to 'Log Out',destroy_user_session_path,
+              method: :delete, class: "nav-link px-2 text-body-secondary home-link" %>
+        </div>
+        <% end %>
+    </div>
+  </header>
+
+<%= render "form", complaint: @complaint %>
